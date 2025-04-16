@@ -1,122 +1,206 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>رزومه فوق‌العاده من</title>
-    <link rel="stylesheet" href="styles.css"> <!-- لینک به فایل CSS برای استایل -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Cinzel:wght@700&display=swap" rel="stylesheet"> <!-- استفاده از فونت‌های شیک -->
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(to right, #1f1c2c, #928dab);
-            color: #fff;
-            overflow-x: hidden;
-        }
-        header {
-            text-align: center;
-            padding: 2rem;
-            background-color: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        header h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 2.5rem;
-            margin: 0;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-        nav a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-        nav a:hover {
-            color: #ffdd00;
-        }
-        section {
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-        #bio, #projects, #tools, #contact {
-            animation: fadeIn 1s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from {opacity: 0;}
-            to {opacity: 1;}
-        }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-        button {
-            background: #ffdd00;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            color: #000;
-            font-size: 1rem;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: transform 0.3s;
-        }
-        button:hover {
-            transform: scale(1.1);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سایت فوق‌العاده و خفن</title>
+  <style>
+    /* ریست استایل‌ها */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      overflow: hidden;
+      position: relative;
+    }
+    /* استایل کانواس پس‌زمینه */
+    canvas#bgCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    /* استایل محتوای قرار گرفته روی پس‌زمینه */
+    .container {
+      position: relative;
+      z-index: 1;
+      padding: 2rem;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      animation: fadeInDown 1s ease-out;
+    }
+    header p {
+      font-size: 1.2rem;
+      animation: fadeInDown 1s ease-out;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* دکمه‌های تعاملی */
+    .buttons {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .buttons button {
+      background: #ffdd00;
+      border: none;
+      padding: 1rem 2rem;
+      margin: 0 1rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .buttons button:hover {
+      transform: scale(1.1);
+      background: #ffd700;
+    }
+    /* بخش نمودارها */
+    .charts {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .chart {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      /* از conic-gradient برای ایجاد دایره پیشرفت استفاده می‌شود */
+      background: conic-gradient(#ffdd00 0deg, #444 0deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      position: relative;
+    }
+    /* برچسب پایین هر نمودار */
+    .chart::before {
+      content: attr(data-label);
+      position: absolute;
+      bottom: -30px;
+      width: 100%;
+      text-align: center;
+      font-size: 1rem;
+      color: #ffdd00;
+    }
+  </style>
 </head>
 <body>
+  <!-- فضای پس‌زمینه انیمیشنی -->
+  <canvas id="bgCanvas"></canvas>
+  
+  <!-- محتوای اصلی سایت -->
+  <div class="container">
     <header>
-        <h1>رزومه خارق‌العاده</h1>
-        <nav>
-            <ul>
-                <li><a href="#bio">بیوگرافی</a></li>
-                <li><a href="#projects">پروژه‌ها</a></li>
-                <li><a href="#tools">تولزها</a></li>
-                <li><a href="#contact">تماس</a></li>
-            </ul>
-        </nav>
+      <h1>سایت فوق‌العاده من</h1>
+      <p>تجربه‌ای خارق‌العاده که دهن همه رو می‌بازه!</p>
     </header>
-
-    <section id="bio">
-        <h2>بیوگرافی</h2>
-        <p>سلام! من یک توسعه‌دهنده خلاق هستم و عاشق ساخت پروژه‌های شگفت‌انگیز.</p>
-    </section>
-
-    <section id="projects">
-        <h2>پروژه‌ها</h2>
-        <p>در اینجا برخی از پروژه‌های برتر من را می‌توانید ببینید.</p>
-    </section>
-
-    <section id="tools">
-        <h2>تولزها</h2>
-        <p>از ابزارهای پیشرفته‌ای که ساخته‌ام، نهایت استفاده را ببرید.</p>
-    </section>
-
-    <section id="contact">
-        <h2>تماس</h2>
-        <p>برای ارتباط با من، فرم زیر را پر کنید:</p>
-        <form action="submit_form.php" method="post">
-            <input type="text" placeholder="نام" required>
-            <input type="email" placeholder="ایمیل" required>
-            <textarea placeholder="پیام خود را بنویسید" rows="5"></textarea>
-            <button type="submit">ارسال</button>
-        </form>
-    </section>
-
-    <footer>
-        <p>تمامی حقوق محفوظ است | طراحی شده با عشق</p>
-    </footer>
+    
+    <!-- دکمه‌های تعاملی -->
+    <div class="buttons">
+      <button onclick="performAction('عملکرد دکمه ۱!')">دکمه ۱</button>
+      <button onclick="performAction('عملکرد دکمه ۲!')">دکمه ۲</button>
+      <button onclick="performAction('عملکرد دکمه ۳!')">دکمه ۳</button>
+    </div>
+    
+    <!-- نمودارهای انیمیشنی مهارت زبانی -->
+    <div class="charts">
+      <div class="chart" data-label="انگلیسی - 90%" data-percentage="90">0%</div>
+      <div class="chart" data-label="فارسی - 100%" data-percentage="100">0%</div>
+      <div class="chart" data-label="فرانسوی - 70%" data-percentage="70">0%</div>
+    </div>
+  </div>
+  
+  <script>
+    // عملکرد دکمه‌ها
+    function performAction(message) {
+      alert(message);
+    }
+    
+    // انیمیشن پس‌زمینه با سیستم ذرات
+    const canvas = document.getElementById("bgCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    let particles = [];
+    const particleCount = 100;
+    
+    // ساخت آرایه‌ای از ذرات با خصوصیات تصادفی
+    function Particle(x, y, radius, dx, dy) {
+      this.x = x;
+      this.y = y;
+      this.radius = radius;
+      this.dx = dx;
+      this.dy = dy;
+    }
+    
+    for (let i = 0; i < particleCount; i++) {
+      let radius = Math.random() * 3 + 1;
+      let x = Math.random() * canvas.width;
+      let y = Math.random() * canvas.height;
+      let dx = (Math.random() - 0.5) * 2;
+      let dy = (Math.random() - 0.5) * 2;
+      particles.push(new Particle(x, y, radius, dx, dy));
+    }
+    
+    // تابع انیمیشن ذرات
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.x += p.dx;
+        p.y += p.dy;
+    
+        // تغییر جهت در برخورد با لبه‌های صفحه
+        if (p.x + p.radius > canvas.width || p.x - p.radius < 0) p.dx *= -1;
+        if (p.y + p.radius > canvas.height || p.y - p.radius < 0) p.dy *= -1;
+    
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "#ffdd00";
+        ctx.fill();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+    
+    // تطبیق اندازه کانواس با تغییر اندازه صفحه
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+    
+    // انیمیشن نمودارهای پیشرفت زبانی
+    const charts = document.querySelectorAll('.chart');
+    charts.forEach(chart => {
+      let targetPercentage = parseInt(chart.getAttribute('data-percentage'));
+      let currentPercentage = 0;
+      let targetDegree = targetPercentage * 3.6; // تبدیل درصد به درجه (100% = 360 درجه)
+      
+      let interval = setInterval(() => {
+        if (currentPercentage >= targetPercentage) {
+          clearInterval(interval);
+        } else {
+          currentPercentage++;
+          let currentDegree = currentPercentage * 3.6;
+          // به‌روزرسانی استایل پس‌زمینه دایره‌ای به صورت تدریجی
+          chart.style.background = `conic-gradient(#ffdd00 ${currentDegree}deg, #444 ${currentDegree}deg)`;
+          chart.textContent = currentPercentage + "%";
+        }
+      }, 10);
+    });
+  </script>
 </body>
 </html>
