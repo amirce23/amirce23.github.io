@@ -1,206 +1,509 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html dir="ltr" lang="fa" class="translated-rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>سایت فوق‌العاده و خفن</title>
-  <style>
-    /* ریست استایل‌ها */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      overflow: hidden;
-      position: relative;
-    }
-    /* استایل کانواس پس‌زمینه */
-    canvas#bgCanvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-    /* استایل محتوای قرار گرفته روی پس‌زمینه */
-    .container {
-      position: relative;
-      z-index: 1;
-      padding: 2rem;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-      animation: fadeInDown 1s ease-out;
-    }
-    header p {
-      font-size: 1.2rem;
-      animation: fadeInDown 1s ease-out;
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    /* دکمه‌های تعاملی */
-    .buttons {
-      text-align: center;
-      margin: 2rem 0;
-    }
-    .buttons button {
-      background: #ffdd00;
-      border: none;
-      padding: 1rem 2rem;
-      margin: 0 1rem;
-      border-radius: 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: transform 0.3s, background 0.3s;
-    }
-    .buttons button:hover {
-      transform: scale(1.1);
-      background: #ffd700;
-    }
-    /* بخش نمودارها */
-    .charts {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    .chart {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      /* از conic-gradient برای ایجاد دایره پیشرفت استفاده می‌شود */
-      background: conic-gradient(#ffdd00 0deg, #444 0deg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      position: relative;
-    }
-    /* برچسب پایین هر نمودار */
-    .chart::before {
-      content: attr(data-label);
-      position: absolute;
-      bottom: -30px;
-      width: 100%;
-      text-align: center;
-      font-size: 1rem;
-      color: #ffdd00;
-    }
-  </style>
-</head>
-<body>
-  <!-- فضای پس‌زمینه انیمیشنی -->
-  <canvas id="bgCanvas"></canvas>
-  
-  <!-- محتوای اصلی سایت -->
-  <div class="container">
-    <header>
-      <h1>سایت فوق‌العاده من</h1>
-      <p>تجربه‌ای خارق‌العاده که دهن همه رو می‌بازه!</p>
-    </header>
-    
-    <!-- دکمه‌های تعاملی -->
-    <div class="buttons">
-      <button onclick="performAction('عملکرد دکمه ۱!')">دکمه ۱</button>
-      <button onclick="performAction('عملکرد دکمه ۲!')">دکمه ۲</button>
-      <button onclick="performAction('عملکرد دکمه ۳!')">دکمه ۳</button>
-    </div>
-    
-    <!-- نمودارهای انیمیشنی مهارت زبانی -->
-    <div class="charts">
-      <div class="chart" data-label="انگلیسی - 90%" data-percentage="90">0%</div>
-      <div class="chart" data-label="فارسی - 100%" data-percentage="100">0%</div>
-      <div class="chart" data-label="فرانسوی - 70%" data-percentage="70">0%</div>
-    </div>
-  </div>
-  
-  <script>
-    // عملکرد دکمه‌ها
-    function performAction(message) {
-      alert(message);
-    }
-    
-    // انیمیشن پس‌زمینه با سیستم ذرات
-    const canvas = document.getElementById("bgCanvas");
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
-    let particles = [];
-    const particleCount = 100;
-    
-    // ساخت آرایه‌ای از ذرات با خصوصیات تصادفی
-    function Particle(x, y, radius, dx, dy) {
-      this.x = x;
-      this.y = y;
-      this.radius = radius;
-      this.dx = dx;
-      this.dy = dy;
-    }
-    
-    for (let i = 0; i < particleCount; i++) {
-      let radius = Math.random() * 3 + 1;
-      let x = Math.random() * canvas.width;
-      let y = Math.random() * canvas.height;
-      let dx = (Math.random() - 0.5) * 2;
-      let dy = (Math.random() - 0.5) * 2;
-      particles.push(new Particle(x, y, radius, dx, dy));
-    }
-    
-    // تابع انیمیشن ذرات
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        p.x += p.dx;
-        p.y += p.dy;
-    
-        // تغییر جهت در برخورد با لبه‌های صفحه
-        if (p.x + p.radius > canvas.width || p.x - p.radius < 0) p.dx *= -1;
-        if (p.y + p.radius > canvas.height || p.y - p.radius < 0) p.dy *= -1;
-    
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "#ffdd00";
-        ctx.fill();
-      });
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-    
-    // تطبیق اندازه کانواس با تغییر اندازه صفحه
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-    
-    // انیمیشن نمودارهای پیشرفت زبانی
-    const charts = document.querySelectorAll('.chart');
-    charts.forEach(chart => {
-      let targetPercentage = parseInt(chart.getAttribute('data-percentage'));
-      let currentPercentage = 0;
-      let targetDegree = targetPercentage * 3.6; // تبدیل درصد به درجه (100% = 360 درجه)
-      
-      let interval = setInterval(() => {
-        if (currentPercentage >= targetPercentage) {
-          clearInterval(interval);
-        } else {
-          currentPercentage++;
-          let currentDegree = currentPercentage * 3.6;
-          // به‌روزرسانی استایل پس‌زمینه دایره‌ای به صورت تدریجی
-          chart.style.background = `conic-gradient(#ffdd00 ${currentDegree}deg, #444 ${currentDegree}deg)`;
-          chart.textContent = currentPercentage + "%";
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ali Safamanesh - Expert Fullstack Developer specializing in Python, Bot Development, and Web Technologies. View my portfolio and experience.">
+    <meta name="keywords" content="Ali Safamanesh, Fullstack Developer, Bot Developer, Python Developer, Discord Bots, Web Development">
+    <meta name="author" content="Ali Safamanesh">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Ali Safamanesh | Fullstack &amp; Bot Developer">
+    <meta property="og:description" content="Professional portfolio of Ali Safamanesh - Expert in Python, Bot Development, and Web Technologies">
+    <meta property="og:image" content="/logo.png">
+    <meta property="og:url" content="https://daradege.ir">
+    <link rel="canonical" href="https://daradege.ir">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <title>علی صفامنش | Fullstack &amp; Bot Developer</title>
+    <link rel="preload" href="/fonts/robotocode.ttf" as="font" type="font/ttf" crossorigin="">
+    <link rel="preload" href="/fonts/poppins.ttf" as="font" type="font/ttf" crossorigin="">
+    <link rel="stylesheet" href="/src/output.css">
+    <link rel="icon" type="image/x-icon" href="/logo.png">
+
+    <style>
+        @font-face {
+            font-family: 'poppinsfont';
+            src: url(/fonts/poppins.ttf) format('truetype');
+            font-weight: lighter;
+            font-display: swap;
         }
-      }, 10);
-    });
-  </script>
+        body {
+            font-family: 'poppinsfont', system-ui, -apple-system, sans-serif;
+        }
+        h1, h2, h3 {
+            font-family: 'poppinsfont', sans-serif;
+        }
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .nav-links {
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .nav-links:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .nav-links::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #a855f7, #ec4899);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-links:hover::after {
+            width: 80%;
+        }
+        .skill-bar {
+            height: 24px;
+            background: linear-gradient(90deg, #3b82f6 var(--percent), #1e293b var(--percent));
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        .skill-bar:hover {
+            transform: scale(1.02);
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .3; }
+        }
+        @keyframes rotate {
+            from { transform: rotate(0); }
+            to { transform: rotate(360deg); }
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 1.5s infinite;
+        }
+        .glass-card {
+            background: rgba(255,255,255,.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: 16px;
+            padding: 20px;
+            transition: .3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,.15);
+        }
+        ::-webkit-scrollbar {
+            width: 0px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(30,41,59,0.5);
+            border-radius: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+            border-radius: 6px;
+            border: 2px solid rgba(30,41,59,0.5);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #60a5fa, #a78bfa);
+        }
+        .page-transition {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem !important; }
+            h2 { font-size: 1.8rem !important; }
+            h3 { font-size: 1.5rem !important; }
+            .container { padding: 0.5rem !important; }
+            nav { 
+                padding: 0.75rem;
+                margin: 0.5rem;
+            }
+            .nav-links {
+                padding: 0.375rem 0.75rem;
+                font-size: 0.875rem;
+            }
+            .skill-bar { height: 20px; }
+            .glass-card { padding: 15px; }
+            img[alt="Ali Safamanesh Profile"] { width: 120px !important; height: 120px !important; }
+        }
+        @media (max-width: 640px) {
+          .floating-orb {
+              width: 20vw !important;
+              height: 20vw !important;
+              opacity: 0.15 !important;
+          }
+          .profile-image {
+              width: clamp(80px, 25vw, 128px) !important;
+              height: clamp(80px, 25vw, 128px) !important;
+          }
+          nav {
+              padding: 0.5rem;
+              margin: 0.25rem;
+          }
+          .nav-links {
+              font-size: 0.75rem;
+              padding: 0.25rem 0.5rem;
+          }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem !important; }
+            h2 { font-size: 1.5rem !important; }
+            .container { padding: 0.25rem !important; }
+            .skill-bar { height: 16px; }
+            nav {
+                padding: 0.375rem;
+                margin: 0.125rem;
+            }
+        }
+    </style>
+    
+    <link type="text/css" rel="stylesheet" charset="UTF-8" href="https://www.gstatic.com/_/translate_http/_/ss/k=translate_http.tr.NJgGN_yGIWM.L.W.O/am=AAY/d=0/rs=AN8SPfrTSMIvWAFISYN4u74dPJrX0HgUsw/m=el_main_css">
+</head>
+<body class="min-h-screen bg-gradient-to-b from-[#0A0A20] via-[#151540] to-[#250829] text-slate-200 relative overflow-x-hidden">
+    <!-- فضای پس‌زمینه با ستاره‌ها -->
+    <div id="stars" class="fixed inset-0 z-0" aria-hidden="true">
+        <!-- ستاره‌های اولیه، سپس از طریق جاوااسکریپت تعداد ستاره‌ها تکمیل می‌شود -->
+        <div class="star" style="left: 19.8211%; top: 13.4835%; animation-delay: 1.43561s;"></div>
+        <div class="star" style="left: 54.6824%; top: 19.5505%; animation-delay: 1.20553s;"></div>
+        <div class="star" style="left: 19.1149%; top: 50.4394%; animation-delay: 0.666082s;"></div>
+        <div class="star" style="left: 71.0743%; top: 93.1339%; animation-delay: 0.403765s;"></div>
+        <div class="star" style="left: 67.889%; top: 42.6233%; animation-delay: 0.759709s;"></div>
+        <div class="star" style="left: 90.0376%; top: 13.9263%; animation-delay: 1.19762s;"></div>
+        <div class="star" style="left: 55.3269%; top: 19.8748%; animation-delay: 0.431872s;"></div>
+        <div class="star" style="left: 56.7572%; top: 41.5788%; animation-delay: 0.944247s;"></div>
+        <div class="star" style="left: 61.4786%; top: 37.728%; animation-delay: 0.60535s;"></div>
+        <div class="star" style="left: 5.77552%; top: 51.0503%; animation-delay: 0.548102s;"></div>
+        <div class="star" style="left: 92.9803%; top: 41.204%; animation-delay: 1.48253s;"></div>
+        <div class="star" style="left: 28.5555%; top: 86.8787%; animation-delay: 0.631241s;"></div>
+        <div class="star" style="left: 89.7157%; top: 44.5504%; animation-delay: 0.660437s;"></div>
+        <div class="star" style="left: 62.9034%; top: 13.733%; animation-delay: 0.966851s;"></div>
+        <div class="star" style="left: 60.3053%; top: 96.1534%; animation-delay: 0.722661s;"></div>
+        <div class="star" style="left: 7.99572%; top: 23.9998%; animation-delay: 0.532985s;"></div>
+        <div class="star" style="left: 72.3373%; top: 18.3816%; animation-delay: 0.758798s;"></div>
+        <div class="star" style="left: 71.2859%; top: 7.9599%; animation-delay: 0.979236s;"></div>
+        <div class="star" style="left: 14.4328%; top: 13.1668%; animation-delay: 1.08392s;"></div>
+        <div class="star" style="left: 78.0766%; top: 22.2184%; animation-delay: 0.510446s;"></div>
+        <div class="star" style="left: 14.6376%; top: 10.4357%; animation-delay: 0.14692s;"></div>
+        <div class="star" style="left: 91.1229%; top: 4.40641%; animation-delay: 0.343093s;"></div>
+        <div class="star" style="left: 6.59919%; top: 49.406%; animation-delay: 0.00778367s;"></div>
+        <div class="star" style="left: 0.177973%; top: 40.3965%; animation-delay: 0.361461s;"></div>
+        <div class="star" style="left: 34.7229%; top: 36.018%; animation-delay: 0.859177s;"></div>
+        <div class="star" style="left: 44.7112%; top: 11.9299%; animation-delay: 0.217054s;"></div>
+        <div class="star" style="left: 79.8299%; top: 74.5741%; animation-delay: 0.132558s;"></div>
+        <div class="star" style="left: 45.046%; top: 13.7311%; animation-delay: 0.550869s;"></div>
+        <div class="star" style="left: 86.6566%; top: 70.8078%; animation-delay: 0.719708s;"></div>
+        <div class="star" style="left: 15.1617%; top: 58.1155%; animation-delay: 0.00481058s;"></div>
+        <div class="star" style="left: 77.6822%; top: 57.5485%; animation-delay: 0.216611s;"></div>
+        <div class="star" style="left: 13.9349%; top: 38.4011%; animation-delay: 0.549918s;"></div>
+        <div class="star" style="left: 28.5131%; top: 60.7437%; animation-delay: 0.662714s;"></div>
+        <div class="star" style="left: 24.4025%; top: 54.4732%; animation-delay: 0.462514s;"></div>
+        <div class="star" style="left: 94.9336%; top: 79.9101%; animation-delay: 1.01522s;"></div>
+        <div class="star" style="left: 52.3661%; top: 68.2707%; animation-delay: 0.550338s;"></div>
+        <div class="star" style="left: 84.7312%; top: 78.7186%; animation-delay: 0.869616s;"></div>
+        <div class="star" style="left: 32.8725%; top: 61.4674%; animation-delay: 1.32103s;"></div>
+        <div class="star" style="left: 57.0203%; top: 72.0612%; animation-delay: 0.323661s;"></div>
+        <div class="star" style="left: 98.899%; top: 24.9256%; animation-delay: 0.686853s;"></div>
+        <div class="star" style="left: 40.9823%; top: 67.8898%; animation-delay: 0.736923s;"></div>
+        <div class="star" style="left: 19.3604%; top: 32.2431%; animation-delay: 0.0498446s;"></div>
+        <div class="star" style="left: 92.2116%; top: 5.79127%; animation-delay: 0.47073s;"></div>
+        <div class="star" style="left: 9.86465%; top: 16.4559%; animation-delay: 0.805329s;"></div>
+        <div class="star" style="left: 50.029%; top: 43.3391%; animation-delay: 0.222005s;"></div>
+        <div class="star" style="left: 78.2352%; top: 98.3162%; animation-delay: 0.655396s;"></div>
+        <div class="star" style="left: 62.4998%; top: 75.962%; animation-delay: 1.17241s;"></div>
+        <div class="star" style="left: 69.3056%; top: 62.1371%; animation-delay: 0.74008s;"></div>
+        <div class="star" style="left: 79.8801%; top: 58.4835%; animation-delay: 0.40855s;"></div>
+        <div class="star" style="left: 41.4236%; top: 3.01466%; animation-delay: 0.00332816s;"></div>
+        <div class="star" style="left: 85.3175%; top: 82.9175%; animation-delay: 0.0829534s;"></div>
+        <div class="star" style="left: 65.3667%; top: 89.1397%; animation-delay: 0.47535s;"></div>
+        <div class="star" style="left: 59.4451%; top: 85.902%; animation-delay: 0.435814s;"></div>
+        <div class="star" style="left: 11.3723%; top: 15.0398%; animation-delay: 0.699753s;"></div>
+        <div class="star" style="left: 82.4027%; top: 54.4003%; animation-delay: 0.339064s;"></div>
+        <div class="star" style="left: 22.5922%; top: 7.64812%; animation-delay: 0.508673s;"></div>
+        <div class="star" style="left: 50.871%; top: 48.801%; animation-delay: 0.763249s;"></div>
+        <div class="star" style="left: 21.1403%; top: 37.1136%; animation-delay: 0.88175s;"></div>
+        <div class="star" style="left: 76.7177%; top: 73.7332%; animation-delay: 0.540415s;"></div>
+        <div class="star" style="left: 10.2928%; top: 71.3052%; animation-delay: 0.332062s;"></div>
+        <div class="star" style="left: 57.1244%; top: 50.1343%; animation-delay: 1.0522s;"></div>
+        <div class="star" style="left: 24.1942%; top: 95.3474%; animation-delay: 0.707376s;"></div>
+        <div class="star" style="left: 75.2397%; top: 79.8057%; animation-delay: 1.11843s;"></div>
+        <div class="star" style="left: 23.1476%; top: 79.0803%; animation-delay: 1.27557s;"></div>
+        <div class="star" style="left: 66.172%; top: 87.7987%; animation-delay: 0.273118s;"></div>
+        <div class="star" style="left: 19.6619%; top: 60.9878%; animation-delay: 0.151898s;"></div>
+        <div class="star" style="left: 43.6047%; top: 37.714%; animation-delay: 1.39483s;"></div>
+        <div class="star" style="left: 92.2512%; top: 87.6079%; animation-delay: 0.0586721s;"></div>
+        <div class="star" style="left: 13.6946%; top: 92.3011%; animation-delay: 0.239484s;"></div>
+        <div class="star" style="left: 32.373%; top: 55.4686%; animation-delay: 0.591769s;"></div>
+        <div class="star" style="left: 42.1614%; top: 37.1285%; animation-delay: 1.49076s;"></div>
+        <div class="star" style="left: 56.4684%; top: 96.8202%; animation-delay: 0.796876s;"></div>
+        <div class="star" style="left: 80.8359%; top: 90.4765%; animation-delay: 1.10539s;"></div>
+        <div class="star" style="left: 3.4827%; top: 76.9407%; animation-delay: 1.35647s;"></div>
+        <div class="star" style="left: 8.88044%; top: 71.3361%; animation-delay: 1.35053s;"></div>
+        <div class="star" style="left: 32.9087%; top: 62.552%; animation-delay: 1.31642s;"></div>
+        <div class="star" style="left: 15.1432%; top: 56.6911%; animation-delay: 1.29011s;"></div>
+        <div class="star" style="left: 38.474%; top: 87.4158%; animation-delay: 1.45232s;"></div>
+        <div class="star" style="left: 47.9998%; top: 63.56%; animation-delay: 0.191723s;"></div>
+        <div class="star" style="left: 66.8794%; top: 35.1832%; animation-delay: 0.346811s;"></div>
+        <div class="star" style="left: 68.1953%; top: 15.5599%; animation-delay: 0.551264s;"></div>
+        <div class="star" style="left: 83.9885%; top: 46.7626%; animation-delay: 0.810423s;"></div>
+        <div class="star" style="left: 47.7475%; top: 62.5887%; animation-delay: 1.46704s;"></div>
+        <div class="star" style="left: 19.5736%; top: 1.74126%; animation-delay: 0.950896s;"></div>
+        <div class="star" style="left: 10.8732%; top: 9.09808%; animation-delay: 0.669695s;"></div>
+        <div class="star" style="left: 81.9653%; top: 58.6773%; animation-delay: 0.21997s;"></div>
+        <div class="star" style="left: 90.8265%; top: 12.2596%; animation-delay: 1.24177s;"></div>
+        <div class="star" style="left: 70.8274%; top: 72.1501%; animation-delay: 0.662424s;"></div>
+        <div class="star" style="left: 88.315%; top: 35.8387%; animation-delay: 0.784074s;"></div>
+        <div class="star" style="left: 97.8792%; top: 96.0227%; animation-delay: 0.163974s;"></div>
+        <div class="star" style="left: 20.839%; top: 77.744%; animation-delay: 0.0484139s;"></div>
+        <div class="star" style="left: 50.7346%; top: 40.1518%; animation-delay: 0.710099s;"></div>
+        <div class="star" style="left: 21.1319%; top: 41.2432%; animation-delay: 0.062102s;"></div>
+        <div class="star" style="left: 16.4446%; top: 90.7204%; animation-delay: 0.299593s;"></div>
+        <div class="star" style="left: 40.4701%; top: 42.4247%; animation-delay: 0.961155s;"></div>
+        <div class="star" style="left: 15.7066%; top: 45.7572%; animation-delay: 1.21609s;"></div>
+        <div class="star" style="left: 37.4711%; top: 83.3166%; animation-delay: 1.39446s;"></div>
+        <div class="star" style="left: 92.0004%; top: 76.1403%; animation-delay: 0.432954s;"></div>
+        <div class="star" style="left: 8.68343%; top: 95.1598%; animation-delay: 0.120428s;"></div>
+        <div class="star" style="left: 93.2528%; top: 24.8258%; animation-delay: 0.662717s;"></div>
+        <div class="star" style="left: 89.5593%; top: 14.0146%; animation-delay: 0.566335s;"></div>
+        <div class="star" style="left: 13.8558%; top: 52.6946%; animation-delay: 1.26261s;"></div>
+        <div class="star" style="left: 95.8776%; top: 99.2906%; animation-delay: 1.21664s;"></div>
+        <div class="star" style="left: 53.5092%; top: 1.92399%; animation-delay: 0.329047s;"></div>
+        <div class="star" style="left: 69.2185%; top: 73.4738%; animation-delay: 1.02184s;"></div>
+        <div class="star" style="left: 19.8335%; top: 81.2071%; animation-delay: 0.650958s;"></div>
+        <div class="star" style="left: 87.4363%; top: 31.8268%; animation-delay: 0.566611s;"></div>
+        <div class="star" style="left: 34.1194%; top: 89.3003%; animation-delay: 0.655478s;"></div>
+        <div class="star" style="left: 21.2285%; top: 76.0368%; animation-delay: 0.907276s;"></div>
+        <div class="star" style="left: 41.9488%; top: 44.0982%; animation-delay: 1.40471s;"></div>
+        <div class="star" style="left: 2.34823%; top: 10.4441%; animation-delay: 0.499392s;"></div>
+        <div class="star" style="left: 89.4685%; top: 37.681%; animation-delay: 0.283877s;"></div>
+        <div class="star" style="left: 55.6503%; top: 45.5953%; animation-delay: 0.643694s;"></div>
+        <div class="star" style="left: 54.163%; top: 93.3391%; animation-delay: 0.410313s;"></div>
+        <div class="star" style="left: 52.1016%; top: 15.3253%; animation-delay: 0.132146s;"></div>
+        <div class="star" style="left: 13.4202%; top: 34.169%; animation-delay: 0.785103s;"></div>
+        <div class="star" style="left: 9.93541%; top: 86.7368%; animation-delay: 0.845579s;"></div>
+        <div class="star" style="left: 37.169%; top: 75.9684%; animation-delay: 0.959728s;"></div>
+    </div>
+    
+    <!-- فراگیر ها/ اورب‌های شناور -->
+    <div class="floating-orb fixed top-20 right-10 w-28 h-28 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 opacity-25 blur-xl animate-[float_5s_ease-in-out_infinite]" aria-hidden="true"></div>
+    <div class="floating-orb fixed bottom-20 left-10 w-32 h-32 rounded-full bg-gradient-to-br from-blue-500 to-teal-500 opacity-15 blur-xl animate-[float_7s_ease-in-out_infinite]" aria-hidden="true"></div>
+    <div class="floating-orb fixed top-40 left-20 w-20 h-20 rounded-full bg-gradient-to-br from-yellow-500 to-red-500 opacity-20 blur-xl animate-[float_6s_ease-in-out_infinite]" aria-hidden="true"></div>
+    
+    <!-- محتوای اصلی سایت -->
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <header class="py-4">
+            <nav class="flex items-center justify-between backdrop-blur-md bg-white/5 rounded-xl p-3 sm:p-4 hover:bg-white/8 transition-all duration-300" role="navigation">
+                <a href="/" aria-label="صفحه اصلی" class="focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <img src="/logo.png" alt="لوگوی علی صفامنش" width="40" height="40" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-purple-500 hover:border-pink-500 transition-colors">
+                </a>
+                <div class="flex gap-2 sm:gap-4">
+                    <a href="/tools" class="nav-links hover:text-purple-400 transition-colors hover:scale-105 transform text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 px-2 sm:px-3">ابزار</a>
+                    <a href="https://api.daradege.ir" class="nav-links hover:text-purple-400 transition-colors hover:scale-105 transform text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 px-2 sm:px-3">API</a>
+                </div>
+            </nav>
+        </header>
+        <main class="max-w-4xl mx-auto page-transition px-4">
+            <header class="text-center mb-16">
+                <div class="relative inline-block">
+                    <img src="/logo.png" alt="پروفایل علی صفامنش" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto mb-8 border-4 border-purple-500 hover:border-pink-500 transition-all duration-300 shadow-2xl">
+                    <div class="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 hover:opacity-20 transition-opacity duration-300"></div>
+                </div>
+                <h1 class="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text">علی صفامنش</h1>
+                <h2 class="text-2xl sm:text-3xl text-purple-400">Fullstack Developer &amp; Bot Developer</h2>
+            </header>
+
+            <section id="about" class="mb-16">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">درباره من</h2>
+                <div class="glass-card">
+                    <p class="mb-4 text-center text-base sm:text-lg leading-relaxed">سلام! من علی صفامنش هستم. من علاقه زیادی به پایتون دارم و در حال حاضر تخصص خود را در C# گسترش می دهم. با داشتن سه گواهینامه پایتون از مجتمع فنی تهران مرکزی در زمینه توسعه ربات و برنامه نویسی بک اند تخصص دارم.</p>
+                    <p class="text-center text-base sm:text-lg leading-relaxed">من به عنوان یک برنامه نویس باتجربه، خلاقیت و برتری فنی را برای هر پروژه، با تخصص خاصی در توسعه پایتون و باطن، به ارمغان می‌آورم.</p>
+                </div>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-center">مهارت ها</h2>
+                <div class="space-y-6">
+                    <div class="glass-card">
+                        <div class="flex justify-between mb-3">
+                            <span class="text-base sm:text-lg">پایتون</span>
+                            <span class="text-purple-400">90%</span>
+                        </div>
+                        <div class="skill-bar" style="--percent: 90%"></div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="flex justify-between mb-3">
+                            <span class="text-base sm:text-lg">مهارت جستجو</span>
+                            <span class="text-purple-400">100%</span>
+                        </div>
+                        <div class="skill-bar" style="--percent: 100%"></div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="flex justify-between mb-3">
+                            <span class="text-base sm:text-lg">Front-End</span>
+                            <span class="text-purple-400">100%</span>
+                        </div>
+                        <div class="skill-bar" style="--percent: 100%"></div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="flex justify-between mb-3">
+                            <span class="text-base sm:text-lg">Node.js</span>
+                            <span class="text-purple-400">70%</span>
+                        </div>
+                        <div class="skill-bar" style="--percent: 70%"></div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="flex justify-between mb-3">
+                            <span class="text-base sm:text-lg">سی شارپ</span>
+                            <span class="text-purple-400">70%</span>
+                        </div>
+                        <div class="skill-bar" style="--percent: 70%"></div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="flex justify-between mb-3">
+                            <span class="text-base sm:text-lg">GIMP</span>
+                            <span class="text-purple-400">70%</span>
+                        </div>
+                        <div class="skill-bar" style="--percent: 85%"></div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="flex justify-between mb-3">
+                            <span class="text-base sm:text-lg">git</span>
+                            <span class="text-purple-400">95%</span>
+                        </div>
+                        <div class="skill-bar" style="--percent: 95%"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-center">تجربه توسعه ربات</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <div class="glass-card text-center transform hover:scale-105 transition-all duration-300">
+                        <h3 class="text-xl sm:text-2xl font-bold mb-6 text-purple-400">ربات های Discord</h3>
+                        <ul class="list-none space-y-4">
+                            <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات های مدیریت سرور</li>
+                            <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات های موسیقی با کیفیت بالا</li>
+                            <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">سیستم های سطح و رتبه</li>
+                            <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات های اقتصادی و بازی</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card text-center transform hover:scale-105 transition-all duration-300">
+                        <h3 class="text-xl sm:text-2xl font-bold mb-6 text-purple-400">ربات های بیل</h3>
+                        <ul class="list-none space-y-4">
+                            <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات های خبری و اطلاعاتی</li>
+                            <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">سیستم های پاسخگویی خودکار</li>
+                            <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات های مدیریت گروه و کانال</li>
+                            <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات های سرگرمی و بازی</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-center">پروژه های من</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                    <a href="https://pyrobale.github.io" target="_blank" class="glass-card text-center p-6 transform hover:scale-105 transition-all duration-300">
+                        <h3 class="text-xl font-bold mb-4 text-purple-400">PyRoBale</h3>
+                        <p class="text-sm sm:text-base">یک کتابخانه پایتون برای توسعه ربات پیام رسان Bale</p>
+                    </a>
+                    <a href="https://pypi.org/project/sqbooster" target="_blank" class="glass-card text-center p-6 transform hover:scale-105 transition-all duration-300">
+                        <h3 class="text-xl font-bold mb-4 text-purple-400">SQBooster</h3>
+                        <p class="text-sm sm:text-base">سازنده پرس و جوی SQL قدرتمند برای پایتون</p>
+                    </a>
+                    <a href="https://aima.daradege.ir" target="_blank" class="glass-card text-center p-6 transform hover:scale-105 transition-all duration-300">
+                        <h3 class="text-xl font-bold mb-4 text-purple-400">AIMA</h3>
+                        <p class="text-sm sm:text-base">مدیریت و توسعه جامعه هوش مصنوعی دبیرستان مفید</p>
+                    </a>
+                    <a href="https://github.com/daradege/openWPB" target="_blank" class="glass-card text-center p-6 transform hover:scale-105 transition-all duration-300">
+                        <h3 class="text-xl font-bold mb-4 text-purple-400">OpenWPB</h3>
+                        <p class="text-sm sm:text-base">یک پنل مبتنی بر وب برای ارسال پیام به افراد مجرد یا لیستی از کاربران با استفاده از توکن های ربات</p>
+                    </a>
+                    <div class="glass-card text-center p-6">
+                        <h3 class="text-xl font-bold mb-4 text-purple-400">بیشتر به زودی</h3>
+                        <p class="text-sm sm:text-base">منتظر پروژه های جدید و هیجان انگیز باشید!</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold mb-6 text-center">تماس بگیرید</h2>
+                <div class="flex justify-center space-x-8">
+                    <a href="https://t.me/daradege" class="glass-card p-4 hover:text-purple-400 hover:scale-110 transition-all duration-300 flex items-center">
+                        <img src="/assets/telegram.svg" alt="تلگرام" class="w-7 h-7 invert opacity-90 hover:opacity-100">
+                    </a>
+                    <a href="https://github.com/daradege" class="glass-card p-4 hover:text-purple-400 hover:scale-110 transition-all duration-300 flex items-center">
+                        <img src="/assets/github.svg" alt="GitHub" class="w-7 h-7 invert opacity-90 hover:opacity-100">
+                    </a>
+                    <a href="https://ble.ir/daradege" class="glass-card p-4 hover:text-purple-400 hover:scale-110 transition-all duration-300 flex items-center">
+                        <img src="/assets/bale.svg" alt="بیل" class="w-7 h-7 invert opacity-90 hover:opacity-100">
+                    </a>
+                    <a href="https://matrix.to/#/@daradege:matrix.org" class="glass-card p-4 hover:text-purple-400 hover:scale-110 transition-all duration-300 flex items-center">
+                        <img src="/assets/matrix.svg" alt="ماتریس" class="w-7 h-7 opacity-90 hover:opacity-100">
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12 text-sm text-slate-400">
+            © 2024 علی صفامنش. تمامی حقوق محفوظ است.
+        </footer>
+    </div>
+    
+    <!-- اسکریپت افزودن ستاره‌های اضافی -->
+    <script defer>
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.animationDelay = `${Math.random() * 1.5}s`;
+            starsContainer.appendChild(star);
+        }
+    </script>
+    
+    <!-- اسکریپت انتقال صفحه -->
+    <script>
+      document.addEventListener('pageshow', () => {
+          document.querySelectorAll('a').forEach(link => {
+              link.addEventListener('click', e => {
+                  if (link.href.includes(window.location.origin)) {
+                      e.preventDefault();
+                      document.querySelector('main').style.opacity = '0';
+                      document.querySelector('main').style.transform = 'translateY(20px)';
+                      setTimeout(() => {
+                          window.location.href = link.href;
+                      }, 500);
+                  }
+              });
+          });
+      });
+    </script>
+    
+    <!-- اسکریپت Cloudflare Beacon -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;rayId&quot;:&quot;92eb93572fa96ab9&quot;,&quot;version&quot;:&quot;2025.3.0&quot;,&quot;r&quot;:1,&quot;token&quot;:&quot;7836fe392c1e4442a333cd5b59c87aeb&quot;,&quot;serverTiming&quot;:{&quot;name&quot;:{&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfSpeedBrain&quot;:true,&quot;cfCacheStatus&quot;:true}}}" crossorigin="anonymous"></script>
 </body>
 </html>
