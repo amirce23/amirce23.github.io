@@ -1,406 +1,447 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="fa">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="GG MAX - Creative &amp; Innovative Fullstack and Bot Developer. Discover my portfolio and advanced tech projects.">
-  <meta name="keywords" content="GG MAX, Fullstack Developer, Bot Developer, Python, Innovation, Web Development">
-  <meta name="author" content="GG MAX">
-  <meta name="robots" content="index, follow">
-  <meta property="og:title" content="GG MAX | Innovative Fullstack &amp; Bot Developer">
-  <meta property="og:description" content="Explore the creative and innovative projects of GG MAX.">
-  <meta property="og:image" content="/assets/ggmax-logo.png">
-  <meta property="og:url" content="https://ggmax.dev">
-  <link rel="canonical" href="https://ggmax.dev">
-  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-  <title>GG MAX | Innovative Fullstack &amp; Bot Developer</title>
-  
-  <!-- فونت‌ها و CSS اولیه -->
-  <link rel="preload" href="/assets/fonts/robotocode.ttf" as="font" type="font/ttf" crossorigin="">
-  <link rel="preload" href="/assets/fonts/poppins.ttf" as="font" type="font/ttf" crossorigin="">
-  <link rel="stylesheet" href="/assets/css/output.css">
-  
-  <style>
-    /* پس‌زمینه متحرک گرادینت */
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    body {
-      background: linear-gradient(270deg, #0A0A20, #151540, #250829);
-      background-size: 600% 600%;
-      animation: gradientBG 15s ease infinite;
-      font-family: 'poppinsfont', system-ui, -apple-system, sans-serif;
-      color: #eee;
-      margin: 0;
-      overflow-x: hidden;
-      position: relative;
-    }
-    @font-face {
-      font-family: 'poppinsfont';
-      src: url(/assets/fonts/poppins.ttf) format('truetype');
-      font-weight: lighter;
-      font-display: swap;
-    }
-    h1, h2, h3 { font-family: 'poppinsfont', sans-serif; }
-    
-    /* ناوبری و لینک‌ها */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      backdrop-filter: blur(5px);
-    }
-    .nav-links {
-      position: relative;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      transition: all 0.3s ease;
-    }
-    .nav-links:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: scale(1.05);
-    }
-    .nav-links::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #a855f7, #ec4899);
-      transition: all 0.3s ease;
-      transform: translateX(-50%);
-    }
-    .nav-links:hover::after {
-      width: 80%;
-    }
-    
-    /* نوار مهارت‌ها */
-    .skill-bar {
-      height: 24px;
-      background: linear-gradient(90deg, #3b82f6 var(--percent), #1e293b var(--percent));
-      border-radius: 12px;
-      transition: all 0.3s ease;
-    }
-    .skill-bar:hover { transform: scale(1.02); }
-    
-    /* ستاره‌های پس‌زمینه */
-    @keyframes twinkle {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: #fff;
-      border-radius: 50%;
-      animation: twinkle 1.5s infinite;
-    }
-    
-    /* سبک کارت‌های شیشه‌ای */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 16px;
-      padding: 20px;
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-    .glass-card:hover {
-      transform: translateY(-5px);
-      background: rgba(255, 255, 255, 0.15);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    }
-    
-    /* استایل دکمه‌ها */
-    .button {
-      background: #ec4899;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      color: #fff;
-      font-size: 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-    .button:hover {
-      transform: scale(1.1);
-      background: #a855f7;
-    }
-    
-    /* استایل بخش نمونه کد */
-    #snippet-section {
-      margin-bottom: 2rem;
-    }
-    #snippet-section h2 {
-      margin-bottom: 1rem;
-    }
-    pre {
-      background: rgba(0, 0, 0, 0.5);
-      padding: 1rem;
-      border-radius: 8px;
-      overflow-x: auto;
-      color: #90ee90;
-      font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-      position: relative;
-    }
-    pre::before {
-      content: "کد نمونه";
-      position: absolute;
-      top: -1.2rem;
-      left: 1rem;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      color: #fff;
-    }
-    
-    /* انیمیشن ورودی */
-    .page-transition {
-      animation: fadeIn 0.5s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    /* Media Queries */
-    @media (max-width: 768px) {
-      h1 { font-size: 2.5rem !important; }
-      h2 { font-size: 1.8rem !important; }
-      h3 { font-size: 1.5rem !important; }
-      .container { padding: 0.5rem !important; }
-      nav { padding: 0.75rem; margin: 0.5rem; }
-      .nav-links { padding: 0.375rem 0.75rem; font-size: 0.875rem; }
-      .skill-bar { height: 20px; }
-      .glass-card { padding: 15px; }
-      img[alt="GG MAX Profile"] { width: 120px !important; height: 120px !important; }
-    }
-    @media (max-width: 640px) {
-      .floating-orb {
-        width: 20vw !important;
-        height: 20vw !important;
-        opacity: 0.15 !important;
+<html lang="fa" dir="ltr">
+  <head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="GG MAX - Creative &amp; Innovative Fullstack and Bot Developer. Explore my portfolio and advanced tech projects." />
+    <meta name="keywords" content="GG MAX, Fullstack Developer, Bot Developer, Python, Innovation, Web Development" />
+    <meta name="author" content="GG MAX" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="GG MAX | Innovative Fullstack &amp; Bot Developer" />
+    <meta property="og:description" content="Explore the creative and innovative projects of GG MAX." />
+    <meta property="og:image" content="/assets/ggmax-logo.png" />
+    <meta property="og:url" content="https://ggmax.dev" />
+    <link rel="canonical" href="https://ggmax.dev" />
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+    <title>GG MAX | Innovative Fullstack &amp; Bot Developer</title>
+
+    <!-- Preloading Fonts and CSS -->
+    <link rel="preload" href="/assets/fonts/robotocode.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/assets/fonts/poppins.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="stylesheet" href="/assets/css/output.css" />
+
+    <!-- Internal CSS -->
+    <style>
+      /* Smooth scrolling */
+      html { scroll-behavior: smooth; }
+
+      /* Animated Gradient Background */
+      @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
       }
-      nav { padding: 0.5rem; margin: 0.25rem; }
-      .nav-links { font-size: 0.75rem; padding: 0.25rem 0.5rem; }
-    }
-    @media (max-width: 480px) {
-      h1 { font-size: 2rem !important; }
-      h2 { font-size: 1.5rem !important; }
-      .container { padding: 0.25rem !important; }
-      .skill-bar { height: 16px; }
-      nav { padding: 0.375rem; margin: 0.125rem; }
-    }
-  </style>
-  
-  <!-- GSAP برای انیمیشن‌های پیشرفته -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-</head>
-<body class="min-h-screen relative">
-  <!-- پس‌زمینه ستاره‌ها -->
-  <div id="stars" class="fixed inset-0 z-0" aria-hidden="true">
-    <!-- چند ستاره نمونه؛ بقیه داینامیک توسط جاوا اسکریپت اضافه می‌شوند -->
-    <div class="star" style="left: 20%; top: 15%; animation-delay: 1.2s;"></div>
-    <div class="star" style="left: 55%; top: 25%; animation-delay: 0.8s;"></div>
-    <div class="star" style="left: 15%; top: 50%; animation-delay: 1s;"></div>
-    <div class="star" style="left: 70%; top: 90%; animation-delay: 0.5s;"></div>
-  </div>
+      body {
+        background: linear-gradient(270deg, #0a0a20, #151540, #250829);
+        background-size: 600% 600%;
+        animation: gradientBG 15s ease infinite;
+        font-family: 'poppinsfont', system-ui, -apple-system, sans-serif;
+        color: #eee;
+        margin: 0;
+        overflow-x: hidden;
+        position: relative;
+        line-height: 1.6;
+      }
+      @font-face {
+        font-family: "poppinsfont";
+        src: url(/assets/fonts/poppins.ttf) format("truetype");
+        font-weight: 300;
+        font-display: swap;
+      }
+      h1, h2, h3 {
+        font-family: "poppinsfont", sans-serif;
+        margin: 0;
+      }
 
-  <!-- اورب‌های شناور -->
-  <div class="floating-orb fixed top-20 right-10 w-28 h-28 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 opacity-25 blur-xl animate-[float_5s_ease-in-out_infinite]" aria-hidden="true"></div>
-  <div class="floating-orb fixed bottom-20 left-10 w-32 h-32 rounded-full bg-gradient-to-br from-blue-500 to-teal-500 opacity-15 blur-xl animate-[float_7s_ease-in-out_infinite]" aria-hidden="true"></div>
-  <div class="floating-orb fixed top-40 left-20 w-20 h-20 rounded-full bg-gradient-to-br from-yellow-500 to-red-500 opacity-20 blur-xl animate-[float_6s_ease-in-out_infinite]" aria-hidden="true"></div>
-  
-  <!-- محتوای اصلی -->
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 page-transition">
-    <header class="py-4">
-      <nav class="flex items-center justify-between backdrop-blur-md bg-white/5 rounded-xl p-3 sm:p-4 transition-all duration-300" role="navigation">
-        <a href="/" aria-label="صفحه اصلی" class="focus:outline-none focus:ring-2 focus:ring-purple-500">
-          <img src="/assets/ggmax-logo.png" alt="GG MAX Profile" width="40" height="40" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-purple-500 hover:border-pink-500 transition-colors">
-        </a>
-        <div class="flex gap-2 sm:gap-4">
-          <a href="/tools" class="nav-links text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 px-2 sm:px-3">ابزار</a>
-          <a href="https://api.ggmax.dev" class="nav-links text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 px-2 sm:px-3">API</a>
-        </div>
-      </nav>
-    </header>
-    <main class="max-w-4xl mx-auto px-4">
-      <header class="text-center mb-16">
-        <div class="relative inline-block">
-          <img src="/assets/ggmax-logo.png" alt="GG MAX Profile" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto mb-8 border-4 border-purple-500 hover:border-pink-500 transition-all duration-300 shadow-2xl">
-          <div class="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 hover:opacity-30 transition-opacity duration-300"></div>
-        </div>
-        <h1 class="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text">GG MAX</h1>
-        <h2 class="text-2xl sm:text-3xl text-purple-300">Innovative Fullstack &amp; Bot Developer</h2>
+      /* Navigation */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        padding: 1rem 2rem;
+        margin-bottom: 1rem;
+        backdrop-filter: blur(5px);
+        transition: padding 0.3s ease;
+      }
+      nav.shrink {
+        padding: 0.5rem 2rem;
+      }
+      .nav-links {
+        position: relative;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      .nav-links:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: scale(1.05);
+      }
+      .nav-links::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #a855f7, #ec4899);
+        transition: width 0.3s ease;
+        transform: translateX(-50%);
+      }
+      .nav-links:hover::after {
+        width: 80%;
+      }
+
+      /* Skill Bar */
+      .skill-bar {
+        height: 24px;
+        background: linear-gradient(90deg, #3b82f6 var(--percent), #1e293b var(--percent));
+        border-radius: 12px;
+        transition: transform 0.3s ease;
+      }
+      .skill-bar:hover {
+        transform: scale(1.02);
+      }
+
+      /* Background Stars */
+      @keyframes twinkle {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+      }
+      .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: #fff;
+        border-radius: 50%;
+        animation: twinkle 1.5s infinite;
+      }
+      
+      /* Glassmorphism Cards */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(14px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        padding: 20px;
+        transition: transform 0.3s ease, background 0.3s ease;
+        margin-bottom: 1rem;
+      }
+      .glass-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+      
+      /* Button Style */
+      .button {
+        background: #ec4899;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        color: #fff;
+        font-size: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.3s ease, background 0.3s ease;
+      }
+      .button:hover {
+        transform: scale(1.1);
+        background: #a855f7;
+      }
+      
+      /* Code Snippet Section */
+      #snippet-section { margin: 3rem 0; }
+      #snippet-section h2 { margin-bottom: 1rem; text-align: center; }
+      pre {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 1rem;
+        border-radius: 8px;
+        overflow-x: auto;
+        color: #90ee90;
+        font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+        position: relative;
+      }
+      pre::before {
+        content: "نمونه کد";
+        position: absolute;
+        top: -1.2rem;
+        left: 1rem;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        color: #fff;
+      }
+      
+      /* Back to Top Button */
+      #back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #ec4899;
+        border: none;
+        padding: 0.8rem;
+        border-radius: 50%;
+        color: #fff;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s;
+        z-index: 100;
+      }
+      #back-to-top:hover {
+        background: #a855f7;
+        transform: scale(1.1);
+      }
+      
+      /* Page Transition Animation */
+      .page-transition {
+        animation: fadeIn 0.5s ease-in-out;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        h1 { font-size: 2.5rem !important; }
+        h2 { font-size: 1.8rem !important; }
+        h3 { font-size: 1.5rem !important; }
+        .container { padding: 0.5rem !important; }
+        nav { padding: 0.75rem; margin: 0.5rem; }
+        .nav-links { padding: 0.375rem 0.75rem; font-size: 0.875rem; }
+        .skill-bar { height: 20px; }
+        .glass-card { padding: 15px; }
+        img[alt="GG MAX Profile"] { width: 120px !important; height: 120px !important; }
+      }
+      @media (max-width: 640px) {
+        .floating-orb { width: 20vw !important; height: 20vw !important; opacity: 0.15 !important; }
+        nav { padding: 0.5rem; margin: 0.25rem; }
+        .nav-links { font-size: 0.75rem; padding: 0.25rem 0.5rem; }
+      }
+      @media (max-width: 480px) {
+        h1 { font-size: 2rem !important; }
+        h2 { font-size: 1.5rem !important; }
+        .container { padding: 0.25rem !important; }
+        .skill-bar { height: 16px; }
+        nav { padding: 0.375rem; margin: 0.125rem; }
+      }
+    </style>
+    
+    <!-- GSAP & ScrollTrigger for Advanced Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  </head>
+  <body>
+    <!-- Background Stars -->
+    <div id="stars" class="fixed inset-0 z-0" aria-hidden="true">
+      <div class="star" style="left: 20%; top: 15%; animation-delay: 1.2s;"></div>
+      <div class="star" style="left: 55%; top: 25%; animation-delay: 0.8s;"></div>
+      <div class="star" style="left: 15%; top: 50%; animation-delay: 1s;"></div>
+      <div class="star" style="left: 70%; top: 90%; animation-delay: 0.5s;"></div>
+      <!-- سایر ستاره‌ها از طریق جاوا اسکریپت اضافه می‌شوند -->
+    </div>
+    
+    <!-- Floating Orbs -->
+    <div class="floating-orb fixed top-20 right-10 w-28 h-28 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 opacity-25 blur-xl animate-[float_5s_ease-in-out_infinite]" aria-hidden="true"></div>
+    <div class="floating-orb fixed bottom-20 left-10 w-32 h-32 rounded-full bg-gradient-to-br from-blue-500 to-teal-500 opacity-15 blur-xl animate-[float_7s_ease-in-out_infinite]" aria-hidden="true"></div>
+    <div class="floating-orb fixed top-40 left-20 w-20 h-20 rounded-full bg-gradient-to-br from-yellow-500 to-red-500 opacity-20 blur-xl animate-[float_6s_ease-in-out_infinite]" aria-hidden="true"></div>
+    
+    <!-- Back to Top Button -->
+    <button id="back-to-top" onclick="scrollToTop()">↑</button>
+    
+    <!-- Main Container -->
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 page-transition">
+      <!-- Header Section -->
+      <header class="py-4">
+        <nav class="flex items-center justify-between backdrop-blur-md bg-white/5 rounded-xl p-3 sm:p-4 transition-all duration-300" role="navigation">
+          <a href="/" aria-label="صفحه اصلی" class="focus:outline-none focus:ring-2 focus:ring-purple-500">
+            <img src="/assets/ggmax-logo.png" alt="GG MAX Profile" width="40" height="40" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-purple-500 hover:border-pink-500 transition-colors">
+          </a>
+          <div class="flex gap-2 sm:gap-4">
+            <a href="#about" class="nav-links text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 px-2 sm:px-3">درباره من</a>
+            <a href="#snippet-section" class="nav-links text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 px-2 sm:px-3">نمونه کد</a>
+            <a href="#contact" class="nav-links text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 px-2 sm:px-3">تماس</a>
+          </div>
+        </nav>
       </header>
-
-      <!-- بخش درباره من -->
-      <section id="about" class="mb-16">
-        <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">درباره من</h2>
-        <div class="glass-card">
-          <p class="mb-4 text-center text-base sm:text-lg leading-relaxed">
-            سلام! من GG MAX هستم. در زمینه توسعه نرم‌افزارهای پیشرفته و ساخت ربات‌های هوشمند فعالیت می‌کنم. همیشه به دنبال پروژه‌های نوآورانه و چالش‌برانگیز هستم.
-          </p>
-          <p class="text-center text-base sm:text-lg leading-relaxed">
-            از تکنولوژی‌های روز مانند پایتون، C# و Node.js استفاده می‌کنم تا تجربه‌ای بی‌نظیر در فضای دیجیتال به وجود آورم.
-          </p>
-        </div>
-      </section>
-
-      <!-- بخش مهارت‌ها -->
-      <section class="mb-16">
-        <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-center">مهارت‌ها</h2>
-        <div class="space-y-6">
+      
+      <!-- Main Header -->
+      <main class="max-w-4xl mx-auto px-4">
+        <header class="text-center mb-16">
+          <div class="relative inline-block">
+            <img src="/assets/ggmax-logo.png" alt="GG MAX Profile" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto mb-8 border-4 border-purple-500 hover:border-pink-500 transition-all duration-300 shadow-2xl">
+            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 hover:opacity-30 transition-opacity duration-300"></div>
+          </div>
+          <h1 class="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text">GG MAX</h1>
+          <h2 class="text-2xl sm:text-3xl text-purple-300">Innovative Fullstack &amp; Bot Developer</h2>
+        </header>
+        
+        <!-- About Section -->
+        <section id="about" class="mb-16">
+          <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">درباره من</h2>
           <div class="glass-card">
-            <div class="flex justify-between mb-3">
-              <span class="text-base sm:text-lg">پایتون</span>
-              <span class="text-purple-400">90%</span>
+            <p class="mb-4 text-center text-base sm:text-lg leading-relaxed">
+              سلام! من GG MAX هستم. در زمینه توسعه نرم‌افزارهای پیشرفته و ساخت ربات‌های هوشمند فعالیت می‌کنم. همیشه به دنبال پروژه‌های نوآورانه و چالش‌برانگیز هستم.
+            </p>
+            <p class="text-center text-base sm:text-lg leading-relaxed">
+              از فناوری‌های روز مانند پایتون، C# و Node.js بهره می‌برم تا تجربه‌ای بی‌نظیر در فضای دیجیتال فراهم کنم.
+            </p>
+          </div>
+        </section>
+        
+        <!-- Skills Section -->
+        <section class="mb-16">
+          <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-center">مهارت‌ها</h2>
+          <div class="space-y-6">
+            <div class="glass-card">
+              <div class="flex justify-between mb-3">
+                <span class="text-base sm:text-lg">پایتون</span>
+                <span class="text-purple-400">90%</span>
+              </div>
+              <div class="skill-bar" style="--percent: 90%"></div>
             </div>
-            <div class="skill-bar" style="--percent: 90%"></div>
-          </div>
-          <div class="glass-card">
-            <div class="flex justify-between mb-3">
-              <span class="text-base sm:text-lg">جستجو و نوآوری</span>
-              <span class="text-purple-400">100%</span>
+            <div class="glass-card">
+              <div class="flex justify-between mb-3">
+                <span class="text-base sm:text-lg">جستجو و نوآوری</span>
+                <span class="text-purple-400">100%</span>
+              </div>
+              <div class="skill-bar" style="--percent: 100%"></div>
             </div>
-            <div class="skill-bar" style="--percent: 100%"></div>
-          </div>
-          <div class="glass-card">
-            <div class="flex justify-between mb-3">
-              <span class="text-base sm:text-lg">Front-End</span>
-              <span class="text-purple-400">100%</span>
+            <div class="glass-card">
+              <div class="flex justify-between mb-3">
+                <span class="text-base sm:text-lg">Front-End</span>
+                <span class="text-purple-400">100%</span>
+              </div>
+              <div class="skill-bar" style="--percent: 100%"></div>
             </div>
-            <div class="skill-bar" style="--percent: 100%"></div>
-          </div>
-          <div class="glass-card">
-            <div class="flex justify-between mb-3">
-              <span class="text-base sm:text-lg">Node.js</span>
-              <span class="text-purple-400">70%</span>
+            <div class="glass-card">
+              <div class="flex justify-between mb-3">
+                <span class="text-base sm:text-lg">Node.js</span>
+                <span class="text-purple-400">70%</span>
+              </div>
+              <div class="skill-bar" style="--percent: 70%"></div>
             </div>
-            <div class="skill-bar" style="--percent: 70%"></div>
-          </div>
-          <div class="glass-card">
-            <div class="flex justify-between mb-3">
-              <span class="text-base sm:text-lg">سی شارپ</span>
-              <span class="text-purple-400">70%</span>
+            <div class="glass-card">
+              <div class="flex justify-between mb-3">
+                <span class="text-base sm:text-lg">سی شارپ</span>
+                <span class="text-purple-400">70%</span>
+              </div>
+              <div class="skill-bar" style="--percent: 70%"></div>
             </div>
-            <div class="skill-bar" style="--percent: 70%"></div>
-          </div>
-          <div class="glass-card">
-            <div class="flex justify-between mb-3">
-              <span class="text-base sm:text-lg">Creative Design</span>
-              <span class="text-purple-400">85%</span>
+            <div class="glass-card">
+              <div class="flex justify-between mb-3">
+                <span class="text-base sm:text-lg">Creative Design</span>
+                <span class="text-purple-400">85%</span>
+              </div>
+              <div class="skill-bar" style="--percent: 85%"></div>
             </div>
-            <div class="skill-bar" style="--percent: 85%"></div>
-          </div>
-          <div class="glass-card">
-            <div class="flex justify-between mb-3">
-              <span class="text-base sm:text-lg">Git &amp; Version Control</span>
-              <span class="text-purple-400">95%</span>
+            <div class="glass-card">
+              <div class="flex justify-between mb-3">
+                <span class="text-base sm:text-lg">Git &amp; Version Control</span>
+                <span class="text-purple-400">95%</span>
+              </div>
+              <div class="skill-bar" style="--percent: 95%"></div>
             </div>
-            <div class="skill-bar" style="--percent: 95%"></div>
           </div>
-        </div>
-      </section>
-
-      <!-- بخش تجربه توسعه ربات -->
-      <section class="mb-16">
-        <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-center">تجربه توسعه ربات</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-          <div class="glass-card text-center transform hover:scale-105 transition-all duration-300">
-            <h3 class="text-xl sm:text-2xl font-bold mb-6 text-purple-400">ربات‌های Discord</h3>
-            <ul class="list-none space-y-4">
-              <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات‌های مدیریت سرور</li>
-              <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات‌های موسیقی با کیفیت بالا</li>
-              <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">سیستم‌های سطح و رتبه</li>
-              <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات‌های اقتصادی و بازی</li>
-            </ul>
+        </section>
+        
+        <!-- Bot Experience Section -->
+        <section class="mb-16">
+          <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-center">تجربه توسعه ربات</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div class="glass-card text-center transform hover:scale-105 transition-all duration-300">
+              <h3 class="text-xl sm:text-2xl font-bold mb-6 text-purple-400">ربات‌های Discord</h3>
+              <ul class="list-none space-y-4">
+                <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات‌های مدیریت سرور</li>
+                <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات‌های موسیقی با کیفیت بالا</li>
+                <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">سیستم‌های سطح و رتبه</li>
+                <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات‌های اقتصادی و بازی</li>
+              </ul>
+            </div>
+            <div class="glass-card text-center transform hover:scale-105 transition-all duration-300">
+              <h3 class="text-xl sm:text-2xl font-bold mb-6 text-purple-400">ربات‌های کانال و گروه</h3>
+              <ul class="list-none space-y-4">
+                <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات‌های اطلاع‌رسانی</li>
+                <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">سیستم‌های پاسخگویی خودکار</li>
+                <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">مدیریت گروه و کانال</li>
+                <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات‌های سرگرمی و بازی</li>
+              </ul>
+            </div>
           </div>
-          <div class="glass-card text-center transform hover:scale-105 transition-all duration-300">
-            <h3 class="text-xl sm:text-2xl font-bold mb-6 text-purple-400">ربات‌های کانال و گروه</h3>
-            <ul class="list-none space-y-4">
-              <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات‌های اطلاع‌رسانی</li>
-              <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">سیستم‌های پاسخگویی خودکار</li>
-              <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">مدیریت گروه و کانال</li>
-              <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات‌های سرگرمی و بازی</li>
-            </ul>
+        </section>
+        
+        <!-- Projects Section -->
+        <section class="mb-16">
+          <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-center">پروژه‌های من</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <a href="https://example.com/project1" target="_blank" class="glass-card text-center p-6 transform hover:scale-105 transition-all duration-300">
+              <h3 class="text-xl font-bold mb-4 text-purple-400">Project Alpha</h3>
+              <p class="text-sm sm:text-base">یک پروژه نوآورانه برای توسعه فناوری‌های نوین.</p>
+            </a>
+            <a href="https://example.com/project2" target="_blank" class="glass-card text-center p-6 transform hover:scale-105 transition-all duration-300">
+              <h3 class="text-xl font-bold mb-4 text-purple-400">Project Beta</h3>
+              <p class="text-sm sm:text-base">ابزاری برای بهبود تجربه کاربری در وب و موبایل.</p>
+            </a>
+            <a href="https://example.com/project3" target="_blank" class="glass-card text-center p-6 transform hover:scale-105 transition-all duration-300">
+              <h3 class="text-xl font-bold mb-4 text-purple-400">Project Gamma</h3>
+              <p class="text-sm sm:text-base">راهکاری هوشمند برای اتوماسیون فرآیندهای تجاری.</p>
+            </a>
+            <a href="https://github.com/ggmax/innovative-project" target="_blank" class="glass-card text-center p-6 transform hover:scale-105 transition-all duration-300">
+              <h3 class="text-xl font-bold mb-4 text-purple-400">OpenSource Project</h3>
+              <p class="text-sm sm:text-base">یک پروژه منبع باز برای نوآوری در حوزه فناوری اطلاعات.</p>
+            </a>
+            <div class="glass-card text-center p-6">
+              <h3 class="text-xl font-bold mb-4 text-purple-400">بیشتر به زودی</h3>
+              <p class="text-sm sm:text-base">منتظر پروژه‌های جدید و هیجان‌انگیز باشید!</p>
+            </div>
           </div>
-        </div>
-      </section>
-
-      <!-- بخش پروژه‌ها -->
-      <section class="mb-16">
-        <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-center">پروژه‌های من</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          <a href="https://example.com/project1" target="_blank" class="glass-card text-center p-6 transform hover:scale-105 transition-all duration-300">
-            <h3 class="text-xl font-bold mb-4 text-purple-400">Project Alpha</h3>
-            <p class="text-sm sm:text-base">یک پروژه نوآورانه برای توسعه فناوری‌های نوین.</p>
-          </a>
-          <a href="https://example.com/project2" target="_blank" class="glass-card text-center p-6 transform hover:scale-105 transition-all duration-300">
-            <h3 class="text-xl font-bold mb-4 text-purple-400">Project Beta</h3>
-            <p class="text-sm sm:text-base">ابزاری برای بهبود تجربه کاربری در وب و موبایل.</p>
-          </a>
-          <a href="https://example.com/project3" target="_blank" class="glass-card text-center p-6 transform hover:scale-105 transition-all duration-300">
-            <h3 class="text-xl font-bold mb-4 text-purple-400">Project Gamma</h3>
-            <p class="text-sm sm:text-base">راهکاری هوشمند برای اتوماسیون فرآیندهای تجاری.</p>
-          </a>
-          <a href="https://github.com/ggmax/innovative-project" target="_blank" class="glass-card text-center p-6 transform hover:scale-105 transition-all duration-300">
-            <h3 class="text-xl font-bold mb-4 text-purple-400">OpenSource Project</h3>
-            <p class="text-sm sm:text-base">یک پروژه منبع باز برای نوآوری در حوزه فناوری اطلاعات.</p>
-          </a>
-          <div class="glass-card text-center p-6">
-            <h3 class="text-xl font-bold mb-4 text-purple-400">بیشتر به زودی</h3>
-            <p class="text-sm sm:text-base">منتظر پروژه‌های جدید و هیجان‌انگیز باشید!</p>
+        </section>
+        
+        <!-- Code Snippet Section -->
+        <section id="snippet-section" class="mb-16">
+          <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">نمونه کدهای الهام‌بخش</h2>
+          <div class="glass-card relative">
+            <pre id="snippet-container"></pre>
+            <button class="button absolute top-2 right-2" onclick="copySnippet()">کپی کد</button>
           </div>
-        </div>
-      </section>
-
-      <!-- بخش نمونه کدهای الهام‌بخش -->
-      <section id="snippet-section" class="mb-16">
-        <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">نمونه کدهای الهام‌بخش</h2>
-        <div class="glass-card">
-          <pre id="snippet-container"></pre>
-        </div>
-      </section>
-
-      <!-- بخش تماس -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-center">تماس بگیرید</h2>
-        <div class="flex justify-center space-x-8">
-          <a href="https://t.me/ggmax" class="glass-card p-4 hover:text-purple-400 hover:scale-110 transition-all duration-300 flex items-center">
-            <img src="/assets/telegram.svg" alt="Telegram" class="w-7 h-7 invert opacity-90 hover:opacity-100">
-          </a>
-          <a href="https://github.com/ggmax" class="glass-card p-4 hover:text-purple-400 hover:scale-110 transition-all duration-300 flex items-center">
-            <img src="/assets/github.svg" alt="GitHub" class="w-7 h-7 invert opacity-90 hover:opacity-100">
-          </a>
-          <a href="https://discord.gg/ggmax" class="glass-card p-4 hover:text-purple-400 hover:scale-110 transition-all duration-300 flex items-center">
-            <img src="/assets/discord.svg" alt="Discord" class="w-7 h-7 invert opacity-90 hover:opacity-100">
-          </a>
-          <a href="https://matrix.to/#/@ggmax:matrix.org" class="glass-card p-4 hover:text-purple-400 hover:scale-110 transition-all duration-300 flex items-center">
-            <img src="/assets/matrix.svg" alt="Matrix" class="w-7 h-7 opacity-90 hover:opacity-100">
-          </a>
-        </div>
-      </section>
-    </main>
-
-    <footer class="text-center mt-12 text-sm text-slate-400">
-      © 2024 GG MAX. تمامی حقوق محفوظ است.
-    </footer>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="mb-12">
+          <h2 class="text-2xl font-bold mb-6 text-center">تماس بگیرید</h2>
+          <div class="flex justify-center space-x-8">
+            <a href="https://t.me/ggmax" class="glass-card p-4 hover:text-purple-400 hover:scale-110 transition-all duration-300 flex items-center">
+              <img src="/assets/telegram.svg" alt="Telegram" class="w-7 h-7 invert opacity-90 hover:opacity-100">
+            </a>
+            <a href="https://github.com/ggmax" class="glass-card p-4 hover:text-purple-400 hover:scale-110 transition-all duration-300 flex items-center">
+              <img src="/assets/github.svg" alt="GitHub" class="w-7 h-7 invert opacity-90 hover:opacity-100">
+            </a>
+            <a href="https://discord.gg/ggmax" class="glass-card p-4 hover:text-purple-400 hover:scale-110 transition-all duration-300 flex items-center">
+              <img src="/assets/discord.svg" alt="Discord" class="w-7 h-7 invert opacity-90 hover:opacity-100">
+            </a>
+            <a href="https://matrix.to/#/@ggmax:matrix.org" class="glass-card p-4 hover:text-purple-400 hover:scale-110 transition-all duration-300 flex items-center">
+              <img src="/assets/matrix.svg" alt="Matrix" class="w-7 h-7 opacity-90 hover:opacity-100">
+            </a>
+          </div>
+        </section>
+      </main>
+      
+      <!-- Footer -->
+      <footer class="text-center mt-12 text-sm text-slate-400">
+        © 2024 GG MAX. تمامی حقوق محفوظ است.
+      </footer>
+    </div>
   </div>
   
-  <!-- اسکریپت افزودن ستاره‌های اضافی به‌طور داینامیک -->
+  <!-- Dynamic Stars Script -->
   <script defer>
-    const starsContainer = document.getElementById('stars');
+    const starsContainer = document.getElementById("stars");
     for (let i = 0; i < 150; i++) {
-      const star = document.createElement('div');
-      star.className = 'star';
+      const star = document.createElement("div");
+      star.className = "star";
       star.style.left = `${Math.random() * 100}%`;
       star.style.top = `${Math.random() * 100}%`;
       star.style.animationDelay = `${Math.random() * 1.5}s`;
@@ -408,64 +449,101 @@
     }
   </script>
   
-  <!-- اسکریپت GSAP برای انیمیشن‌های ورود -->
+  <!-- GSAP & ScrollTrigger Animations -->
   <script>
-    window.addEventListener('load', () => {
+    gsap.registerPlugin(ScrollTrigger);
+    window.addEventListener("load", () => {
       gsap.from("header h1", { duration: 1, y: -50, opacity: 0, ease: "power3.out" });
       gsap.from("header h2", { duration: 1, y: -30, opacity: 0, delay: 0.3, ease: "power3.out" });
       gsap.from(".glass-card", { duration: 1, y: 30, opacity: 0, stagger: 0.2, ease: "power3.out" });
+      
+      // هر کارت هنگام ورود به صفحه
+      gsap.utils.toArray(".glass-card").forEach(card => {
+        gsap.from(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          },
+          y: 50,
+          opacity: 0,
+          duration: 0.8
+        });
+      });
     });
   </script>
   
-  <!-- اسکریپت بخش تغییر کد نمونه به‌طور داینامیک -->
+  <!-- Code Snippet Switching & Copy Functionality -->
   <script>
-    // آرایه‌ای از کدهای نمونه (HTML و Python)
     const codeSnippets = [
 `<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Sample HTML</title>
+    <title>نمونه HTML</title>
   </head>
   <body>
-    <h1>Hello, World!</h1>
-    <p>This is a sample HTML code snippet.</p>
+    <h1>سلام، دنیا!</h1>
+    <p>این یک نمونه کد HTML است.</p>
   </body>
 </html>`,
 `def greet(name):
-    print(f"Hello, {name}!")
+    print(f"سلام, {name}!")
     
 if __name__ == '__main__':
-    greet("World")`,
+    greet("دنیا")`,
 `<div class="container">
-  <h2>Welcome</h2>
-  <p>This is a dynamic HTML example.</p>
+  <h2>خوش آمدید</h2>
+  <p>این یک نمونه کد الهام‌بخش HTML است.</p>
 </div>`
     ];
     
     function showRandomSnippet() {
       const snippetContainer = document.getElementById("snippet-container");
       const randomSnippet = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
-      // برای ایجاد افکت کوچک خروج/ورود از GSAP استفاده می‌کنیم
       gsap.to(snippetContainer, { duration: 0.5, opacity: 0, ease: "power3.in", onComplete: () => {
-        snippetContainer.textContent = randomSnippet;
-        gsap.to(snippetContainer, { duration: 0.5, opacity: 1, ease: "power3.out" });
+          snippetContainer.textContent = randomSnippet;
+          gsap.to(snippetContainer, { duration: 0.5, opacity: 1, ease: "power3.out" });
       }});
     }
+    
+    function copySnippet() {
+      const snippetContainer = document.getElementById("snippet-container");
+      navigator.clipboard.writeText(snippetContainer.textContent)
+        .then(() => alert("کد کپی شد!"))
+        .catch(err => alert("مشکلی در کپی کردن کد پیش آمد."));
+    }
+    
     showRandomSnippet();
-    // هر 10 ثانیه یک بار کد جدید انتخاب شود
     setInterval(showRandomSnippet, 10000);
   </script>
   
-  <!-- اسکریپت انتقال صفحه با افکت -->
+  <!-- Back to Top Button Script -->
   <script>
-    document.addEventListener('pageshow', () => {
-      document.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', e => {
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    window.addEventListener("scroll", () => {
+      const btn = document.getElementById("back-to-top");
+      if (window.scrollY > 300) {
+        btn.style.opacity = "1";
+        btn.style.visibility = "visible";
+      } else {
+        btn.style.opacity = "0";
+        btn.style.visibility = "hidden";
+      }
+    });
+  </script>
+  
+  <!-- Optional: Page Transition on Link Click -->
+  <script>
+    document.addEventListener("pageshow", () => {
+      document.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", e => {
           if (link.href.includes(window.location.origin)) {
             e.preventDefault();
-            document.querySelector('main').style.opacity = '0';
-            document.querySelector('main').style.transform = 'translateY(20px)';
+            document.querySelector("main").style.opacity = "0";
+            document.querySelector("main").style.transform = "translateY(20px)";
             setTimeout(() => { window.location.href = link.href; }, 500);
           }
         });
@@ -473,7 +551,10 @@ if __name__ == '__main__':
     });
   </script>
   
-  <!-- اسکریپت Cloudflare Beacon (اختیاری) -->
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;rayId&quot;:&quot;92eb93572fa96ab9&quot;,&quot;version&quot;:&quot;2025.3.0&quot;,&quot;r&quot;:1,&quot;token&quot;:&quot;7836fe392c1e4442a333cd5b59c87aeb&quot;,&quot;serverTiming&quot;:{&quot;name&quot;:{&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfSpeedBrain&quot;:true,&quot;cfCacheStatus&quot;:true}}}" crossorigin="anonymous"></script>
+  <!-- Optional: Cloudflare Beacon (برای ردیابی، در صورت نیاز) -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+    integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+    data-cf-beacon='{"rayId":"92eb93572fa96ab9","version":"2025.3.0","r":1,"token":"7836fe392c1e4442a333cd5b59c87aeb","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}'
+    crossorigin="anonymous"></script>
 </body>
 </html>
