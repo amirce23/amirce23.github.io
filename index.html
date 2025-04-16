@@ -72,7 +72,8 @@
         cursor: pointer;
       }
       .nav-links:hover {
-        background: rgba(255, 255, 255, 0.1); /* حذف transform scale برای جلوگیری از محو شدن */
+        background: rgba(255, 255, 255, 0.1);
+        /* حذف transform scale برای عدم ایجاد مشکلات در نمایش محتوا */
       }
       .nav-links::after {
         content: "";
@@ -137,10 +138,7 @@
         cursor: pointer;
         transition: transform 0.3s ease, background 0.3s ease;
       }
-      .button:hover {
-        transform: scale(1.1);
-        background: #a855f7;
-      }
+      .button:hover { transform: scale(1.1); background: #a855f7; }
 
       /* Code Snippet Section */
       #snippet-section { margin: 3rem 0; }
@@ -206,10 +204,7 @@
         .nav-links { padding: 0.375rem 0.75rem; font-size: 0.875rem; }
         .skill-bar { height: 20px; }
         .glass-card { padding: 15px; }
-        img[alt="GG MAX Profile"] {
-          width: 120px !important;
-          height: 120px !important;
-        }
+        img[alt="GG MAX Profile"] { width: 120px !important; height: 120px !important; }
       }
       @media (max-width: 640px) {
         .floating-orb {
@@ -229,7 +224,7 @@
       }
     </style>
     
-    <!-- GSAP & ScrollTrigger for Animations -->
+    <!-- GSAP & ScrollTrigger for Advanced Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   </head>
@@ -251,7 +246,7 @@
     <!-- Back to Top Button -->
     <button id="back-to-top" onclick="scrollToTop()">↑</button>
     
-    <!-- Main Content -->
+    <!-- Main Container -->
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 page-transition">
       <!-- Header Section -->
       <header class="py-4">
@@ -390,17 +385,17 @@
         <section id="contact" class="mb-12">
           <h2 class="text-2xl font-bold mb-6 text-center">تماس بگیرید</h2>
           <div class="flex justify-center space-x-8">
-            <a href="https://t.me/ggmax" class="glass-card p-4 hover:text-purple-400 hover:scale-110 transition-all duration-300 flex items-center">
-              <img src="/assets/telegram.svg" alt="Telegram" class="w-7 h-7 invert opacity-90 hover:opacity-100">
+            <a href="https://t.me/ggmax" class="glass-card p-4 hover:text-purple-400 transition-all duration-300 flex items-center">
+              <img src="/assets/telegram.svg" alt="Telegram" class="w-7 h-7 invert opacity-90 transition duration-300 hover:opacity-100">
             </a>
-            <a href="https://github.com/ggmax" class="glass-card p-4 hover:text-purple-400 hover:scale-110 transition-all duration-300 flex items-center">
-              <img src="/assets/github.svg" alt="GitHub" class="w-7 h-7 invert opacity-90 hover:opacity-100">
+            <a href="https://github.com/ggmax" class="glass-card p-4 hover:text-purple-400 transition-all duration-300 flex items-center">
+              <img src="/assets/github.svg" alt="GitHub" class="w-7 h-7 invert opacity-90 transition duration-300 hover:opacity-100">
             </a>
-            <a href="https://discord.gg/ggmax" class="glass-card p-4 hover:text-purple-400 hover:scale-110 transition-all duration-300 flex items-center">
-              <img src="/assets/discord.svg" alt="Discord" class="w-7 h-7 invert opacity-90 hover:opacity-100">
+            <a href="https://discord.gg/ggmax" class="glass-card p-4 hover:text-purple-400 transition-all duration-300 flex items-center">
+              <img src="/assets/discord.svg" alt="Discord" class="w-7 h-7 invert opacity-90 transition duration-300 hover:opacity-100">
             </a>
-            <a href="https://matrix.to/#/@ggmax:matrix.org" class="glass-card p-4 hover:text-purple-400 hover:scale-110 transition-all duration-300 flex items-center">
-              <img src="/assets/matrix.svg" alt="Matrix" class="w-7 h-7 opacity-90 hover:opacity-100">
+            <a href="https://matrix.to/#/@ggmax:matrix.org" class="glass-card p-4 hover:text-purple-400 transition-all duration-300 flex items-center">
+              <img src="/assets/matrix.svg" alt="Matrix" class="w-7 h-7 opacity-90 transition duration-300 hover:opacity-100">
             </a>
           </div>
         </section>
@@ -430,17 +425,18 @@
   <script>
     gsap.registerPlugin(ScrollTrigger);
     window.addEventListener("load", () => {
+      // اجرای انیمیشن‌های اولیه
       gsap.from("header h1", { duration: 1, y: -50, opacity: 0, ease: "power3.out" });
       gsap.from("header h2", { duration: 1, y: -30, opacity: 0, delay: 0.3, ease: "power3.out" });
       gsap.from(".glass-card", { duration: 1, y: 30, opacity: 0, stagger: 0.2, ease: "power3.out" });
       
-      // هر کارت هنگام ورود به صفحه
+      // انیمیشن ورود برای هر کارت، بدون reverse (تنها اجرا شود)
       gsap.utils.toArray(".glass-card").forEach(card => {
         gsap.from(card, {
           scrollTrigger: {
             trigger: card,
             start: "top 80%",
-            toggleActions: "play none none reverse"
+            toggleActions: "play none none none"  // اجرا شود و پس از خروج تغییر نکند
           },
           y: 50,
           opacity: 0,
