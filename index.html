@@ -4,19 +4,19 @@
     <!-- Meta Tags -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="GG MAX - Creative &amp; Innovative Developer specializing in Python, HTML, CSS, Java and C languages. Explore my portfolio and tech projects." />
+    <meta name="description" content="GG MAX - Creative & Innovative Developer specializing in Python, HTML, CSS, Java &amp; C. Explore my portfolio and tech projects." />
     <meta name="keywords" content="GG MAX, Python, HTML, CSS, Java, C, Developer" />
     <meta name="author" content="GG MAX" />
     <meta name="robots" content="index, follow" />
     <meta property="og:title" content="GG MAX | Innovative Developer" />
-    <meta property="og:description" content="Explore the creative and innovative projects of GG MAX." />
+    <meta property="og:description" content="Explore the creative projects of GG MAX." />
     <meta property="og:image" content="/assets/ggmax-logo.png" />
     <meta property="og:url" content="https://ggmax.dev" />
     <link rel="canonical" href="https://ggmax.dev" />
     <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
     <title>GG MAX | Innovative Developer</title>
 
-    <!-- Preload Fonts and CSS -->
+    <!-- Preload fonts and CSS -->
     <link rel="preload" href="/assets/fonts/robotocode.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="preload" href="/assets/fonts/poppins.ttf" as="font" type="font/ttf" crossorigin />
     <link rel="stylesheet" href="/assets/css/output.css" />
@@ -68,12 +68,11 @@
         position: relative;
         padding: 0.5rem 1rem;
         border-radius: 0.5rem;
-        transition: all 0.3s ease;
+        transition: background 0.3s ease;
         cursor: pointer;
       }
       .nav-links:hover {
-        background: rgba(255, 255, 255, 0.1);
-        transform: scale(1.05);
+        background: rgba(255, 255, 255, 0.1); /* حذف transform scale برای جلوگیری از محو شدن */
       }
       .nav-links::after {
         content: "";
@@ -124,7 +123,7 @@
       .glass-card:hover {
         transform: translateY(-5px);
         background: rgba(255, 255, 255, 0.15);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
       }
 
       /* Button Style */
@@ -208,14 +207,14 @@
         .skill-bar { height: 20px; }
         .glass-card { padding: 15px; }
         img[alt="GG MAX Profile"] {
-          width: 120px !important; 
+          width: 120px !important;
           height: 120px !important;
         }
       }
       @media (max-width: 640px) {
         .floating-orb {
-          width: 20vw !important; 
-          height: 20vw !important; 
+          width: 20vw !important;
+          height: 20vw !important;
           opacity: 0.15 !important;
         }
         nav { padding: 0.5rem; margin: 0.25rem; }
@@ -230,7 +229,7 @@
       }
     </style>
     
-    <!-- GSAP & ScrollTrigger -->
+    <!-- GSAP & ScrollTrigger for Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   </head>
@@ -252,9 +251,9 @@
     <!-- Back to Top Button -->
     <button id="back-to-top" onclick="scrollToTop()">↑</button>
     
-    <!-- Main Container -->
+    <!-- Main Content -->
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 page-transition">
-      <!-- Header -->
+      <!-- Header Section -->
       <header class="py-4">
         <nav class="flex items-center justify-between backdrop-blur-md bg-white/5 rounded-xl p-3 sm:p-4 transition-all duration-300" role="navigation">
           <a href="/" aria-label="صفحه اصلی" class="focus:outline-none focus:ring-2 focus:ring-purple-500">
@@ -276,7 +275,9 @@
             <div class="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 hover:opacity-30 transition-opacity duration-300"></div>
           </div>
           <h1 class="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text">GG MAX</h1>
-          <h2 class="text-2xl sm:text-3xl text-purple-300">Developer Specialized in Python, HTML, CSS, Java &amp; C Languages</h2>
+          <h2 class="text-2xl sm:text-3xl text-purple-300">
+            Developer Specialized in Python, HTML, CSS, Java &amp; C Languages
+          </h2>
         </header>
         
         <!-- About Section -->
@@ -284,7 +285,7 @@
           <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">درباره من</h2>
           <div class="glass-card">
             <p class="mb-4 text-center text-base sm:text-lg leading-relaxed">
-              سلام! من GG MAX هستم. تخصص من در برنامه‌نویسی با استفاده از پایتون، HTML، CSS، جاوا و زبان‌های C می‌باشد. همواره به دنبال پروژه‌های نوآورانه و جذاب برای ارتقای تجربه کاربری و ایجاد نوآوری در فناوری‌های روز هستم.
+              سلام! من GG MAX هستم. تخصص من در برنامه‌نویسی‌های مرتبط با زبان‌های Python، HTML، CSS، جاوا و زبان‌های C می‌باشد. همواره به دنبال پروژه‌های نوآورانه و جذاب برای ارتقای تجربه‌ی دیجیتال هستم.
             </p>
           </div>
         </section>
@@ -433,7 +434,7 @@
       gsap.from("header h2", { duration: 1, y: -30, opacity: 0, delay: 0.3, ease: "power3.out" });
       gsap.from(".glass-card", { duration: 1, y: 30, opacity: 0, stagger: 0.2, ease: "power3.out" });
       
-      // Animate each glass card on scroll into view
+      // هر کارت هنگام ورود به صفحه
       gsap.utils.toArray(".glass-card").forEach(card => {
         gsap.from(card, {
           scrollTrigger: {
