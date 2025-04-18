@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="GG MAX - Developer specializing in Python, HTML, CSS, Java &amp; C. Explore my urban resume and tech projects in a dynamic Matrix Rain background." />
-  <meta name="keywords" content="GG MAX, Python, HTML, CSS, Java, C, Resume, Developer, Matrix, Rain" />
-  <meta name="author" content="GG MAX" />
-  <title>GG MAX | Matrix Urban Resume</title>
+  <meta name="description" content="Developer specializing in Python, HTML, CSS, Java &amp; C. Explore my urban resume and tech projects in a dynamic Matrix Rain background." />
+  <meta name="keywords" content="Python, HTML, CSS, Java, C, Resume, Developer, Urban, Matrix, Rain, Lightning" />
+  <meta name="author" content="Your Name" />
+  <title>Urban Resume</title>
   <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-  
+
   <!-- Preload fonts -->
   <link rel="preload" href="/assets/fonts/robotocode.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="/assets/fonts/poppins.ttf" as="font" type="font/ttf" crossorigin>
 
   <style>
-    /* Reset & Base styles */
+    /* Reset & Base Styles */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { width: 100%; height: 100%; overflow: hidden; }
     body { 
       font-family: 'poppinsfont', sans-serif; 
-      transition: background 0.5s, color 0.5s; 
+      transition: background 0.5s, color 0.5s;
     }
     @font-face {
       font-family: 'poppinsfont';
@@ -27,23 +27,22 @@
       font-weight: 300;
       font-display: swap;
     }
-    
-    /* برای حالت شب (در صورت استفاده) – در اینجا می‌توانید تغییرات دلخواه اعمال کنید */
-    body[data-theme="night"] {
-      background: #000;
-      color: #ccc;
+    /* در این نسخه حالت روز/شب حذف شده است */
+    body {
+      background: linear-gradient(270deg, #708090, #6e7f80, #576b6a);
+      background-size: 600% 600%;
+      animation: gradientBG 20s ease infinite;
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     
-    /* Canvas Matrix Background */
-    canvas#cityCanvas { 
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 10; 
-      display: block;
-    }
-    
-    /* Header Top: عنوان و دکمه‌های تغییر حالت و زبان */
+    /* Header Top: شامل تنها دکمه تغییر زبان */
     header.top {
       position: fixed;
       top: 0;
@@ -51,14 +50,10 @@
       right: 0;
       z-index: 300;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
       padding: 1rem;
-      background: rgba(0,0,0,0.8);
-    }
-    header.top h1 {
-      font-size: 1.5rem;
-      color: #ffc107;
+      background: rgba(0,0,0,0.7);
     }
     .toggle-btns {
       display: flex;
@@ -73,9 +68,7 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-    .toggle-btns button:hover {
-      background: #3700b3;
-    }
+    .toggle-btns button:hover { background: #3700b3; }
     
     /* Navigation: منوی مرکزی */
     nav.main-nav {
@@ -89,14 +82,21 @@
     }
     nav.main-nav a {
       padding: 0.5rem 1rem;
-      background: rgba(0, 0, 0, 0.65);
+      background: rgba(0,0,0,0.65);
       border-radius: 5px;
       text-decoration: none;
       color: #fff;
       transition: background 0.3s;
     }
-    nav.main-nav a:hover {
-      background: rgba(255,255,255,0.2);
+    nav.main-nav a:hover { background: rgba(255,255,255,0.2); }
+    
+    /* Canvas for Matrix Background */
+    canvas#cityCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      display: block;
     }
     
     /* Overlay Sections: Resume & Contact */
@@ -127,7 +127,7 @@
       line-height: 1.8;
     }
     
-    /* Skill Chart (Programming Languages) with inline SVG */
+    /* Skill Chart (Inline SVG) for Programming Languages */
     section.skill-chart {
       margin-top: 1rem;
       text-align: center;
@@ -165,33 +165,31 @@
     }
   </style>
   
-  <!-- GSAP for UI Animations (Optional) -->
+  <!-- GSAP Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body data-theme="day" lang="fa">
-  <!-- Header Top -->
+  <!-- Header Top: شامل فقط دکمه تغییر زبان -->
   <header class="top">
-    <h1>GG MAX - Urban Resume</h1>
     <div class="toggle-btns">
-      <button onclick="toggleTheme()">حالت روز/شب</button>
       <button onclick="toggleLanguage()">تغییر زبان</button>
     </div>
   </header>
   
   <!-- Navigation -->
   <nav class="main-nav">
-    <a href="#resume">رزومه</a>
-    <a href="#contact">تماس</a>
+    <a id="nav-resume" href="#resume">رزومه</a>
+    <a id="nav-contact" href="#contact">تماس</a>
   </nav>
   
-  <!-- Canvas for Matrix Background -->
+  <!-- Canvas for Matrix Rain Background -->
   <canvas id="cityCanvas"></canvas>
   
   <!-- Resume Overlay -->
   <section class="overlay" id="resume">
-    <h2>رزومه من</h2>
-    <div class="content">
-      <p><strong>GG MAX</strong></p>
+    <h2 id="resumeHeading">رزومه من</h2>
+    <div class="content" id="resumeContent">
+      <p><strong>نام شما</strong></p>
       <p>توسعه‌دهنده حرفه‌ای متخصص در Python, HTML, CSS, Java و زبان‌های C.</p>
       <h3>تجربه کاری</h3>
       <ul>
@@ -209,24 +207,24 @@
       </ul>
       <!-- Skill Chart -->
       <section class="skill-chart">
-        <h3 style="color:#ffc107;">مهارت‌های برنامه نویسی</h3>
+        <h3 id="skillChartHeading" style="color:#ffc107;">مهارت‌های برنامه نویسی</h3>
         <svg viewBox="0 0 500 250">
           <text x="10" y="30">Python</text>
           <rect x="100" y="15" width="400" height="20" fill="#3498db" />
           <rect x="100" y="15" width="360" height="20" fill="#27ae60" />
-          
+  
           <text x="10" y="70">HTML</text>
           <rect x="100" y="55" width="400" height="20" fill="#3498db" />
           <rect x="100" y="55" width="400" height="20" fill="#27ae60" />
-          
+  
           <text x="10" y="110">CSS</text>
           <rect x="100" y="95" width="400" height="20" fill="#3498db" />
           <rect x="100" y="95" width="400" height="20" fill="#27ae60" />
-          
+  
           <text x="10" y="150">Java</text>
           <rect x="100" y="135" width="400" height="20" fill="#3498db" />
           <rect x="100" y="135" width="340" height="20" fill="#27ae60" />
-          
+  
           <text x="10" y="190">C</text>
           <rect x="100" y="175" width="400" height="20" fill="#3498db" />
           <rect x="100" y="175" width="360" height="20" fill="#27ae60" />
@@ -236,15 +234,15 @@
   </section>
   
   <!-- Contact Overlay -->
-  <section class="overlay" id="contact" style="top: auto;">
-    <h2>تماس با من</h2>
-    <div class="content">
-      <p>ایمیل: <a href="mailto:ggmax@example.com" style="color:#ffc107;">ggmax@example.com</a></p>
+  <section class="overlay" id="contact">
+    <h2 id="contactHeading">تماس با من</h2>
+    <div class="content" id="contactContent">
+      <p>ایمیل: <a href="mailto:yourname@example.com" style="color:#ffc107;">yourname@example.com</a></p>
       <p>شبکه‌های اجتماعی:</p>
       <ul>
-        <li>تلگرام: <a href="https://t.me/ggmax" target="_blank" style="color:#ffc107;">t.me/ggmax</a></li>
-        <li>گیت‌هاب: <a href="https://github.com/ggmax" target="_blank" style="color:#ffc107;">github.com/ggmax</a></li>
-        <li>دیسکورد: <a href="https://discord.gg/ggmax" target="_blank" style="color:#ffc107;">discord.gg/ggmax</a></li>
+        <li>تلگرام: <a href="https://t.me/yourname" target="_blank" style="color:#ffc107;">t.me/yourname</a></li>
+        <li>گیت‌هاب: <a href="https://github.com/yourname" target="_blank" style="color:#ffc107;">github.com/yourname</a></li>
+        <li>دیسکورد: <a href="https://discord.gg/yourserver" target="_blank" style="color:#ffc107;">discord.gg/yourserver</a></li>
       </ul>
     </div>
   </section>
@@ -253,12 +251,101 @@
   <button id="back-to-top" onclick="scrollToTop()">↑</button>
   
   <script>
-    // Global variable for theme (روز/شب)
-    let currentTheme = "day";
+    // زبان‌های فارسی و انگلیسی به صورت دیکشنری
+    const langData = {
+      fa: {
+        nav: {
+          resume: "رزومه",
+          contact: "تماس"
+        },
+        resumeOverlay: {
+          title: "رزومه من",
+          content: `<p><strong>نام شما</strong></p>
+                    <p>توسعه‌دهنده حرفه‌ای متخصص در Python, HTML, CSS, Java و زبان‌های C.</p>
+                    <h3>تجربه کاری</h3>
+                    <ul>
+                      <li>طراحی و توسعه وب‌سایت‌های مدرن و پیشرفته</li>
+                      <li>ساخت ربات‌های هوشمند برای بهبود کارایی سیستم‌ها</li>
+                      <li>همکاری در پروژه‌های منبع باز و تیم‌های توسعه</li>
+                    </ul>
+                    <h3>مهارت‌ها</h3>
+                    <ul>
+                      <li>Python</li>
+                      <li>HTML</li>
+                      <li>CSS</li>
+                      <li>Java</li>
+                      <li>C</li>
+                    </ul>`
+        },
+        contactOverlay: {
+          title: "تماس با من",
+          content: `<p>ایمیل: <a href="mailto:yourname@example.com" style="color:#ffc107;">yourname@example.com</a></p>
+                    <p>شبکه‌های اجتماعی:</p>
+                    <ul>
+                      <li>تلگرام: <a href="https://t.me/yourname" target="_blank" style="color:#ffc107;">t.me/yourname</a></li>
+                      <li>گیت‌هاب: <a href="https://github.com/yourname" target="_blank" style="color:#ffc107;">github.com/yourname</a></li>
+                      <li>دیسکورد: <a href="https://discord.gg/yourserver" target="_blank" style="color:#ffc107;">discord.gg/yourserver</a></li>
+                    </ul>`
+        },
+        skillChartTitle: "مهارت‌های برنامه نویسی"
+      },
+      en: {
+        nav: {
+          resume: "Resume",
+          contact: "Contact"
+        },
+        resumeOverlay: {
+          title: "My Resume",
+          content: `<p><strong>Your Name</strong></p>
+                    <p>A professional developer specialized in Python, HTML, CSS, Java, and C.</p>
+                    <h3>Work Experience</h3>
+                    <ul>
+                      <li>Designing and developing modern and advanced websites</li>
+                      <li>Creating intelligent bots to improve system efficiency</li>
+                      <li>Collaborating in open-source projects and development teams</li>
+                    </ul>
+                    <h3>Skills</h3>
+                    <ul>
+                      <li>Python</li>
+                      <li>HTML</li>
+                      <li>CSS</li>
+                      <li>Java</li>
+                      <li>C</li>
+                    </ul>`
+        },
+        contactOverlay: {
+          title: "Contact Me",
+          content: `<p>Email: <a href="mailto:yourname@example.com" style="color:#ffc107;">yourname@example.com</a></p>
+                    <p>Social Networks:</p>
+                    <ul>
+                      <li>Telegram: <a href="https://t.me/yourname" target="_blank" style="color:#ffc107;">t.me/yourname</a></li>
+                      <li>GitHub: <a href="https://github.com/yourname" target="_blank" style="color:#ffc107;">github.com/yourname</a></li>
+                      <li>Discord: <a href="https://discord.gg/yourserver" target="_blank" style="color:#ffc107;">discord.gg/yourserver</a></li>
+                    </ul>`
+        },
+        skillChartTitle: "Programming Skills"
+      }
+    };
     
-    function toggleTheme() {
-      currentTheme = currentTheme === "day" ? "night" : "day";
-      document.body.setAttribute("data-theme", currentTheme);
+    // Function to update language in DOM
+    function updateLanguage(newLang) {
+      // Update Navigation
+      document.getElementById("nav-resume").innerText = langData[newLang].nav.resume;
+      document.getElementById("nav-contact").innerText = langData[newLang].nav.contact;
+      
+      // Update Resume Overlay
+      document.querySelector("#resume h2").innerText = langData[newLang].resumeOverlay.title;
+      document.getElementById("resumeContent").innerHTML = langData[newLang].resumeOverlay.content;
+      
+      // Update Skill Chart Heading
+      const skillHead = document.querySelector("#resume .skill-chart h3");
+      if(skillHead) {
+        skillHead.innerText = langData[newLang].skillChartTitle;
+      }
+      
+      // Update Contact Overlay
+      document.querySelector("#contact h2").innerText = langData[newLang].contactOverlay.title;
+      document.getElementById("contactContent").innerHTML = langData[newLang].contactOverlay.content;
     }
     
     function toggleLanguage() {
@@ -266,13 +353,13 @@
       const current = html.getAttribute("lang") || "fa";
       const newLang = current === "fa" ? "en" : "fa";
       html.setAttribute("lang", newLang);
-      alert("زبان به " + (newLang === "fa" ? "فارسی" : "انگلیسی") + " تغییر یافت!");
+      updateLanguage(newLang);
     }
     
+    // Back to Top Functionality
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-    
     window.addEventListener("scroll", () => {
       const btn = document.getElementById("back-to-top");
       if (window.scrollY > 300) {
@@ -284,7 +371,7 @@
       }
     });
     
-    // Canvas Setup for Matrix Background
+    // Canvas for Matrix Background
     const canvas = document.getElementById("cityCanvas");
     const ctx = canvas.getContext("2d");
     function resizeCanvas() {
@@ -297,25 +384,23 @@
     // Matrix Rain Settings
     const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()";
     const fontSize = 16;
-    const columns = Math.floor(canvas.width / fontSize);
+    let columns = Math.floor(canvas.width / fontSize);
     const drops = [];
     for (let i = 0; i < columns; i++) {
       drops[i] = 1;
     }
     
-    // Drawing Matrix Rain behind content – در اینجا ابتدا چاپ می‌شود
     function drawMatrix() {
-      // برای ایجاد اثر trail از یک مستطیل نیمه‌شفاف استفاده می‌کنیم
+      // ایجاد اثر Trail
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
-      ctx.fillStyle = "#0F0";
       ctx.font = fontSize + "px monospace";
-      
       for (let i = 0; i < drops.length; i++) {
-        const text = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        
+        const ch = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
+        // 20% احتمال قرمز بودن
+        ctx.fillStyle = Math.random() < 0.2 ? "#F00" : "#0F0";
+        ctx.fillText(ch, i * fontSize, drops[i] * fontSize);
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
         }
@@ -323,12 +408,26 @@
       }
     }
     
-    // Since we want resume overlays on top, ولی using matrix effect only as پس‌زمینه
+    // Lightning Effect for Night Mode (در این نسخه، به دلیل حذف حالت شب، افکت همچنان به‌عنوان بخشی از Matrix به صورت پیش‌فرض اجرا می‌شود)
+    let lightningTimer = 0;
+    function updateLightning() {
+      // در این نسخه چون حالت شب حذف شده، ما همچنان می‌توانیم افکت رعد و برق را به عنوان یک افکت خودکار داشته باشیم
+      if(Math.random() < 0.005) {
+        lightningTimer = 5;
+      }
+      if (lightningTimer > 0) lightningTimer--;
+    }
+    function drawLightning() {
+      if (lightningTimer > 0) {
+        ctx.fillStyle = "rgba(255,255,255," + (lightningTimer / 5) + ")";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+    
     function drawScene() {
-      // ابتدا ماتریکس را رسم می‌کنیم
       drawMatrix();
-      // سپس می‌توانیم اجزای اضافی (مانند ساختمان، اگر بخواهیم) را رسم کنیم.
-      // اما در این نسخه پس‌زمینه فقط همان Matrix Rain است.
+      updateLightning();
+      drawLightning();
     }
     
     function animate() {
@@ -337,16 +436,14 @@
     }
     animate();
     
-    // اگر نیاز به اضافه کردن عنصرهای اضافی در بالای Matrix داشتید، می‌توانید آن را به صورت DOM Overlay انجام دهید.
-    
     // Optional GSAP animations for UI elements
     window.addEventListener("load", () => {
-      gsap.from("header.top h1", { duration: 1, y: -20, opacity: 0, ease: "power3.out" });
+      gsap.from("header.top", { duration: 1, y: -20, opacity: 0, ease: "power3.out" });
       gsap.from("nav.main-nav a", { duration: 1, y: -20, opacity: 0, stagger: 0.2, ease: "power3.out" });
     });
   </script>
   
-  <!-- Back to Top Button Script already موجود -->
+  <!-- Back to Top Button Script -->
   <script>
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
