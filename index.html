@@ -1,48 +1,38 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="توسعه‌دهنده حرفه‌ای متخصص در Python, HTML, CSS, Java و C. سایت رزومه‌ای بسیار خفن با پس‌زمینه Matrix Rain." />
-  <meta name="keywords" content="GG MAX, Python, HTML, CSS, Java, C, رزومه, توسعه, Matrix Rain, Tools" />
-  <meta name="author" content="GG MAX" />
-  <title>Urban Resume</title>
-  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="توسعه‌دهنده حرفه‌ای متخصص در Python, HTML, CSS, Java و C.">
+  <meta name="keywords" content="رزومه, توسعه‌دهنده, Matrix Rain, Resume, Developer">
+  <meta name="author" content="GG MAX">
+  <title>Epic Resume</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   
-  <!-- Preload Fonts -->
-  <link rel="preload" href="/assets/fonts/robotocode.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="/assets/fonts/poppins.ttf" as="font" type="font/ttf" crossorigin>
+  <!-- Preload fonts -->
+  <link rel="preload" href="poppins.ttf" as="font" type="font/ttf" crossorigin>
 
   <style>
-    /* RESET & BASE STYLE */
+    /* RESET & BASE */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { width: 100%; height: 100%; overflow: hidden; }
     body {
-      font-family: 'poppinsfont', sans-serif; 
+      font-family: 'poppins', sans-serif;
       transition: background 0.5s, color 0.5s;
+      background: linear-gradient(270deg, #708090, #6e7f80, #576b6a);
+      background-size: 600% 600%;
+      animation: gradientBG 20s ease infinite;
+      position: relative;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    @font-face {
-      font-family: 'poppinsfont';
-      src: url('/assets/fonts/poppins.ttf') format('truetype');
-      font-weight: 300;
-      font-display: swap;
-    }
-    /* پس‌زمینه اصلی: گرادیان متحرک */
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    body {
-      background: linear-gradient(270deg, #708090, #6e7f80, #576b6a);
-      background-size: 600% 600%;
-      animation: gradientBG 20s ease infinite;
-      line-height: 1.6;
-      position: relative;
-      overflow-x: hidden;
-    }
     
-    /* HEADER (فقط شامل دکمه تغییر زبان) */
+    /* HEADER */
     header.top {
       position: fixed;
       top: 0;
@@ -51,9 +41,8 @@
       z-index: 300;
       display: flex;
       justify-content: flex-end;
-      align-items: center;
       padding: 1rem;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0,0,0,0.7);
     }
     .toggle-btns { display: flex; gap: 1rem; }
     .toggle-btns button {
@@ -79,15 +68,15 @@
     }
     nav.main-nav a {
       padding: 0.5rem 1rem;
-      background: rgba(0, 0, 0, 0.65);
+      background: rgba(0,0,0,0.65);
       border-radius: 5px;
       text-decoration: none;
       color: #fff;
       transition: background 0.3s;
     }
-    nav.main-nav a:hover { background: rgba(255, 255, 255, 0.2); }
+    nav.main-nav a:hover { background: rgba(255,255,255,0.2); }
     
-    /* CANVAS: پس‌زمینه Matrix Rain */
+    /* CANVAS for Matrix Rain Background */
     canvas#cityCanvas {
       position: fixed;
       top: 0;
@@ -96,14 +85,14 @@
       display: block;
     }
     
-    /* OVERLAY SECTIONS */
+    /* OVERLAYS */
     section.overlay {
       position: fixed;
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
       max-width: 800px;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0,0,0,0.7);
       padding: 2rem;
       border-radius: 10px;
       z-index: 350;
@@ -111,7 +100,7 @@
       max-height: 70vh;
     }
     #resume { top: 140px; }
-    #tools { top: 240px; }  /* بخش ابزارها */
+    #tools { top: 240px; }
     #contact { bottom: 40px; top: unset; }
     section.overlay h2 {
       font-size: 2rem;
@@ -124,8 +113,8 @@
       color: #fff;
       line-height: 1.8;
     }
-
-    /* تگ‌لاین با افکت تایپ‌رایت */
+    
+    /* Tagline with typewriter effect */
     #tagline {
       text-align: center;
       font-size: 1.5rem;
@@ -134,7 +123,7 @@
       min-height: 30px;
     }
     
-    /* BACK TO TOP BUTTON */
+    /* BACK TO TOP */
     #back-to-top {
       position: fixed;
       bottom: 20px;
@@ -156,28 +145,27 @@
     }
   </style>
   
-  <!-- GSAP LIBRARY -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body data-theme="day" lang="fa">
-  <!-- HEADER: شامل دکمه تغییر زبان -->
+  <!-- Header -->
   <header class="top">
     <div class="toggle-btns">
       <button onclick="toggleLanguage()">تغییر زبان</button>
     </div>
   </header>
   
-  <!-- NAVIGATION -->
+  <!-- Navigation -->
   <nav class="main-nav">
     <a id="nav-resume" href="#resume">رزومه</a>
     <a id="nav-tools" href="#tools">ابزارها</a>
     <a id="nav-contact" href="#contact">تماس</a>
   </nav>
   
-  <!-- CANVAS: پس‌زمینه Matrix Rain -->
+  <!-- Canvas Background (Matrix Rain) -->
   <canvas id="cityCanvas"></canvas>
   
-  <!-- OVERLAY: رزومه -->
+  <!-- Resume Overlay -->
   <section class="overlay" id="resume">
     <h2 id="resumeHeading">رزومه من</h2>
     <div id="tagline"></div>
@@ -186,9 +174,9 @@
       <p>توسعه‌دهنده حرفه‌ای متخصص در Python, HTML, CSS, Java و C.</p>
       <h3>تجربه کاری</h3>
       <ul>
-        <li>طراحی و توسعه وب‌سایت‌های مدرن و پیشرفته</li>
-        <li>ساخت ربات‌های هوشمند برای بهبود کارایی سیستم‌ها</li>
-        <li>همکاری در پروژه‌های منبع باز و تیم‌های توسعه</li>
+        <li>طراحی و توسعه وب‌سایت‌های مدرن</li>
+        <li>ساخت ربات‌های هوشمند</li>
+        <li>همکاری در پروژه‌های منبع باز</li>
       </ul>
       <h3>مهارت‌ها</h3>
       <ul>
@@ -201,11 +189,11 @@
     </div>
   </section>
   
-  <!-- OVERLAY: ابزارها (Capabilities) -->
+  <!-- Tools Overlay -->
   <section class="overlay" id="tools">
     <h2 id="toolsHeading">ابزارهای من</h2>
     <div class="content" id="toolsContent">
-      <p>در اینجا ابزارهایی برای راحتی شما ارائه شده است:</p>
+      <p>ابزارهایی برای آسان‌تر کردن کار شما:</p>
       <ul>
         <li><button onclick="alert('ترجمه گر فعال است!')">ترجمه گر</button></li>
         <li><button onclick="alert('ماشین حساب فعال است!')">ماشین حساب</button></li>
@@ -214,7 +202,7 @@
     </div>
   </section>
   
-  <!-- OVERLAY: تماس -->
+  <!-- Contact Overlay -->
   <section class="overlay" id="contact">
     <h2 id="contactHeading">تماس با من</h2>
     <div class="content" id="contactContent">
@@ -228,18 +216,14 @@
     </div>
   </section>
   
-  <!-- BACK TO TOP BUTTON -->
+  <!-- Back to Top Button -->
   <button id="back-to-top" onclick="scrollToTop()">↑</button>
   
   <script>
-    // دیکشنری متون برای فارسی و انگلیسی
+    // Language data dictionary
     const langData = {
       fa: {
-        nav: {
-          resume: "رزومه",
-          tools: "ابزارها",
-          contact: "تماس"
-        },
+        nav: { resume: "رزومه", tools: "ابزارها", contact: "تماس" },
         resumeOverlay: {
           title: "رزومه من",
           tagline: "به رزومه من خوش آمدید",
@@ -247,9 +231,9 @@
                     <p>توسعه‌دهنده حرفه‌ای متخصص در Python, HTML, CSS, Java و C.</p>
                     <h3>تجربه کاری</h3>
                     <ul>
-                      <li>طراحی و توسعه وب‌سایت‌های مدرن و پیشرفته</li>
-                      <li>ساخت ربات‌های هوشمند برای بهبود کارایی سیستم‌ها</li>
-                      <li>همکاری در پروژه‌های منبع باز و تیم‌های توسعه</li>
+                      <li>طراحی وب‌سایت‌های مدرن</li>
+                      <li>ساخت ربات‌های هوشمند</li>
+                      <li>همکاری در پروژه‌های منبع باز</li>
                     </ul>
                     <h3>مهارت‌ها</h3>
                     <ul>
@@ -262,7 +246,7 @@
         },
         capabilitiesOverlay: {
           title: "ابزارهای من",
-          content: `<p>در اینجا ابزارهایی برای راحتی شما ارائه شده است:</p>
+          content: `<p>ابزارهایی برای آسان‌تر کردن کار شما:</p>
                     <ul>
                       <li><button onclick='alert("ترجمه گر فعال است!")'>ترجمه گر</button></li>
                       <li><button onclick='alert("ماشین حساب فعال است!")'>ماشین حساب</button></li>
@@ -281,11 +265,7 @@
         }
       },
       en: {
-        nav: {
-          resume: "Resume",
-          tools: "Tools",
-          contact: "Contact"
-        },
+        nav: { resume: "Resume", tools: "Tools", contact: "Contact" },
         resumeOverlay: {
           title: "My Resume",
           tagline: "Welcome to my Resume",
@@ -293,9 +273,9 @@
                     <p>A professional developer specialized in Python, HTML, CSS, Java, and C.</p>
                     <h3>Work Experience</h3>
                     <ul>
-                      <li>Design and development of modern, advanced websites</li>
-                      <li>Creating intelligent bots to improve system efficiency</li>
-                      <li>Collaborating in open-source projects and development teams</li>
+                      <li>Designing modern websites</li>
+                      <li>Creating intelligent bots</li>
+                      <li>Collaborating in open-source projects</li>
                     </ul>
                     <h3>Skills</h3>
                     <ul>
@@ -308,7 +288,7 @@
         },
         capabilitiesOverlay: {
           title: "My Tools",
-          content: `<p>Here you can find various tools for your convenience:</p>
+          content: `<p>Here are some useful tools for you:</p>
                     <ul>
                       <li><button onclick='alert("Translator is active!")'>Translator</button></li>
                       <li><button onclick='alert("Calculator is active!")'>Calculator</button></li>
@@ -327,25 +307,17 @@
         }
       }
     };
-    
-    // بروزرسانی زبان در DOM
+
     function updateLanguage(newLang) {
-      // ناوبری
       document.getElementById("nav-resume").innerText = langData[newLang].nav.resume;
       document.getElementById("nav-tools").innerText = langData[newLang].nav.tools;
       document.getElementById("nav-contact").innerText = langData[newLang].nav.contact;
-      
-      // رزومه
       document.getElementById("resumeHeading").innerText = langData[newLang].resumeOverlay.title;
       document.getElementById("tagline").innerHTML = "";
       typeWriter(langData[newLang].resumeOverlay.tagline, "tagline", 0);
       document.getElementById("resumeContent").innerHTML = langData[newLang].resumeOverlay.content;
-      
-      // ابزارها
       document.getElementById("toolsHeading").innerText = langData[newLang].capabilitiesOverlay.title;
       document.getElementById("toolsContent").innerHTML = langData[newLang].capabilitiesOverlay.content;
-      
-      // تماس
       document.getElementById("contactHeading").innerText = langData[newLang].contactOverlay.title;
       document.getElementById("contactContent").innerHTML = langData[newLang].contactOverlay.content;
     }
@@ -358,16 +330,14 @@
       updateLanguage(newLang);
     }
     
-    // افکت تایپ‌رایت برای تگ‌لاین
     function typeWriter(text, elementId, i) {
-      const element = document.getElementById(elementId);
-      if(i < text.length){
-        element.innerHTML += text.charAt(i);
+      const el = document.getElementById(elementId);
+      if(i < text.length) {
+        el.innerHTML += text.charAt(i);
         setTimeout(() => typeWriter(text, elementId, i + 1), 100);
       }
     }
     
-    // Back to Top Button
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -382,7 +352,6 @@
       }
     });
     
-    // Canvas: Matrix Rain Background
     const canvas = document.getElementById("cityCanvas");
     const ctx = canvas.getContext("2d");
     function resizeCanvas() {
@@ -396,7 +365,6 @@
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
     
-    // Matrix Rain Settings
     const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()";
     const fontSize = 16;
     let columns = Math.floor(canvas.width / fontSize);
@@ -420,16 +388,13 @@
       }
     }
     
-    // Lightning Effect
     let lightningTimer = 0;
     function updateLightning() {
-      if(Math.random() < 0.005){
-        lightningTimer = 5;
-      }
+      if(Math.random() < 0.005) { lightningTimer = 5; }
       if(lightningTimer > 0) lightningTimer--;
     }
     function drawLightning() {
-      if(lightningTimer > 0){
+      if(lightningTimer > 0) {
         ctx.fillStyle = "rgba(255,255,255," + (lightningTimer/5) + ")";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       }
@@ -447,23 +412,20 @@
     }
     animate();
     
-    // GSAP Animations for UI Elements
     window.addEventListener("load", () => {
       gsap.from("header.top", { duration: 1, y: -20, opacity: 0, ease: "power3.out" });
       gsap.from("nav.main-nav a", { duration: 1, y: -20, opacity: 0, stagger: 0.2, ease: "power3.out" });
-      // بروزرسانی زبان پیش‌فرض به فارسی
       updateLanguage("fa");
     });
   </script>
   
-  <!-- Back to Top Button Script (برای اطمینان) -->
   <script>
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
     window.addEventListener("scroll", () => {
       const btn = document.getElementById("back-to-top");
-      if(window.scrollY > 300){
+      if(window.scrollY > 300) {
         btn.style.opacity = "1";
         btn.style.visibility = "visible";
       } else {
