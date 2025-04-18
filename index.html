@@ -3,20 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" 
-        content="GG MAX - Developer specializing in Python, HTML, CSS, Java &amp; C. Explore my urban resume and tech projects in a dynamic city scene with rain and lightning." />
-  <meta name="keywords" 
-        content="GG MAX, Python, HTML, CSS, Java, C, Resume, Developer, Urban, City, Rain, Lightning" />
+  <meta name="description" content="GG MAX - Developer specializing in Python, HTML, CSS, Java &amp; C. Explore my urban resume and tech projects in a dynamic Matrix Rain background." />
+  <meta name="keywords" content="GG MAX, Python, HTML, CSS, Java, C, Resume, Developer, Matrix, Rain" />
   <meta name="author" content="GG MAX" />
-  <title>GG MAX | Urban Resume</title>
+  <title>GG MAX | Matrix Urban Resume</title>
   <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-
+  
   <!-- Preload fonts -->
   <link rel="preload" href="/assets/fonts/robotocode.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="/assets/fonts/poppins.ttf" as="font" type="font/ttf" crossorigin>
 
   <style>
-    /* Reset & Base */
+    /* Reset & Base styles */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { width: 100%; height: 100%; overflow: hidden; }
     body { 
@@ -29,27 +27,23 @@
       font-weight: 300;
       font-display: swap;
     }
-    /* حالت شب: تغییر رنگ پس‌زمینه و ویژگی‌های دیگر */
+    
+    /* برای حالت شب (در صورت استفاده) – در اینجا می‌توانید تغییرات دلخواه اعمال کنید */
     body[data-theme="night"] {
-      background: linear-gradient(270deg, #0f0f21, #0a0a18, #050508);
+      background: #000;
       color: #ccc;
     }
-    /* روز: استفاده از یک آسمان ابی برای شهر */
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    body {
-      background: linear-gradient(270deg, #708090, #6e7f80, #576b6a);
-      background-size: 600% 600%;
-      animation: gradientBG 20s ease infinite;
-      line-height: 1.6;
-      position: relative;
-      overflow-x: hidden;
+    
+    /* Canvas Matrix Background */
+    canvas#cityCanvas { 
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10; 
+      display: block;
     }
     
-    /* Header Top: شامل عنوان و دکمه‌های تغییر حالت */
+    /* Header Top: عنوان و دکمه‌های تغییر حالت و زبان */
     header.top {
       position: fixed;
       top: 0;
@@ -60,7 +54,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.8);
     }
     header.top h1 {
       font-size: 1.5rem;
@@ -95,7 +89,7 @@
     }
     nav.main-nav a {
       padding: 0.5rem 1rem;
-      background: rgba(0,0,0,0.6);
+      background: rgba(0, 0, 0, 0.65);
       border-radius: 5px;
       text-decoration: none;
       color: #fff;
@@ -105,23 +99,14 @@
       background: rgba(255,255,255,0.2);
     }
     
-    /* Canvas: Urban Scene */
-    canvas#cityCanvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 100;
-      display: block;
-    }
-    
     /* Overlay Sections: Resume & Contact */
     section.overlay {
-      position: absolute;
+      position: fixed;
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
       max-width: 800px;
-      background: rgba(0,0,0,0.6);
+      background: rgba(0,0,0,0.7);
       padding: 2rem;
       border-radius: 10px;
       z-index: 350;
@@ -142,7 +127,7 @@
       line-height: 1.8;
     }
     
-    /* نمودار مهارت‌های برنامه نویسی (Inline SVG) */
+    /* Skill Chart (Programming Languages) with inline SVG */
     section.skill-chart {
       margin-top: 1rem;
       text-align: center;
@@ -180,7 +165,7 @@
     }
   </style>
   
-  <!-- GSAP Library for Optional UI Animations -->
+  <!-- GSAP for UI Animations (Optional) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body data-theme="day" lang="fa">
@@ -199,7 +184,7 @@
     <a href="#contact">تماس</a>
   </nav>
   
-  <!-- Canvas for Urban Scene -->
+  <!-- Canvas for Matrix Background -->
   <canvas id="cityCanvas"></canvas>
   
   <!-- Resume Overlay -->
@@ -226,23 +211,22 @@
       <section class="skill-chart">
         <h3 style="color:#ffc107;">مهارت‌های برنامه نویسی</h3>
         <svg viewBox="0 0 500 250">
-          <!-- Python: 90% -->
           <text x="10" y="30">Python</text>
           <rect x="100" y="15" width="400" height="20" fill="#3498db" />
           <rect x="100" y="15" width="360" height="20" fill="#27ae60" />
-          <!-- HTML: 100% -->
+          
           <text x="10" y="70">HTML</text>
           <rect x="100" y="55" width="400" height="20" fill="#3498db" />
           <rect x="100" y="55" width="400" height="20" fill="#27ae60" />
-          <!-- CSS: 100% -->
+          
           <text x="10" y="110">CSS</text>
           <rect x="100" y="95" width="400" height="20" fill="#3498db" />
           <rect x="100" y="95" width="400" height="20" fill="#27ae60" />
-          <!-- Java: 85% -->
+          
           <text x="10" y="150">Java</text>
           <rect x="100" y="135" width="400" height="20" fill="#3498db" />
           <rect x="100" y="135" width="340" height="20" fill="#27ae60" />
-          <!-- C: 90% -->
+          
           <text x="10" y="190">C</text>
           <rect x="100" y="175" width="400" height="20" fill="#3498db" />
           <rect x="100" y="175" width="360" height="20" fill="#27ae60" />
@@ -269,27 +253,26 @@
   <button id="back-to-top" onclick="scrollToTop()">↑</button>
   
   <script>
-    // Global variable for theme
+    // Global variable for theme (روز/شب)
     let currentTheme = "day";
     
-    // Toggle Theme Function
     function toggleTheme() {
       currentTheme = currentTheme === "day" ? "night" : "day";
       document.body.setAttribute("data-theme", currentTheme);
     }
-    // Toggle Language Function
+    
     function toggleLanguage() {
       const html = document.documentElement;
-      const currentLang = html.getAttribute("lang") || "fa";
-      const newLang = currentLang === "fa" ? "en" : "fa";
+      const current = html.getAttribute("lang") || "fa";
+      const newLang = current === "fa" ? "en" : "fa";
       html.setAttribute("lang", newLang);
       alert("زبان به " + (newLang === "fa" ? "فارسی" : "انگلیسی") + " تغییر یافت!");
     }
     
-    // Back to Top Function
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
+    
     window.addEventListener("scroll", () => {
       const btn = document.getElementById("back-to-top");
       if (window.scrollY > 300) {
@@ -301,162 +284,51 @@
       }
     });
     
-    // Canvas Setup for Urban Scene
+    // Canvas Setup for Matrix Background
     const canvas = document.getElementById("cityCanvas");
     const ctx = canvas.getContext("2d");
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      drawScene();
     }
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
     
-    // Global variable for lightning effect
-    let lightningTimer = 0;
-    function updateLightning() {
-      if(currentTheme === "night" && Math.random() < 0.005) {
-        lightningTimer = 5;
-      }
-      if(lightningTimer > 0) lightningTimer--;
-    }
-    function drawLightning() {
-      if(lightningTimer > 0) {
-        ctx.fillStyle = "rgba(255,255,255," + (lightningTimer/5) + ")";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      }
+    // Matrix Rain Settings
+    const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()";
+    const fontSize = 16;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = [];
+    for (let i = 0; i < columns; i++) {
+      drops[i] = 1;
     }
     
-    // Draw Sun (only in day mode)
-    function drawSun() {
-      if(currentTheme === "day"){
-        const sunX = 100, sunY = 100, sunRadius = 50;
-        const grad = ctx.createRadialGradient(sunX, sunY, 10, sunX, sunY, sunRadius);
-        grad.addColorStop(0, "#FFD700");
-        grad.addColorStop(1, "rgba(255,215,0,0)");
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(sunX, sunY, sunRadius, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-    
-    // Draw Colorful Buildings with Triangular Roofs and detailed windows
-    function drawBuildings() {
-      const count = Math.ceil(canvas.width / 80);
-      for(let i = 0; i < count; i++){
-        const x = i * 80;
-        const width = 60 + Math.random() * 40;
-        const height = canvas.height * 0.3 + Math.random() * (canvas.height * 0.3);
-        const hue = Math.floor(Math.random() * 360);
-        // Draw building body
-        ctx.fillStyle = `hsl(${hue}, 70%, 50%)`;
-        ctx.fillRect(x, canvas.height - height, width, height);
-  
-        // Draw triangular roof
-        ctx.fillStyle = `hsl(${hue}, 70%, ${currentTheme === "night" ? 40 : 45}%)`;
-        ctx.beginPath();
-        ctx.moveTo(x, canvas.height - height);
-        ctx.lineTo(x + width/2, canvas.height - height - 20);
-        ctx.lineTo(x + width, canvas.height - height);
-        ctx.closePath();
-        ctx.fill();
-  
-        // Draw windows
-        const rows = Math.floor(height / 30);
-        const cols = Math.floor(width / 20);
-        for(let r = 0; r < rows; r++){
-          for(let c = 0; c < cols; c++){
-            let wx = x + 5 + c * 20;
-            let wy = canvas.height - height + 5 + r * 30;
-            let isNight = currentTheme === "night";
-            if(isNight){
-              ctx.fillStyle = Math.random() < 0.5 ? "#FFD700" : "rgba(0,0,0,0.3)";
-            } else {
-              ctx.fillStyle = "rgba(255,255,224,0.8)";
-            }
-            ctx.fillRect(wx, wy, 10, 15);
-          }
-        }
-      }
-    }
-    
-    // Rain Clouds and Rain Drops
-    let rainClouds = [];
-    function initRainClouds() {
-      rainClouds = [];
-      const count = 5 + Math.floor(Math.random() * 5);
-      for(let i = 0; i < count; i++){
-        rainClouds.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height * 0.2,
-          radius: 40 + Math.random() * 30,
-          speed: 0.2 + Math.random() * 0.5
-        });
-      }
-    }
-    initRainClouds();
-    function drawRainClouds() {
-      rainClouds.forEach(cloud => {
-        ctx.fillStyle = "rgba(200,200,200,0.8)";
-        ctx.beginPath();
-        ctx.arc(cloud.x, cloud.y, cloud.radius, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(cloud.x + cloud.radius * 0.6, cloud.y - 10, cloud.radius * 0.8, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(cloud.x - cloud.radius * 0.6, cloud.y - 10, cloud.radius * 0.8, 0, Math.PI * 2);
-        ctx.fill();
-  
-        // Draw rain in day mode
-        if(currentTheme === "day"){
-          ctx.strokeStyle = "rgba(174,194,224,0.5)";
-          ctx.lineWidth = 2;
-          for(let i = 0; i < 5; i++){
-            let rx = cloud.x - cloud.radius + Math.random() * cloud.radius * 2;
-            let ry = cloud.y + cloud.radius;
-            ctx.beginPath();
-            ctx.moveTo(rx, ry);
-            ctx.lineTo(rx, ry + 15 + Math.random() * 10);
-            ctx.stroke();
-          }
-        }
-  
-        // Update cloud position
-        cloud.x += cloud.speed;
-        if(cloud.x - cloud.radius > canvas.width) {
-          cloud.x = -cloud.radius;
-          cloud.y = Math.random() * canvas.height * 0.2;
-        }
-      });
-    }
-    
-    // Draw complete urban scene
-    function drawScene() {
-      // Draw sky
-      ctx.fillStyle = "#87CEEB";
+    // Drawing Matrix Rain behind content – در اینجا ابتدا چاپ می‌شود
+    function drawMatrix() {
+      // برای ایجاد اثر trail از یک مستطیل نیمه‌شفاف استفاده می‌کنیم
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-  
-      // Draw sun (only in day)
-      drawSun();
-  
-      // Draw rain clouds first so that buildings are drawn on top
-      drawRainClouds();
-  
-      // Draw buildings
-      drawBuildings();
-  
-      // Update and draw lightning in night mode
-      updateLightning();
-      drawLightning();
+      
+      ctx.fillStyle = "#0F0";
+      ctx.font = fontSize + "px monospace";
+      
+      for (let i = 0; i < drops.length; i++) {
+        const text = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
     }
     
-    function drawLightning() {
-      if(lightningTimer > 0) {
-        ctx.fillStyle = "rgba(255,255,255," + (lightningTimer/5) + ")";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      }
+    // Since we want resume overlays on top, ولی using matrix effect only as پس‌زمینه
+    function drawScene() {
+      // ابتدا ماتریکس را رسم می‌کنیم
+      drawMatrix();
+      // سپس می‌توانیم اجزای اضافی (مانند ساختمان، اگر بخواهیم) را رسم کنیم.
+      // اما در این نسخه پس‌زمینه فقط همان Matrix Rain است.
     }
     
     function animate() {
@@ -465,29 +337,23 @@
     }
     animate();
     
-    // Update lightning effect
-    function updateLightning() {
-      if(currentTheme === "night" && Math.random() < 0.005) {
-        lightningTimer = 5;
-      }
-      if(lightningTimer > 0) lightningTimer--;
-    }
+    // اگر نیاز به اضافه کردن عنصرهای اضافی در بالای Matrix داشتید، می‌توانید آن را به صورت DOM Overlay انجام دهید.
     
-    // Optional GSAP animations for UI
+    // Optional GSAP animations for UI elements
     window.addEventListener("load", () => {
       gsap.from("header.top h1", { duration: 1, y: -20, opacity: 0, ease: "power3.out" });
       gsap.from("nav.main-nav a", { duration: 1, y: -20, opacity: 0, stagger: 0.2, ease: "power3.out" });
     });
   </script>
   
-  <!-- Back to Top Button Script -->
+  <!-- Back to Top Button Script already موجود -->
   <script>
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
     window.addEventListener("scroll", () => {
       const btn = document.getElementById("back-to-top");
-      if(window.scrollY > 300) {
+      if (window.scrollY > 300) {
         btn.style.opacity = "1";
         btn.style.visibility = "visible";
       } else {
