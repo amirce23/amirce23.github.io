@@ -5,21 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Developer specializing in Python, HTML, CSS, Java &amp; C. Explore my urban resume and tech projects in a dynamic Matrix Rain background." />
   <meta name="keywords" content="Python, HTML, CSS, Java, C, Resume, Developer, Urban, Matrix, Rain, Lightning" />
-  <meta name="author" content="Your Name" />
+  <meta name="author" content="GG MAX" />
   <title>Urban Resume</title>
   <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-
+  
   <!-- Preload fonts -->
   <link rel="preload" href="/assets/fonts/robotocode.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="/assets/fonts/poppins.ttf" as="font" type="font/ttf" crossorigin>
-
+  
   <style>
     /* Reset & Base Styles */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { width: 100%; height: 100%; overflow: hidden; }
     body { 
       font-family: 'poppinsfont', sans-serif; 
-      transition: background 0.5s, color 0.5s;
+      transition: background 0.5s, color 0.5s; 
     }
     @font-face {
       font-family: 'poppinsfont';
@@ -27,7 +27,13 @@
       font-weight: 300;
       font-display: swap;
     }
-    /* در این نسخه حالت روز/شب حذف شده است */
+    
+    /* حالت روز – از یک پس‌زمینه شهری ماتریکسی استفاده می‌شود */
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
     body {
       background: linear-gradient(270deg, #708090, #6e7f80, #576b6a);
       background-size: 600% 600%;
@@ -36,13 +42,8 @@
       position: relative;
       overflow-x: hidden;
     }
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
     
-    /* Header Top: شامل تنها دکمه تغییر زبان */
+    /* Header Top: شامل تنها دکمه تغییر زبان (حالت روز/شب حذف شده) */
     header.top {
       position: fixed;
       top: 0;
@@ -68,7 +69,9 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-    .toggle-btns button:hover { background: #3700b3; }
+    .toggle-btns button:hover {
+      background: #3700b3;
+    }
     
     /* Navigation: منوی مرکزی */
     nav.main-nav {
@@ -88,9 +91,11 @@
       color: #fff;
       transition: background 0.3s;
     }
-    nav.main-nav a:hover { background: rgba(255,255,255,0.2); }
+    nav.main-nav a:hover {
+      background: rgba(255,255,255,0.2);
+    }
     
-    /* Canvas for Matrix Background */
+    /* Canvas for Matrix Rain Background */
     canvas#cityCanvas {
       position: fixed;
       top: 0;
@@ -127,20 +132,13 @@
       line-height: 1.8;
     }
     
-    /* Skill Chart (Inline SVG) for Programming Languages */
-    section.skill-chart {
-      margin-top: 1rem;
+    /* اضافه کردن یک تگ‌لاین با افکت تایپ‌رایت */
+    #tagline {
       text-align: center;
-    }
-    section.skill-chart svg {
-      width: 100%;
-      max-width: 400px;
-      margin: auto;
-    }
-    section.skill-chart text {
-      fill: #fff;
-      font-size: 1rem;
-      font-family: 'poppinsfont', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #fff;
+      min-height: 30px;
     }
     
     /* Back to Top Button */
@@ -165,11 +163,11 @@
     }
   </style>
   
-  <!-- GSAP Library -->
+  <!-- GSAP Library for Optional UI Animations -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body data-theme="day" lang="fa">
-  <!-- Header Top: شامل فقط دکمه تغییر زبان -->
+  <!-- Header Top -->
   <header class="top">
     <div class="toggle-btns">
       <button onclick="toggleLanguage()">تغییر زبان</button>
@@ -188,9 +186,10 @@
   <!-- Resume Overlay -->
   <section class="overlay" id="resume">
     <h2 id="resumeHeading">رزومه من</h2>
+    <div id="tagline"></div>
     <div class="content" id="resumeContent">
-      <p><strong>نام شما</strong></p>
-      <p>توسعه‌دهنده حرفه‌ای متخصص در Python, HTML, CSS, Java و زبان‌های C.</p>
+      <p><strong>GG MAX</strong></p>
+      <p>توسعه‌دهنده حرفه‌ای متخصص در Python, HTML, CSS, Java و C.</p>
       <h3>تجربه کاری</h3>
       <ul>
         <li>طراحی و توسعه وب‌سایت‌های مدرن و پیشرفته</li>
@@ -205,31 +204,6 @@
         <li>Java</li>
         <li>C</li>
       </ul>
-      <!-- Skill Chart -->
-      <section class="skill-chart">
-        <h3 id="skillChartHeading" style="color:#ffc107;">مهارت‌های برنامه نویسی</h3>
-        <svg viewBox="0 0 500 250">
-          <text x="10" y="30">Python</text>
-          <rect x="100" y="15" width="400" height="20" fill="#3498db" />
-          <rect x="100" y="15" width="360" height="20" fill="#27ae60" />
-  
-          <text x="10" y="70">HTML</text>
-          <rect x="100" y="55" width="400" height="20" fill="#3498db" />
-          <rect x="100" y="55" width="400" height="20" fill="#27ae60" />
-  
-          <text x="10" y="110">CSS</text>
-          <rect x="100" y="95" width="400" height="20" fill="#3498db" />
-          <rect x="100" y="95" width="400" height="20" fill="#27ae60" />
-  
-          <text x="10" y="150">Java</text>
-          <rect x="100" y="135" width="400" height="20" fill="#3498db" />
-          <rect x="100" y="135" width="340" height="20" fill="#27ae60" />
-  
-          <text x="10" y="190">C</text>
-          <rect x="100" y="175" width="400" height="20" fill="#3498db" />
-          <rect x="100" y="175" width="360" height="20" fill="#27ae60" />
-        </svg>
-      </section>
     </div>
   </section>
   
@@ -237,12 +211,12 @@
   <section class="overlay" id="contact">
     <h2 id="contactHeading">تماس با من</h2>
     <div class="content" id="contactContent">
-      <p>ایمیل: <a href="mailto:yourname@example.com" style="color:#ffc107;">yourname@example.com</a></p>
+      <p>ایمیل: <a href="mailto:ggmax@example.com" style="color:#ffc107;">ggmax@example.com</a></p>
       <p>شبکه‌های اجتماعی:</p>
       <ul>
-        <li>تلگرام: <a href="https://t.me/yourname" target="_blank" style="color:#ffc107;">t.me/yourname</a></li>
-        <li>گیت‌هاب: <a href="https://github.com/yourname" target="_blank" style="color:#ffc107;">github.com/yourname</a></li>
-        <li>دیسکورد: <a href="https://discord.gg/yourserver" target="_blank" style="color:#ffc107;">discord.gg/yourserver</a></li>
+        <li>تلگرام: <a href="https://t.me/ggmax" target="_blank" style="color:#ffc107;">t.me/ggmax</a></li>
+        <li>گیت‌هاب: <a href="https://github.com/ggmax" target="_blank" style="color:#ffc107;">github.com/ggmax</a></li>
+        <li>دیسکورد: <a href="https://discord.gg/ggmax" target="_blank" style="color:#ffc107;">discord.gg/ggmax</a></li>
       </ul>
     </div>
   </section>
@@ -251,7 +225,7 @@
   <button id="back-to-top" onclick="scrollToTop()">↑</button>
   
   <script>
-    // زبان‌های فارسی و انگلیسی به صورت دیکشنری
+    // زبان‌های فارسی و انگلیسی: دیکشنری متون
     const langData = {
       fa: {
         nav: {
@@ -260,8 +234,9 @@
         },
         resumeOverlay: {
           title: "رزومه من",
-          content: `<p><strong>نام شما</strong></p>
-                    <p>توسعه‌دهنده حرفه‌ای متخصص در Python, HTML, CSS, Java و زبان‌های C.</p>
+          tagline: "به رزومه من خوش آمدید",
+          content: `<p><strong>GG MAX</strong></p>
+                    <p>توسعه‌دهنده حرفه‌ای متخصص در Python, HTML, CSS, Java و C.</p>
                     <h3>تجربه کاری</h3>
                     <ul>
                       <li>طراحی و توسعه وب‌سایت‌های مدرن و پیشرفته</li>
@@ -279,15 +254,14 @@
         },
         contactOverlay: {
           title: "تماس با من",
-          content: `<p>ایمیل: <a href="mailto:yourname@example.com" style="color:#ffc107;">yourname@example.com</a></p>
+          content: `<p>ایمیل: <a href="mailto:ggmax@example.com" style="color:#ffc107;">ggmax@example.com</a></p>
                     <p>شبکه‌های اجتماعی:</p>
                     <ul>
-                      <li>تلگرام: <a href="https://t.me/yourname" target="_blank" style="color:#ffc107;">t.me/yourname</a></li>
-                      <li>گیت‌هاب: <a href="https://github.com/yourname" target="_blank" style="color:#ffc107;">github.com/yourname</a></li>
-                      <li>دیسکورد: <a href="https://discord.gg/yourserver" target="_blank" style="color:#ffc107;">discord.gg/yourserver</a></li>
+                      <li>تلگرام: <a href="https://t.me/ggmax" target="_blank" style="color:#ffc107;">t.me/ggmax</a></li>
+                      <li>گیت‌هاب: <a href="https://github.com/ggmax" target="_blank" style="color:#ffc107;">github.com/ggmax</a></li>
+                      <li>دیسکورد: <a href="https://discord.gg/ggmax" target="_blank" style="color:#ffc107;">discord.gg/ggmax</a></li>
                     </ul>`
-        },
-        skillChartTitle: "مهارت‌های برنامه نویسی"
+        }
       },
       en: {
         nav: {
@@ -296,7 +270,8 @@
         },
         resumeOverlay: {
           title: "My Resume",
-          content: `<p><strong>Your Name</strong></p>
+          tagline: "Welcome to my Resume",
+          content: `<p><strong>GG MAX</strong></p>
                     <p>A professional developer specialized in Python, HTML, CSS, Java, and C.</p>
                     <h3>Work Experience</h3>
                     <ul>
@@ -315,36 +290,31 @@
         },
         contactOverlay: {
           title: "Contact Me",
-          content: `<p>Email: <a href="mailto:yourname@example.com" style="color:#ffc107;">yourname@example.com</a></p>
+          content: `<p>Email: <a href="mailto:ggmax@example.com" style="color:#ffc107;">ggmax@example.com</a></p>
                     <p>Social Networks:</p>
                     <ul>
-                      <li>Telegram: <a href="https://t.me/yourname" target="_blank" style="color:#ffc107;">t.me/yourname</a></li>
-                      <li>GitHub: <a href="https://github.com/yourname" target="_blank" style="color:#ffc107;">github.com/yourname</a></li>
-                      <li>Discord: <a href="https://discord.gg/yourserver" target="_blank" style="color:#ffc107;">discord.gg/yourserver</a></li>
+                      <li>Telegram: <a href="https://t.me/ggmax" target="_blank" style="color:#ffc107;">t.me/ggmax</a></li>
+                      <li>GitHub: <a href="https://github.com/ggmax" target="_blank" style="color:#ffc107;">github.com/ggmax</a></li>
+                      <li>Discord: <a href="https://discord.gg/ggmax" target="_blank" style="color:#ffc107;">discord.gg/ggmax</a></li>
                     </ul>`
-        },
-        skillChartTitle: "Programming Skills"
+        }
       }
     };
     
-    // Function to update language in DOM
+    // تابع بروزرسانی زبان در صفحات
     function updateLanguage(newLang) {
-      // Update Navigation
+      // Navigation
       document.getElementById("nav-resume").innerText = langData[newLang].nav.resume;
       document.getElementById("nav-contact").innerText = langData[newLang].nav.contact;
       
-      // Update Resume Overlay
-      document.querySelector("#resume h2").innerText = langData[newLang].resumeOverlay.title;
+      // Resume Overlay
+      document.getElementById("resumeHeading").innerText = langData[newLang].resumeOverlay.title;
+      document.getElementById("tagline").innerText = "";
+      typeWriter(langData[newLang].resumeOverlay.tagline, "tagline", 0);
       document.getElementById("resumeContent").innerHTML = langData[newLang].resumeOverlay.content;
       
-      // Update Skill Chart Heading
-      const skillHead = document.querySelector("#resume .skill-chart h3");
-      if(skillHead) {
-        skillHead.innerText = langData[newLang].skillChartTitle;
-      }
-      
-      // Update Contact Overlay
-      document.querySelector("#contact h2").innerText = langData[newLang].contactOverlay.title;
+      // Contact Overlay
+      document.getElementById("contactHeading").innerText = langData[newLang].contactOverlay.title;
       document.getElementById("contactContent").innerHTML = langData[newLang].contactOverlay.content;
     }
     
@@ -354,6 +324,15 @@
       const newLang = current === "fa" ? "en" : "fa";
       html.setAttribute("lang", newLang);
       updateLanguage(newLang);
+    }
+    
+    // Typewriter effect for the tagline
+    function typeWriter(text, elementId, i) {
+      const element = document.getElementById(elementId);
+      if (i < text.length) {
+        element.innerHTML += text.charAt(i);
+        setTimeout(() => typeWriter(text, elementId, i + 1), 100);
+      }
     }
     
     // Back to Top Functionality
@@ -371,12 +350,17 @@
       }
     });
     
-    // Canvas for Matrix Background
+    // Canvas: Matrix Rain Background
     const canvas = document.getElementById("cityCanvas");
     const ctx = canvas.getContext("2d");
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      // Recalculate number of columns and resets drops array
+      columns = Math.floor(canvas.width / fontSize);
+      for (let i = 0; i < columns; i++) {
+        drops[i] = 1;
+      }
     }
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
@@ -391,14 +375,12 @@
     }
     
     function drawMatrix() {
-      // ایجاد اثر Trail
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       ctx.font = fontSize + "px monospace";
       for (let i = 0; i < drops.length; i++) {
         const ch = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
-        // 20% احتمال قرمز بودن
         ctx.fillStyle = Math.random() < 0.2 ? "#F00" : "#0F0";
         ctx.fillText(ch, i * fontSize, drops[i] * fontSize);
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
@@ -408,11 +390,10 @@
       }
     }
     
-    // Lightning Effect for Night Mode (در این نسخه، به دلیل حذف حالت شب، افکت همچنان به‌عنوان بخشی از Matrix به صورت پیش‌فرض اجرا می‌شود)
+    // Lightning Effect
     let lightningTimer = 0;
     function updateLightning() {
-      // در این نسخه چون حالت شب حذف شده، ما همچنان می‌توانیم افکت رعد و برق را به عنوان یک افکت خودکار داشته باشیم
-      if(Math.random() < 0.005) {
+      if (Math.random() < 0.005) {
         lightningTimer = 5;
       }
       if (lightningTimer > 0) lightningTimer--;
@@ -436,14 +417,16 @@
     }
     animate();
     
-    // Optional GSAP animations for UI elements
+    // GSAP Animations for UI Elements
     window.addEventListener("load", () => {
       gsap.from("header.top", { duration: 1, y: -20, opacity: 0, ease: "power3.out" });
       gsap.from("nav.main-nav a", { duration: 1, y: -20, opacity: 0, stagger: 0.2, ease: "power3.out" });
+      // Default language set to Persian
+      updateLanguage("fa");
     });
   </script>
   
-  <!-- Back to Top Button Script -->
+  <!-- Back to Top Button Script (تکرار برای اطمینان) -->
   <script>
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
