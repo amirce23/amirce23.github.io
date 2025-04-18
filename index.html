@@ -14,11 +14,13 @@
   <link rel="preload" href="/assets/fonts/poppins.ttf" as="font" type="font/ttf" crossorigin>
 
   <style>
-    /* Reset */
+    /* Reset & Base */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { width: 100%; height: 100%; overflow: hidden; }
-    body { font-family: 'poppinsfont', sans-serif; transition: background 0.5s, color 0.5s; }
-
+    body { 
+      font-family: 'poppinsfont', sans-serif; 
+      transition: background 0.5s, color 0.5s; 
+    }
     @font-face {
       font-family: 'poppinsfont';
       src: url('/assets/fonts/poppins.ttf') format('truetype');
@@ -26,7 +28,7 @@
       font-display: swap;
     }
 
-    /* Urban Environment Background */
+    /* Urban Environment Background: آسمان ابی با حالت ابری */
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -42,7 +44,7 @@
       overflow-x: hidden;
     }
 
-    /* Header Top (Toggle Buttons) */
+    /* Header Top: شامل عنوان و دکمه‌های تغییر حالت و زبان */
     header.top {
       position: fixed;
       top: 0;
@@ -70,13 +72,13 @@
       background: #6200ea;
       color: #fff;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background 0.3s;
     }
     .toggle-btns button:hover {
       background: #3700b3;
     }
 
-    /* Navigation (Central) */
+    /* Navigation: منوی مرکزی بالای صفحه */
     nav.main-nav {
       position: fixed;
       top: 70px;
@@ -98,7 +100,7 @@
       background: rgba(255, 255, 255, 0.2);
     }
 
-    /* Urban Canvas */
+    /* Canvas for Urban Scene */
     canvas#cityCanvas {
       position: absolute;
       top: 0;
@@ -107,10 +109,9 @@
       display: block;
     }
     
-    /* Resume Section (Overlay) */
-    section.resume {
+    /* Resume & Contact Overlay Sections */
+    section.overlay {
       position: absolute;
-      top: 140px;
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
@@ -122,13 +123,15 @@
       overflow-y: auto;
       max-height: 70vh;
     }
-    section.resume h2 {
+    #resume { top: 140px; }
+    #contact { bottom: 40px; top: unset; max-height: none; }
+    section.overlay h2 {
       font-size: 2rem;
       margin-bottom: 1rem;
       text-align: center;
       color: #ffc107;
     }
-    section.resume .content {
+    section.overlay .content {
       font-size: 1.1rem;
       color: #fff;
       line-height: 1.8;
@@ -147,7 +150,7 @@
       cursor: pointer;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s;
+      transition: opacity 0.3s, visibility 0.3s;
       z-index: 300;
     }
     #back-to-top:hover {
@@ -156,7 +159,7 @@
     }
   </style>
   
-  <!-- GSAP Library -->
+  <!-- GSAP Library (for optional UI animations) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body data-theme="day" lang="fa">
@@ -175,20 +178,20 @@
     <a href="#contact">تماس</a>
   </nav>
   
-  <!-- Canvas for Urban Scene -->
+  <!-- Canvas for the Urban Scene -->
   <canvas id="cityCanvas"></canvas>
   
   <!-- Resume Section (Overlay) -->
-  <section class="resume" id="resume">
+  <section class="overlay" id="resume">
     <h2>رزومه من</h2>
     <div class="content">
       <p><strong>GG MAX</strong></p>
       <p>توسعه‌دهنده حرفه‌ای متخصص در Python, HTML, CSS, Java و زبان‌های C.</p>
       <h3>تجربه کاری</h3>
       <ul>
-        <li>طراحی و توسعه وب‌سایت‌ها و برنامه‌های پیشرفته</li>
-        <li>ساخت ربات‌های هوشمند برای اتوماسیون سیستم‌ها</li>
-        <li>همکاری در پروژه‌های منبع باز</li>
+        <li>طراحی و توسعه وب‌سایت‌های مدرن و پیشرفته</li>
+        <li>ساخت ربات‌های هوشمند برای بهبود کارایی سیستم‌ها</li>
+        <li>همکاری در پروژه‌های منبع باز و تیم‌های توسعه</li>
       </ul>
       <h3>مهارت‌ها</h3>
       <ul>
@@ -200,7 +203,7 @@
   </section>
   
   <!-- Contact Section (Overlay) -->
-  <section class="resume" id="contact" style="top: auto; bottom: 40px; max-height: none;">
+  <section class="overlay" id="contact" style="top: auto;">
     <h2>تماس با من</h2>
     <div class="content">
       <p>ایمیل: <a href="mailto:ggmax@example.com" style="color: #ffc107;">ggmax@example.com</a></p>
@@ -221,19 +224,18 @@
     function toggleTheme() {
       const body = document.body;
       const current = body.getAttribute("data-theme");
-      const newTheme = current === "day" ? "night" : "day";
-      body.setAttribute("data-theme", newTheme);
+      body.setAttribute("data-theme", current === "day" ? "night" : "day");
     }
     // Toggle Language (فارسی/انگلیسی)
     function toggleLanguage() {
       const html = document.documentElement;
-      const current = html.getAttribute("lang") || "fa";
-      const newLang = current === "fa" ? "en" : "fa";
+      const currentLang = html.getAttribute("lang") || "fa";
+      const newLang = currentLang === "fa" ? "en" : "fa";
       html.setAttribute("lang", newLang);
       alert("زبان به " + (newLang === "fa" ? "فارسی" : "انگلیسی") + " تغییر یافت!");
     }
-  
-    // Back to Top Functionality
+    
+    // Back to Top Button
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -247,138 +249,75 @@
         btn.style.visibility = "hidden";
       }
     });
-  
-    // Canvas: Urban Scene Simulation
+    
+    // Urban Scene using Canvas with Three.js-like simulation (2D approximation)
     const canvas = document.getElementById("cityCanvas");
     const ctx = canvas.getContext("2d");
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      drawScene();
     }
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
-  
-    // Create Buildings
-    let buildings = [];
-    function initBuildings() {
-      buildings = [];
-      const count = Math.ceil(canvas.width / 80);
-      for (let i = 0; i < count; i++) {
-        const w = 60 + Math.random() * 40;
-        const h = canvas.height * 0.3 + Math.random() * (canvas.height * 0.3);
-        buildings.push({ x: i * 80, width: w, height: h });
-      }
-    }
-    initBuildings();
-  
-    // Create Pedestrians
-    let pedestrians = [];
-    function initPedestrians() {
-      pedestrians = [];
-      const count = 20;
-      for (let i = 0; i < count; i++) {
-        pedestrians.push({
-          x: Math.random() * canvas.width,
-          y: canvas.height - 30 - Math.random() * 20,
-          speed: 0.5 + Math.random() * 1.5
-        });
-      }
-    }
-    initPedestrians();
-  
-    // Airplane variables
-    let airplane = null;
-    let airplaneTimer = 0;
-    function spawnAirplane() {
-      airplane = {
-        x: -100,
-        y: Math.random() * canvas.height * 0.2,
-        speed: 2 + Math.random() * 2
-      };
-    }
-  
-    function updateScene() {
-      // Update pedestrians (wrap around)
-      pedestrians.forEach(p => {
-        p.x += p.speed;
-        if (p.x > canvas.width + 20) p.x = -20;
-      });
-      // Update airplane
-      if (airplane) {
-        airplane.x += airplane.speed;
-        if (airplane.x > canvas.width + 100) {
-          airplane = null;
-          airplaneTimer = 0;
-        }
-      } else {
-        airplaneTimer++;
-        if (airplaneTimer > 600 && Math.random() < 0.05) {
-          spawnAirplane();
-          airplaneTimer = 0;
-        }
-      }
-    }
-  
+    
+    // Create and draw buildings (Colorful & dynamic)
     function drawBuildings() {
-      ctx.fillStyle = "#2c3e50";
-      buildings.forEach(b => {
-        ctx.fillRect(b.x, canvas.height - b.height, b.width, b.height);
-      });
-    }
+      const buildingCount = Math.ceil(canvas.width / 80);
+      for (let i = 0; i < buildingCount; i++) {
+        let x = i * 80;
+        let width = 60 + Math.random() * 40;
+        let height = canvas.height * 0.3 + Math.random() * (canvas.height * 0.3);
+        let hue = Math.floor(Math.random() * 360);
+        ctx.fillStyle = `hsl(${hue}, 70%, 50%)`;
+        ctx.fillRect(x, canvas.height - height, width, height);
   
-    function drawPedestrians() {
-      pedestrians.forEach(p => {
-        // Draw head as circle
-        ctx.fillStyle = "#f1c40f"; 
-        ctx.beginPath();
-        ctx.arc(p.x, p.y - 10, 8, 0, Math.PI * 2);
-        ctx.fill();
-        // Draw body as line
-        ctx.strokeStyle = "#ecf0f1";
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y - 2);
-        ctx.lineTo(p.x, p.y + 10);
-        ctx.stroke();
-      });
-    }
-  
-    function drawAirplane() {
-      if (airplane) {
-        ctx.fillStyle = "#bdc3c7";
-        ctx.beginPath();
-        ctx.moveTo(airplane.x, airplane.y);
-        ctx.lineTo(airplane.x + 40, airplane.y + 10);
-        ctx.lineTo(airplane.x + 30, airplane.y + 20);
-        ctx.lineTo(airplane.x, airplane.y + 10);
-        ctx.closePath();
-        ctx.fill();
+        // Draw windows on each building
+        ctx.fillStyle = "rgba(255,255,224,0.6)";
+        const rows = Math.floor(height / 30);
+        const cols = Math.floor(width / 20);
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            let wx = x + 5 + c * 20;
+            let wy = canvas.height - height + 5 + r * 30;
+            ctx.fillRect(wx, wy, 10, 15);
+          }
+        }
       }
     }
-  
-    function drawScene() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      // Draw clouds as translucent circles (optional)
-      // Draw city: Buildings and street
-      drawBuildings();
-      // Draw pedestrians on the street
-      drawPedestrians();
-      // Draw airplane if exists
-      drawAirplane();
+    
+    // Draw the sun in the sky
+    function drawSun() {
+      const sunX = 100, sunY = 100, sunRadius = 50;
+      const gradient = ctx.createRadialGradient(sunX, sunY, 10, sunX, sunY, sunRadius);
+      gradient.addColorStop(0, "#FFD700");
+      gradient.addColorStop(1, "rgba(255,215,0,0)");
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(sunX, sunY, sunRadius, 0, 2 * Math.PI);
+      ctx.fill();
     }
+    
+    // Main drawScene function for urban scene
+    function drawScene() {
+      // Clear and draw sky
+      ctx.fillStyle = "#87CEEB"; // آسمان آبی
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
   
+      // Draw sun
+      drawSun();
+  
+      // Draw buildings at the bottom
+      drawBuildings();
+    }
+    
     function animate() {
-      updateScene();
       drawScene();
       requestAnimationFrame(animate);
     }
     animate();
-  
-    // Optional: GSAP animations on page load for static elements
-    window.addEventListener("load", () => {
-      gsap.from("header.top h1", { duration: 1, opacity: 0, y: -20, ease: "power3.out" });
-      gsap.from("nav.main-nav a", { duration: 1, opacity: 0, y: -20, stagger: 0.2, ease: "power3.out" });
-    });
   </script>
+  
+  <!-- Back to Top Button Script already موجود در بالا -->
 </body>
 </html>
