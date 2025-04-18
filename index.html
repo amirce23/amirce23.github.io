@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Developer specializing in Python, HTML, CSS, Java &amp; C. Explore my urban resume and tech projects in a dynamic Matrix Rain background." />
-  <meta name="keywords" content="Python, HTML, CSS, Java, C, Resume, Developer, Urban, Matrix, Rain, Lightning" />
+  <meta name="description" content="Developer specializing in Python, HTML, CSS, Java &amp; C. Explore my urban resume and tools in a dynamic Matrix Rain background." />
+  <meta name="keywords" content="Python, HTML, CSS, Java, C, Resume, Developer, Urban, Matrix, Rain, Tools" />
   <meta name="author" content="GG MAX" />
   <title>Urban Resume</title>
   <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
@@ -19,7 +19,7 @@
     html, body { width: 100%; height: 100%; overflow: hidden; }
     body { 
       font-family: 'poppinsfont', sans-serif; 
-      transition: background 0.5s, color 0.5s; 
+      transition: background 0.5s, color 0.5s;
     }
     @font-face {
       font-family: 'poppinsfont';
@@ -28,7 +28,7 @@
       font-display: swap;
     }
     
-    /* حالت روز – از یک پس‌زمینه شهری ماتریکسی استفاده می‌شود */
+    /* حالت روز – پس‌زمینه شهری ماتریکسی */
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -43,7 +43,7 @@
       overflow-x: hidden;
     }
     
-    /* Header Top: شامل تنها دکمه تغییر زبان (حالت روز/شب حذف شده) */
+    /* Header Top: فقط شامل دکمه تغییر زبان */
     header.top {
       position: fixed;
       top: 0;
@@ -69,9 +69,7 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-    .toggle-btns button:hover {
-      background: #3700b3;
-    }
+    .toggle-btns button:hover { background: #3700b3; }
     
     /* Navigation: منوی مرکزی */
     nav.main-nav {
@@ -91,9 +89,7 @@
       color: #fff;
       transition: background 0.3s;
     }
-    nav.main-nav a:hover {
-      background: rgba(255,255,255,0.2);
-    }
+    nav.main-nav a:hover { background: rgba(255,255,255,0.2); }
     
     /* Canvas for Matrix Rain Background */
     canvas#cityCanvas {
@@ -104,7 +100,7 @@
       display: block;
     }
     
-    /* Overlay Sections: Resume & Contact */
+    /* Overlay Sections: Resume, Tools, and Contact */
     section.overlay {
       position: fixed;
       left: 50%;
@@ -118,7 +114,11 @@
       overflow-y: auto;
       max-height: 70vh;
     }
+    /* بخش رزومه در بالای صفحه */
     #resume { top: 140px; }
+    /* بخش ابزارها (Capabilities) در وسط صفحه */
+    #capabilities { top: 240px; }
+    /* بخش تماس در پایین صفحه */
     #contact { bottom: 40px; top: unset; }
     section.overlay h2 {
       font-size: 2rem;
@@ -132,7 +132,7 @@
       line-height: 1.8;
     }
     
-    /* اضافه کردن یک تگ‌لاین با افکت تایپ‌رایت */
+    /* تگ‌لاین (Tagline) با افکت تایپ‌رایت */
     #tagline {
       text-align: center;
       font-size: 1.5rem;
@@ -163,11 +163,11 @@
     }
   </style>
   
-  <!-- GSAP Library for Optional UI Animations -->
+  <!-- GSAP Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body data-theme="day" lang="fa">
-  <!-- Header Top -->
+  <!-- Header Top: فقط دکمه تغییر زبان -->
   <header class="top">
     <div class="toggle-btns">
       <button onclick="toggleLanguage()">تغییر زبان</button>
@@ -177,6 +177,7 @@
   <!-- Navigation -->
   <nav class="main-nav">
     <a id="nav-resume" href="#resume">رزومه</a>
+    <a id="nav-capabilities" href="#capabilities">ابزارها</a>
     <a id="nav-contact" href="#contact">تماس</a>
   </nav>
   
@@ -207,6 +208,19 @@
     </div>
   </section>
   
+  <!-- Capabilities (Tools) Overlay -->
+  <section class="overlay" id="capabilities">
+    <h2 id="capabilitiesHeading">ابزارهای من</h2>
+    <div class="content" id="capabilitiesContent">
+      <p>در اینجا ابزارهایی برای راحتی شما قرار گرفته است:</p>
+      <ul>
+        <li><button onclick="alert('ترجمه گر فعال است!')">ترجمه گر</button></li>
+        <li><button onclick="alert('ماشین حساب فعال است!')">ماشین حساب</button></li>
+        <li><button onclick="alert('تقویم فعال است!')">تقویم</button></li>
+      </ul>
+    </div>
+  </section>
+  
   <!-- Contact Overlay -->
   <section class="overlay" id="contact">
     <h2 id="contactHeading">تماس با من</h2>
@@ -225,11 +239,12 @@
   <button id="back-to-top" onclick="scrollToTop()">↑</button>
   
   <script>
-    // زبان‌های فارسی و انگلیسی: دیکشنری متون
+    // دیکشنری متون برای دو زبان فارسی و انگلیسی
     const langData = {
       fa: {
         nav: {
           resume: "رزومه",
+          capabilities: "ابزارها",
           contact: "تماس"
         },
         resumeOverlay: {
@@ -252,6 +267,15 @@
                       <li>C</li>
                     </ul>`
         },
+        capabilitiesOverlay: {
+          title: "ابزارهای من",
+          content: `<p>در اینجا ابزارهایی برای راحتی شما قرار گرفته است:</p>
+                    <ul>
+                      <li><button onclick='alert("ترجمه گر فعال است!")'>ترجمه گر</button></li>
+                      <li><button onclick='alert("ماشین حساب فعال است!")'>ماشین حساب</button></li>
+                      <li><button onclick='alert("تقویم فعال است!")'>تقویم</button></li>
+                    </ul>`
+        },
         contactOverlay: {
           title: "تماس با من",
           content: `<p>ایمیل: <a href="mailto:ggmax@example.com" style="color:#ffc107;">ggmax@example.com</a></p>
@@ -266,6 +290,7 @@
       en: {
         nav: {
           resume: "Resume",
+          capabilities: "Tools",
           contact: "Contact"
         },
         resumeOverlay: {
@@ -288,6 +313,15 @@
                       <li>C</li>
                     </ul>`
         },
+        capabilitiesOverlay: {
+          title: "My Tools",
+          content: `<p>Here you can find various tools for your convenience:</p>
+                    <ul>
+                      <li><button onclick='alert("Translator is active!")'>Translator</button></li>
+                      <li><button onclick='alert("Calculator is active!")'>Calculator</button></li>
+                      <li><button onclick='alert("Calendar is active!")'>Calendar</button></li>
+                    </ul>`
+        },
         contactOverlay: {
           title: "Contact Me",
           content: `<p>Email: <a href="mailto:ggmax@example.com" style="color:#ffc107;">ggmax@example.com</a></p>
@@ -301,19 +335,24 @@
       }
     };
     
-    // تابع بروزرسانی زبان در صفحات
+    // تابع بروزرسانی متن‌ها بر اساس زبان انتخابی
     function updateLanguage(newLang) {
-      // Navigation
+      // بروزرسانی ناوبری
       document.getElementById("nav-resume").innerText = langData[newLang].nav.resume;
+      document.getElementById("nav-capabilities").innerText = langData[newLang].nav.capabilities;
       document.getElementById("nav-contact").innerText = langData[newLang].nav.contact;
       
-      // Resume Overlay
+      // بروزرسانی بخش رزومه
       document.getElementById("resumeHeading").innerText = langData[newLang].resumeOverlay.title;
-      document.getElementById("tagline").innerText = "";
+      document.getElementById("tagline").innerHTML = "";
       typeWriter(langData[newLang].resumeOverlay.tagline, "tagline", 0);
       document.getElementById("resumeContent").innerHTML = langData[newLang].resumeOverlay.content;
       
-      // Contact Overlay
+      // بروزرسانی بخش ابزارها
+      document.getElementById("capabilitiesHeading").innerText = langData[newLang].capabilitiesOverlay.title;
+      document.getElementById("capabilitiesContent").innerHTML = langData[newLang].capabilitiesOverlay.content;
+      
+      // بروزرسانی بخش تماس
       document.getElementById("contactHeading").innerText = langData[newLang].contactOverlay.title;
       document.getElementById("contactContent").innerHTML = langData[newLang].contactOverlay.content;
     }
@@ -326,7 +365,7 @@
       updateLanguage(newLang);
     }
     
-    // Typewriter effect for the tagline
+    // افکت تایپ‌رایت برای تگ‌لاین
     function typeWriter(text, elementId, i) {
       const element = document.getElementById(elementId);
       if (i < text.length) {
@@ -335,7 +374,7 @@
       }
     }
     
-    // Back to Top Functionality
+    // Back to Top Button
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -356,7 +395,7 @@
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      // Recalculate number of columns and resets drops array
+      // محاسبه دوباره تعداد ستون‌ها
       columns = Math.floor(canvas.width / fontSize);
       for (let i = 0; i < columns; i++) {
         drops[i] = 1;
@@ -365,7 +404,7 @@
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
     
-    // Matrix Rain Settings
+    // تنظیمات Matrix Rain
     const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()";
     const fontSize = 16;
     let columns = Math.floor(canvas.width / fontSize);
@@ -377,7 +416,6 @@
     function drawMatrix() {
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
       ctx.font = fontSize + "px monospace";
       for (let i = 0; i < drops.length; i++) {
         const ch = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
@@ -390,7 +428,7 @@
       }
     }
     
-    // Lightning Effect
+    // Lightning effect (به عنوان افکت اضافی برای رعد و برق)
     let lightningTimer = 0;
     function updateLightning() {
       if (Math.random() < 0.005) {
@@ -400,7 +438,7 @@
     }
     function drawLightning() {
       if (lightningTimer > 0) {
-        ctx.fillStyle = "rgba(255,255,255," + (lightningTimer / 5) + ")";
+        ctx.fillStyle = "rgba(255,255,255," + (lightningTimer/5) + ")";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       }
     }
@@ -421,12 +459,12 @@
     window.addEventListener("load", () => {
       gsap.from("header.top", { duration: 1, y: -20, opacity: 0, ease: "power3.out" });
       gsap.from("nav.main-nav a", { duration: 1, y: -20, opacity: 0, stagger: 0.2, ease: "power3.out" });
-      // Default language set to Persian
+      // تنظیم زبان پیش‌فرض
       updateLanguage("fa");
     });
   </script>
   
-  <!-- Back to Top Button Script (تکرار برای اطمینان) -->
+  <!-- Back to Top Button Script -->
   <script>
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
