@@ -1,246 +1,187 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Meta Tags -->
-  <meta name="description" content="GG MAX - Developer specializing in Python, HTML, CSS, Java &amp; C. Explore my portfolio and tech projects." />
-  <meta name="keywords" content="GG MAX, Python, HTML, CSS, Java, C, Developer" />
-  <meta name="author" content="GG MAX" />
-  <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="GG MAX | Innovative Developer" />
-  <meta property="og:description" content="Explore the creative projects of GG MAX." />
-  <meta property="og:image" content="/assets/ggmax-logo.png" />
-  <meta property="og:url" content="https://ggmax.dev" />
-  <link rel="canonical" href="https://ggmax.dev" />
-  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
-  <title>GG MAX | Innovative Developer</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="GG MAX - Developer specializing in Python, HTML, CSS, Java & C. Explore my portfolio and tech projects." />
+    <meta name="keywords" content="GG MAX, Python, HTML, CSS, Java, C, Developer" />
+    <meta name="author" content="GG MAX" />
+    <title>GG MAX | Urban Scene Template</title>
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+
+    <!-- Preload fonts -->
+    <link rel="preload" href="/assets/fonts/robotocode.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/assets/fonts/poppins.ttf" as="font" type="font/ttf" crossorigin>
+
+    <style>
+      /* Reset & Base */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      body {
+        font-family: 'poppinsfont', sans-serif;
+      }
+      @font-face {
+        font-family: 'poppinsfont';
+        src: url(/assets/fonts/poppins.ttf) format('truetype');
+        font-weight: 300;
+        font-display: swap;
+      }
+
+      /* --- Urban Theme: 背景 (background) --- */
+      /* ما از گرادیان متحرک همراه با ابر برای آسمان استفاده می‌کنیم */
+      @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      body {
+        background: linear-gradient(270deg, #708090, #6e7f80, #576b6a); /* سایه‌های ابری */
+        background-size: 600% 600%;
+        animation: gradientBG 20s ease infinite;
+        color: #eee;
+        overflow: hidden;
+      }
+      
+      /* --- Canvas styling --- */
+      canvas {
+        display: block;
+      }
+      
+      /* --- Header (دکمه‌های تغییر حالت و زبان) --- */
+      header.top {
+        position: relative;
+        z-index: 200; /* بالا بودن */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.5);
+      }
+      header.top h1 {
+        font-size: 1.5rem;
+        color: #ffc107;
+      }
+      .toggle-buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .toggle-buttons button {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        background: #6200ea;
+        color: #fff;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+      .toggle-buttons button:hover {
+        background: #3700b3;
+      }
+      
+      /* --- Navigation (به سبک ساده شهری) --- */
+      nav {
+        position: absolute;
+        top: 70px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 1rem;
+        z-index: 200;
+      }
+      .nav-links {
+        padding: 0.5rem 1rem;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
+        color: #fff;
+        text-decoration: none;
+        transition: background 0.3s ease;
+      }
+      .nav-links:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      
+      /* --- City Simulation Canvas Styling --- */
+      #cityCanvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 100;
+      }
+
+      /* --- Back to Top Button --- */
+      #back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 0.5rem;
+        border: none;
+        border-radius: 50%;
+        background: #ffc107;
+        color: #000;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s;
+        z-index: 200;
+      }
+      #back-to-top:hover {
+        background: #ffeb3b;
+        transform: scale(1.1);
+      }
+    </style>
+    
+    <!-- GSAP for Animations (Optional for text fade in, etc.) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  </head>
+<body data-theme="day" lang="fa">
+  <!-- Header Top: Title and Toggle Buttons -->
+  <header class="top">
+    <h1>GG MAX - Urban Scene</h1>
+    <div class="toggle-buttons">
+      <button onclick="toggleTheme()">حالت روز/شب</button>
+      <button onclick="toggleLanguage()">زبان</button>
+    </div>
+  </header>
   
-  <!-- Preload Fonts and CSS -->
-  <link rel="preload" href="/assets/fonts/robotocode.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="/assets/fonts/poppins.ttf" as="font" type="font/ttf" crossorigin>
-  <!-- اگر فایل css خارجی دارید آن را اینجا لینک کنید -->
-  <link rel="stylesheet" href="/assets/css/output.css" />
-
-  <style>
-    /* تنظیم اسکرول نرم */
-    html { scroll-behavior: smooth; }
-
-    /* پس‌زمینه گرادیان متحرک */
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    body {
-      background: linear-gradient(270deg, #0a0a20, #151540, #250829);
-      background-size: 600% 600%;
-      animation: gradientBG 15s ease infinite;
-      font-family: 'poppinsfont', system-ui, -apple-system, sans-serif;
-      color: #eee;
-      margin: 0;
-      overflow-x: hidden;
-      position: relative;
-      line-height: 1.6;
-      transition: background-color 0.5s ease, color 0.5s ease;
-    }
-    @font-face {
-      font-family: 'poppinsfont';
-      src: url(/assets/fonts/poppins.ttf) format('truetype');
-      font-weight: 300;
-      font-display: swap;
-    }
-    h1, h2, h3 { font-family: 'poppinsfont', sans-serif; margin: 0; }
-
-    /* حالت شب / روز – از طریق data-theme روی body */
-    :root {
-      --day-bg: #ffffff;
-      --day-text: #000000;
-      --night-bg: #121212;
-      --night-text: #ffffff;
-    }
-    [data-theme="day"] {
-      /* روز ممکن است تغییراتی داشته باشد؛ در اینجا رنگ پس‌زمینه اصلی همچنان حفظ شده */
-    }
-    [data-theme="night"] {
-      /* حالت شب – با همین رنگ‌ها قابل بروز رسانی قرار دهید. */
-      /* در این نمونه ما تنها ترجیحاً متن تغییر می‌کند */
-      color: var(--night-text);
-    }
-
-    /* ناوبری */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      padding: 1rem 2rem;
-      margin-bottom: 1rem;
-      backdrop-filter: blur(5px);
-      transition: padding 0.3s ease;
-    }
-    nav.shrink { padding: 0.5rem 2rem; }
-    .nav-links {
-      position: relative;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      transition: background 0.3s ease;
-      cursor: pointer;
-    }
-    .nav-links:hover {
-      background: rgba(255,255,255,0.1);
-    }
-    .nav-links::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #a855f7, #ec4899);
-      transition: width 0.3s ease;
-      transform: translateX(-50%);
-    }
-    .nav-links:hover::after { width: 80%; }
-
-    /* نوار مهارت‌ها */
-    .skill-bar {
-      height: 24px;
-      background: linear-gradient(90deg, #3b82f6 var(--percent), #1e293b var(--percent));
-      border-radius: 12px;
-      transition: transform 0.3s ease;
-    }
-    .skill-bar:hover { transform: scale(1.02); }
-
-    /* ستاره‌های پس‌زمینه */
-    @keyframes twinkle {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: #fff;
-      border-radius: 50%;
-      animation: twinkle 1.5s infinite;
-    }
-
-    /* کارت‌های شیشه‌ای */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 1rem;
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-    .glass-card:hover {
-      transform: translateY(-5px);
-      background: rgba(255, 255, 255, 0.15);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
-
-    /* دکمه‌ها */
-    .button {
-      background: #ec4899;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      color: #fff;
-      font-size: 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-    .button:hover { transform: scale(1.1); background: #a855f7; }
-
-    /* بخش نمونه کد (Code Snippet) */
-    #snippet-section { margin: 3rem 0; }
-    #snippet-section h2 { margin-bottom: 1rem; text-align: center; }
-    pre {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 1rem;
-      border-radius: 8px;
-      overflow-x: auto;
-      color: #90ee90;
-      font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-      position: relative;
-    }
-    pre::before {
-      content: "نمونه کد";
-      position: absolute;
-      top: -1.2rem;
-      left: 1rem;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      color: #fff;
-    }
-
-    /* دکمه بازگشت به بالا */
-    #back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: #ec4899;
-      border: none;
-      padding: 0.8rem;
-      border-radius: 50%;
-      color: #fff;
-      cursor: pointer;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s;
-      z-index: 100;
-    }
-    #back-to-top:hover { background: #a855f7; transform: scale(1.1); }
-
-    /* انیمیشن ورود صفحه */
-    .page-transition {
-      animation: fadeIn 0.5s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Responsive Styles */
-    @media (max-width: 768px) {
-      h1 { font-size: 2.5rem !important; }
-      h2 { font-size: 1.8rem !important; }
-      h3 { font-size: 1.5rem !important; }
-      .container { padding: 0.5rem !important; }
-      nav { padding: 0.75rem; margin: 0.5rem; }
-      .nav-links { padding: 0.375rem 0.75rem; font-size: 0.875rem; }
-      .skill-bar { height: 20px; }
-      .glass-card { padding: 15px; }
-      img[alt="GG MAX Profile"] { width: 120px !important; height: 120px !important; }
-    }
-    @media (max-width: 640px) {
-      .floating-orb { width: 20vw !important; height: 20vw !important; opacity: 0.15 !important; }
-      nav { padding: 0.5rem; margin: 0.25rem; }
-      .nav-links { font-size: 0.75rem; padding: 0.25rem 0.5rem; }
-    }
-    @media (max-width: 480px) {
-      h1 { font-size: 2rem !important; }
-      h2 { font-size: 1.5rem !important; }
-      .container { padding: 0.25rem !important; }
-      .skill-bar { height: 16px; }
-      nav { padding: 0.375rem; margin: 0.125rem; }
-    }
-  </style>
+  <!-- Navigation -->
+  <nav>
+    <a class="nav-links" href="#about">درباره من</a>
+    <a class="nav-links" href="#projects">پروژه‌ها</a>
+    <a class="nav-links" href="#contact">تماس</a>
+  </nav>
   
-  <!-- GSAP & ScrollTrigger -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Canvas for City Simulation -->
+  <canvas id="cityCanvas"></canvas>
   
-  <!-- Theme & Language Toggle Script -->
+  <!-- Back to Top Button -->
+  <button id="back-to-top" onclick="scrollToTop()">↑</button>
+  
+  <!-- Main Content (Overlay text, optional) -->
+  <div id="content" style="position: relative; z-index: 250; padding-top: 200px; text-align: center;">
+    <section id="about" style="margin-bottom: 2rem; color: #fff;">
+      <h2 style="font-size: 2rem;">درباره من</h2>
+      <p>سلام! من GG MAX هستم. من در زمینه‌ی برنامه‌نویسی به زبان‌های Python، HTML، CSS، Java و C تخصص دارم.</p>
+    </section>
+    <section id="projects" style="margin-bottom: 2rem; color: #fff;">
+      <h2 style="font-size: 2rem;">پروژه‌ها</h2>
+      <p>در حال حاضر چندین پروژه جذاب در این حوزه در حال اجراست.</p>
+    </section>
+    <section id="contact" style="margin-bottom: 2rem; color: #fff;">
+      <h2 style="font-size: 2rem;">تماس</h2>
+      <p>لطفاً از طریق شبکه‌های اجتماعی با من در ارتباط باشید!</p>
+    </section>
+  </div>
+  
   <script>
+    // Theme & Language Toggle
     function toggleTheme() {
       const body = document.body;
-      const currentTheme = body.getAttribute("data-theme");
-      body.setAttribute("data-theme", currentTheme === "day" ? "night" : "day");
+      const current = body.getAttribute("data-theme");
+      body.setAttribute("data-theme", current === "day" ? "night" : "day");
     }
     function toggleLanguage() {
       const html = document.documentElement;
@@ -249,234 +190,222 @@
       html.setAttribute("lang", newLang);
       alert("زبان به " + (newLang === "fa" ? "فارسی" : "انگلیسی") + " تغییر یافت!");
     }
-  </script>
-</head>
-<body data-theme="day" lang="fa">
-  <!-- Header Top: Theme and Language Toggle Buttons -->
-  <header style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid #ddd;">
-    <h1 style="margin:0;">GG MAX</h1>
-    <div>
-      <button onclick="toggleTheme()" style="padding: 0.5rem 1rem; margin-left:0.5rem;">تغییر حالت (روز/شب)</button>
-      <button onclick="toggleLanguage()" style="padding: 0.5rem 1rem; margin-left:0.5rem;">تغییر زبان</button>
-    </div>
-  </header>
-
-  <!-- Background Stars -->
-  <div id="stars" class="fixed inset-0 z-0" aria-hidden="true">
-    <div class="star" style="left: 20%; top: 15%; animation-delay: 1.2s;"></div>
-    <div class="star" style="left: 55%; top: 25%; animation-delay: 0.8s;"></div>
-    <div class="star" style="left: 15%; top: 50%; animation-delay: 1s;"></div>
-    <div class="star" style="left: 70%; top: 90%; animation-delay: 0.5s;"></div>
-    <!-- ستاره‌های بیشتر داینامیک اضافه خواهند شد -->
-  </div>
-  
-  <!-- Floating Orbs -->
-  <div class="floating-orb fixed top-20 right-10 w-28 h-28 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 opacity-25 blur-xl animate-[float_5s_ease-in-out_infinite]" aria-hidden="true"></div>
-  <div class="floating-orb fixed bottom-20 left-10 w-32 h-32 rounded-full bg-gradient-to-br from-blue-500 to-teal-500 opacity-15 blur-xl animate-[float_7s_ease-in-out_infinite]" aria-hidden="true"></div>
-  <div class="floating-orb fixed top-40 left-20 w-20 h-20 rounded-full bg-gradient-to-br from-yellow-500 to-red-500 opacity-20 blur-xl animate-[float_6s_ease-in-out_infinite]" aria-hidden="true"></div>
-  
-  <!-- Back to Top Button -->
-  <button id="back-to-top" onclick="scrollToTop()">↑</button>
-  
-  <!-- Main Content Container -->
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 page-transition">
-    <!-- Navigation -->
-    <header class="py-4">
-      <nav class="flex items-center justify-between backdrop-blur-md bg-white/5 rounded-xl p-3 sm:p-4 transition-all duration-300" role="navigation">
-        <a href="/" aria-label="صفحه اصلی" class="focus:outline-none focus:ring-2 focus:ring-purple-500">
-          <img src="/assets/ggmax-logo.png" alt="GG MAX Profile" width="40" height="40" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-purple-500 hover:border-pink-500 transition-colors" />
-        </a>
-        <div class="flex gap-2 sm:gap-4">
-          <a href="#about" class="nav-links text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 px-2 sm:px-3">درباره من</a>
-          <a href="#snippet-section" class="nav-links text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 px-2 sm:px-3">نمونه کد</a>
-          <a href="#contact" class="nav-links text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 px-2 sm:px-3">تماس</a>
-        </div>
-      </nav>
-    </header>
     
-    <!-- Main Header -->
-    <main class="max-w-4xl mx-auto px-4">
-      <header class="text-center mb-16">
-        <div class="relative inline-block">
-          <img src="/assets/ggmax-logo.png" alt="GG MAX Profile" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto mb-8 border-4 border-purple-500 hover:border-pink-500 transition-all duration-300 shadow-2xl" />
-          <div class="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 hover:opacity-30 transition-opacity duration-300"></div>
-        </div>
-        <h1 class="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text">GG MAX</h1>
-        <h2 class="text-2xl sm:text-3xl text-purple-300">Developer Specialized in Python, HTML, CSS, Java &amp; C Languages</h2>
-      </header>
-      
-      <!-- About Section -->
-      <section id="about" class="mb-16">
-        <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">درباره من</h2>
-        <div class="glass-card">
-          <p class="mb-4 text-center text-base sm:text-lg leading-relaxed">
-            سلام! من GG MAX هستم. تخصص من در برنامه‌نویسی‌های مرتبط با زبان‌های Python، HTML، CSS، جاوا و زبان‌های C می‌باشد. همواره به دنبال پروژه‌های نوآورانه و جذاب برای ارتقای تجربه‌ی دیجیتال هستم.
-          </p>
-        </div>
-      </section>
-      
-      <!-- Skills Section -->
-      <section class="mb-16">
-        <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-center">مهارت‌ها</h2>
-        <div class="space-y-6">
-          <div class="glass-card">
-            <div class="flex justify-between mb-3">
-              <span class="text-base sm:text-lg">پایتون</span>
-              <span class="text-purple-400">90%</span>
-            </div>
-            <div class="skill-bar" style="--percent: 90%"></div>
-          </div>
-          <div class="glass-card">
-            <div class="flex justify-between mb-3">
-              <span class="text-base sm:text-lg">HTML &amp; CSS</span>
-              <span class="text-purple-400">100%</span>
-            </div>
-            <div class="skill-bar" style="--percent: 100%"></div>
-          </div>
-          <div class="glass-card">
-            <div class="flex justify-between mb-3">
-              <span class="text-base sm:text-lg">جاوا</span>
-              <span class="text-purple-400">85%</span>
-            </div>
-            <div class="skill-bar" style="--percent: 85%"></div>
-          </div>
-          <div class="glass-card">
-            <div class="flex justify-between mb-3">
-              <span class="text-base sm:text-lg">زبان‌های C</span>
-              <span class="text-purple-400">90%</span>
-            </div>
-            <div class="skill-bar" style="--percent: 90%"></div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Bot Experience Section -->
-      <section class="mb-16">
-        <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-center">تجربه توسعه ربات</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-          <div class="glass-card text-center transform hover:scale-105 transition-all duration-300">
-            <h3 class="text-xl sm:text-2xl font-bold mb-6 text-purple-400">ربات‌های Discord</h3>
-            <ul class="list-none space-y-4">
-              <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات‌های مدیریت سرور</li>
-              <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات‌های موسیقی با کیفیت بالا</li>
-              <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">سیستم‌های سطح و رتبه</li>
-              <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات‌های اقتصادی و بازی</li>
-            </ul>
-          </div>
-          <div class="glass-card text-center transform hover:scale-105 transition-all duration-300">
-            <h3 class="text-xl sm:text-2xl font-bold mb-6 text-purple-400">ربات‌های کانال و گروه</h3>
-            <ul class="list-none space-y-4">
-              <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات‌های اطلاع‌رسانی</li>
-              <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">سیستم‌های پاسخگویی خودکار</li>
-              <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">مدیریت گروه و کانال</li>
-              <li class="hover:text-purple-400 transition-colors text-sm sm:text-base">ربات‌های سرگرمی و بازی</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Projects Section -->
-      <section class="mb-16">
-        <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-center">پروژه‌های من</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          <a href="https://example.com/project1" target="_blank" class="glass-card text-center p-6 transform hover:scale-105 transition-all duration-300">
-            <h3 class="text-xl font-bold mb-4 text-purple-400">Project Alpha</h3>
-            <p class="text-sm sm:text-base">یک پروژه نوآورانه برای توسعه فناوری‌های نوین.</p>
-          </a>
-          <a href="https://example.com/project2" target="_blank" class="glass-card text-center p-6 transform hover:scale-105 transition-all duration-300">
-            <h3 class="text-xl font-bold mb-4 text-purple-400">Project Beta</h3>
-            <p class="text-sm sm:text-base">ابزاری برای بهبود تجربه کاربری در وب و موبایل.</p>
-          </a>
-          <a href="https://example.com/project3" target="_blank" class="glass-card text-center p-6 transform hover:scale-105 transition-all duration-300">
-            <h3 class="text-xl font-bold mb-4 text-purple-400">Project Gamma</h3>
-            <p class="text-sm sm:text-base">راهکاری هوشمند برای اتوماسیون فرآیندهای تجاری.</p>
-          </a>
-          <a href="https://github.com/ggmax/innovative-project" target="_blank" class="glass-card text-center p-6 transform hover:scale-105 transition-all duration-300">
-            <h3 class="text-xl font-bold mb-4 text-purple-400">OpenSource Project</h3>
-            <p class="text-sm sm:text-base">یک پروژه منبع باز برای نوآوری در حوزه فناوری اطلاعات.</p>
-          </a>
-          <div class="glass-card text-center p-6">
-            <h3 class="text-xl font-bold mb-4 text-purple-400">بیشتر به زودی</h3>
-            <p class="text-sm sm:text-base">منتظر پروژه‌های جدید و هیجان‌انگیز باشید!</p>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Code Snippet Section -->
-      <section id="snippet-section" class="mb-16">
-        <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">نمونه کدهای الهام‌بخش</h2>
-        <div class="glass-card relative">
-          <pre id="snippet-container"></pre>
-          <button class="button absolute top-2 right-2" onclick="copySnippet()">کپی کد</button>
-        </div>
-      </section>
-      
-      <!-- Contact Section -->
-      <section id="contact" class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-center">تماس بگیرید</h2>
-        <div class="flex justify-center space-x-8">
-          <a href="https://t.me/ggmax" class="glass-card p-4 hover:text-purple-400 transition-all duration-300 flex items-center">
-            <img src="/assets/telegram.svg" alt="Telegram" class="w-7 h-7 invert opacity-90 transition duration-300 hover:opacity-100">
-          </a>
-          <a href="https://github.com/ggmax" class="glass-card p-4 hover:text-purple-400 transition-all duration-300 flex items-center">
-            <img src="/assets/github.svg" alt="GitHub" class="w-7 h-7 invert opacity-90 transition duration-300 hover:opacity-100">
-          </a>
-          <a href="https://discord.gg/ggmax" class="glass-card p-4 hover:text-purple-400 transition-all duration-300 flex items-center">
-            <img src="/assets/discord.svg" alt="Discord" class="w-7 h-7 invert opacity-90 transition duration-300 hover:opacity-100">
-          </a>
-          <a href="https://matrix.to/#/@ggmax:matrix.org" class="glass-card p-4 hover:text-purple-400 transition-all duration-300 flex items-center">
-            <img src="/assets/matrix.svg" alt="Matrix" class="w-7 h-7 opacity-90 transition duration-300 hover:opacity-100">
-          </a>
-        </div>
-      </section>
-    </main>
-    
-    <!-- Footer -->
-    <footer class="text-center mt-12 text-sm text-slate-400">
-      © 2024 GG MAX. تمامی حقوق محفوظ است.
-    </footer>
-  </div>
-  
-  <!-- Dynamic Stars Script -->
-  <script defer>
-    const starsContainer = document.getElementById("stars");
-    for (let i = 0; i < 150; i++) {
-      const star = document.createElement("div");
-      star.className = "star";
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.top = `${Math.random() * 100}%`;
-      star.style.animationDelay = `${Math.random() * 1.5}s`;
-      starsContainer.appendChild(star);
+    // Canvas Setup
+    const canvas = document.getElementById("cityCanvas");
+    const ctx = canvas.getContext("2d");
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
-  </script>
-  
-  <!-- GSAP & ScrollTrigger Animations -->
-  <script>
-    gsap.registerPlugin(ScrollTrigger);
-    window.addEventListener("load", () => {
-      gsap.from("header h1", { duration: 1, y: -50, opacity: 0, ease: "power3.out" });
-      gsap.from("header h2", { duration: 1, y: -30, opacity: 0, delay: 0.3, ease: "power3.out" });
-      gsap.from(".glass-card", { duration: 1, y: 30, opacity: 0, stagger: 0.2, ease: "power3.out" });
-      
-      // اجرای انیمیشن ورود برای المان‌ها هنگام اسکرول (بدون reverse شدن)
-      gsap.utils.toArray(".glass-card").forEach(card => {
-        gsap.from(card, {
-          scrollTrigger: {
-            trigger: card,
-            start: "top 80%",
-            toggleActions: "play none none none"
-          },
-          y: 50,
-          opacity: 0,
-          duration: 0.8
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    
+    // Objects for city scene:
+    let buildings = [];
+    let clouds = [];
+    let people = [];
+    let airplane = null;
+    let airplaneTimer = 0;
+    
+    // Initialize Buildings
+    function initBuildings() {
+      buildings = [];
+      let count = Math.ceil(canvas.width / 50);
+      for (let i = 0; i < count; i++) {
+        let w = 50 + Math.random() * 50;
+        let h = canvas.height * 0.3 + Math.random() * (canvas.height * 0.2);
+        buildings.push({ x: i * 60, width: w, height: h });
+      }
+    }
+    initBuildings();
+    
+    // Initialize Clouds
+    function initClouds() {
+      clouds = [];
+      let count = 5 + Math.floor(Math.random() * 5);
+      for (let i = 0; i < count; i++) {
+        clouds.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height * 0.3,
+          radius: 20 + Math.random() * 30,
+          speed: 0.1 + Math.random() * 0.3
         });
+      }
+    }
+    initClouds();
+    
+    // Initialize People
+    function initPeople() {
+      people = [];
+      let count = 10 + Math.floor(Math.random() * 5);
+      for (let i = 0; i < count; i++) {
+        people.push({
+          x: Math.random() * canvas.width,
+          y: canvas.height - (20 + Math.random() * 30),
+          speed: 0.5 + Math.random(),
+          talking: Math.random() < 0.3,
+          talkTimer: 0
+        });
+      }
+    }
+    initPeople();
+    
+    // Airplane: randomly spawn
+    function spawnAirplane() {
+      airplane = {
+        x: -100,
+        y: Math.random() * canvas.height * 0.3,
+        speed: 1.5 + Math.random() * 2
+      };
+    }
+    
+    // Draw functions:
+    function drawBuildings() {
+      ctx.fillStyle = "#2c3e50";
+      buildings.forEach(b => {
+        ctx.fillRect(b.x, canvas.height - b.height, b.width, b.height);
       });
+    }
+    function drawCloud(cloud) {
+      ctx.fillStyle = "rgba(255,255,255,0.8)";
+      ctx.beginPath();
+      ctx.arc(cloud.x, cloud.y, cloud.radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(cloud.x + cloud.radius * 0.6, cloud.y - 10, cloud.radius * 0.8, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(cloud.x - cloud.radius * 0.6, cloud.y - 10, cloud.radius * 0.8, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    function drawClouds() {
+      clouds.forEach(cloud => drawCloud(cloud));
+    }
+    function drawBuildingsAndStreet() {
+      drawBuildings();
+      // Optional: Draw a street line
+      ctx.strokeStyle = "#34495e";
+      ctx.beginPath();
+      ctx.moveTo(0, canvas.height - 2);
+      ctx.lineTo(canvas.width, canvas.height - 2);
+      ctx.stroke();
+    }
+    function drawPeople() {
+      people.forEach(p => {
+        // Draw person as a circle (head)
+        ctx.fillStyle = "#f1c40f";
+        ctx.beginPath();
+        ctx.arc(p.x, p.y - 10, 8, 0, Math.PI * 2);
+        ctx.fill();
+        // Draw body (simple line)
+        ctx.strokeStyle = "#ecf0f1";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y - 2);
+        ctx.lineTo(p.x, p.y + 10);
+        ctx.stroke();
+        // Draw speech bubble if talking
+        if (p.talking && p.talkTimer > 20) {
+          ctx.fillStyle = "rgba(255,255,255,0.8)";
+          ctx.beginPath();
+          if(ctx.roundRect) {
+            ctx.roundRect(p.x + 12, p.y - 40, 50, 20, 10);
+          } else {
+            ctx.rect(p.x + 12, p.y - 40, 50, 20);
+          }
+          ctx.fill();
+          ctx.fillStyle = "#000";
+          ctx.font = "12px Arial";
+          ctx.fillText("Salam!", p.x + 15, p.y - 25);
+        }
+        p.talkTimer++;
+        if(p.talkTimer > 120) {
+          p.talkTimer = 0;
+          p.talking = Math.random() < 0.3;
+        }
+      });
+    }
+    function drawAirplane() {
+      if(airplane) {
+        ctx.fillStyle = "#bdc3c7";
+        ctx.beginPath();
+        ctx.moveTo(airplane.x, airplane.y);
+        ctx.lineTo(airplane.x + 40, airplane.y + 10);
+        ctx.lineTo(airplane.x + 30, airplane.y + 20);
+        ctx.lineTo(airplane.x, airplane.y + 10);
+        ctx.closePath();
+        ctx.fill();
+      }
+    }
+    
+    // Update functions:
+    function update() {
+      // Update clouds
+      clouds.forEach(c => {
+        c.x += c.speed;
+        if(c.x - c.radius > canvas.width) {
+          c.x = -c.radius;
+          c.y = Math.random() * canvas.height * 0.3;
+        }
+      });
+      // Update people
+      people.forEach(p => {
+        p.x += p.speed;
+        if(p.x > canvas.width + 10) p.x = -10;
+      });
+      // Update airplane:
+      if(airplane) {
+        airplane.x += airplane.speed;
+        if(airplane.x > canvas.width + 100) {
+          airplane = null;
+          airplaneTimer = 0;
+        }
+      } else {
+        airplaneTimer++;
+        if(airplaneTimer > 600 && Math.random() < 0.5) {
+          spawnAirplane();
+          airplaneTimer = 0;
+        }
+      }
+    }
+    
+    // Draw scene
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawClouds();
+      drawBuildingsAndStreet();
+      drawPeople();
+      drawAirplane();
+    }
+    
+    // Animation loop
+    function animate() {
+      update();
+      draw();
+      requestAnimationFrame(animate);
+    }
+    animate();
+    
+    // Back to Top function
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    
+    // Dynamic Back to Top Button (Optional: show/hide based on scroll)
+    window.addEventListener("scroll", () => {
+      const btn = document.getElementById("back-to-top");
+      if (window.scrollY > 300) {
+        btn.style.opacity = "1";
+        btn.style.visibility = "visible";
+      } else {
+        btn.style.opacity = "0";
+        btn.style.visibility = "hidden";
+      }
     });
-  </script>
-  
-  <!-- Code Snippet Switching & Copy Functionality -->
-  <script>
-    const codeSnippets = [
+    
+    // Code snippet switching & copy functionality:
+    const snippets = [
 `<!DOCTYPE html>
 <html>
   <head>
@@ -490,7 +419,6 @@
 </html>`,
 `def greet(name):
     print(f"سلام, {name}!")
-    
 if __name__ == '__main__':
     greet("دنیا")`,
 `<div class="container">
@@ -500,40 +428,21 @@ if __name__ == '__main__':
     ];
     
     function showRandomSnippet() {
-      const snippetContainer = document.getElementById("snippet-container");
-      const randomSnippet = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
-      gsap.to(snippetContainer, { duration: 0.5, opacity: 0, ease: "power3.in", onComplete: () => {
-          snippetContainer.textContent = randomSnippet;
-          gsap.to(snippetContainer, { duration: 0.5, opacity: 1, ease: "power3.out" });
+      const pre = document.getElementById("snippet-container");
+      const random = snippets[Math.floor(Math.random() * snippets.length)];
+      gsap.to(pre, { duration: 0.5, opacity: 0, ease: "power3.in", onComplete: () => {
+          pre.textContent = random;
+          gsap.to(pre, { duration: 0.5, opacity: 1, ease: "power3.out" });
       }});
     }
-    
     function copySnippet() {
-      const snippetContainer = document.getElementById("snippet-container");
-      navigator.clipboard.writeText(snippetContainer.textContent)
+      const pre = document.getElementById("snippet-container");
+      navigator.clipboard.writeText(pre.textContent)
         .then(() => alert("کد با موفقیت کپی شد!"))
-        .catch(err => alert("مشکلی در کپی کردن کد پیش آمد."));
+        .catch(() => alert("مشکلی در کپی کردن کد پیش آمد."));
     }
-    
     showRandomSnippet();
     setInterval(showRandomSnippet, 10000);
-  </script>
-  
-  <!-- Back to Top Button Script -->
-  <script>
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-    window.addEventListener("scroll", () => {
-      const btn = document.getElementById("back-to-top");
-      if (window.scrollY > 300) {
-        btn.style.opacity = "1";
-        btn.style.visibility = "visible";
-      } else {
-        btn.style.opacity = "0";
-        btn.style.visibility = "hidden";
-      }
-    });
   </script>
 </body>
 </html>
