@@ -3,22 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Developer specializing in Python, HTML, CSS, Java &amp; C. Explore my urban resume and tools in a dynamic Matrix Rain background." />
-  <meta name="keywords" content="Python, HTML, CSS, Java, C, Resume, Developer, Urban, Matrix, Rain, Tools" />
+  <meta name="description" content="توسعه‌دهنده حرفه‌ای متخصص در Python, HTML, CSS, Java و C. سایت رزومه‌ای بسیار خفن با پس‌زمینه Matrix Rain." />
+  <meta name="keywords" content="GG MAX, Python, HTML, CSS, Java, C, رزومه, توسعه, Matrix Rain" />
   <meta name="author" content="GG MAX" />
   <title>Urban Resume</title>
   <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-  
   <!-- Preload fonts -->
   <link rel="preload" href="/assets/fonts/robotocode.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="/assets/fonts/poppins.ttf" as="font" type="font/ttf" crossorigin>
   
   <style>
-    /* Reset & Base Styles */
+    /* RESET & BASE */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { width: 100%; height: 100%; overflow: hidden; }
-    body { 
-      font-family: 'poppinsfont', sans-serif; 
+    body {
+      font-family: 'poppinsfont', sans-serif;
       transition: background 0.5s, color 0.5s;
     }
     @font-face {
@@ -27,8 +26,7 @@
       font-weight: 300;
       font-display: swap;
     }
-    
-    /* حالت روز – پس‌زمینه شهری ماتریکسی */
+    /* پس‌زمینه شهر: استفاده از گرادیان متحرک */
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -43,7 +41,7 @@
       overflow-x: hidden;
     }
     
-    /* Header Top: فقط شامل دکمه تغییر زبان */
+    /* HEADER */
     header.top {
       position: fixed;
       top: 0;
@@ -56,10 +54,7 @@
       padding: 1rem;
       background: rgba(0,0,0,0.7);
     }
-    .toggle-btns {
-      display: flex;
-      gap: 1rem;
-    }
+    .toggle-btns { display: flex; gap: 1rem; }
     .toggle-btns button {
       padding: 0.5rem 1rem;
       border: none;
@@ -71,7 +66,7 @@
     }
     .toggle-btns button:hover { background: #3700b3; }
     
-    /* Navigation: منوی مرکزی */
+    /* NAVIGATION */
     nav.main-nav {
       position: fixed;
       top: 70px;
@@ -91,7 +86,7 @@
     }
     nav.main-nav a:hover { background: rgba(255,255,255,0.2); }
     
-    /* Canvas for Matrix Rain Background */
+    /* CANVAS: Matrix Rain Background */
     canvas#cityCanvas {
       position: fixed;
       top: 0;
@@ -100,7 +95,7 @@
       display: block;
     }
     
-    /* Overlay Sections: Resume, Tools, and Contact */
+    /* OVERLAY SECTIONS */
     section.overlay {
       position: fixed;
       left: 50%;
@@ -114,11 +109,8 @@
       overflow-y: auto;
       max-height: 70vh;
     }
-    /* بخش رزومه در بالای صفحه */
     #resume { top: 140px; }
-    /* بخش ابزارها (Capabilities) در وسط صفحه */
-    #capabilities { top: 240px; }
-    /* بخش تماس در پایین صفحه */
+    #tools { top: 240px; }  /* بخش ابزارها */
     #contact { bottom: 40px; top: unset; }
     section.overlay h2 {
       font-size: 2rem;
@@ -132,7 +124,7 @@
       line-height: 1.8;
     }
     
-    /* تگ‌لاین (Tagline) با افکت تایپ‌رایت */
+    /* تگ‌لاین – افکت تایپ‌رایت */
     #tagline {
       text-align: center;
       font-size: 1.5rem;
@@ -141,7 +133,7 @@
       min-height: 30px;
     }
     
-    /* Back to Top Button */
+    /* BACK TO TOP */
     #back-to-top {
       position: fixed;
       bottom: 20px;
@@ -163,7 +155,7 @@
     }
   </style>
   
-  <!-- GSAP Library -->
+  <!-- GSAP Library for UI Animations -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body data-theme="day" lang="fa">
@@ -177,7 +169,7 @@
   <!-- Navigation -->
   <nav class="main-nav">
     <a id="nav-resume" href="#resume">رزومه</a>
-    <a id="nav-capabilities" href="#capabilities">ابزارها</a>
+    <a id="nav-tools" href="#tools">ابزارها</a>
     <a id="nav-contact" href="#contact">تماس</a>
   </nav>
   
@@ -208,11 +200,11 @@
     </div>
   </section>
   
-  <!-- Capabilities (Tools) Overlay -->
-  <section class="overlay" id="capabilities">
-    <h2 id="capabilitiesHeading">ابزارهای من</h2>
-    <div class="content" id="capabilitiesContent">
-      <p>در اینجا ابزارهایی برای راحتی شما قرار گرفته است:</p>
+  <!-- Tools (Capabilities) Overlay -->
+  <section class="overlay" id="tools">
+    <h2 id="toolsHeading">ابزارهای من</h2>
+    <div class="content" id="toolsContent">
+      <p>اینجا ابزارهایی برای راحتی شما ارائه شده است:</p>
       <ul>
         <li><button onclick="alert('ترجمه گر فعال است!')">ترجمه گر</button></li>
         <li><button onclick="alert('ماشین حساب فعال است!')">ماشین حساب</button></li>
@@ -239,12 +231,12 @@
   <button id="back-to-top" onclick="scrollToTop()">↑</button>
   
   <script>
-    // دیکشنری متون برای دو زبان فارسی و انگلیسی
+    /* دیکشنری متون برای فارسی و انگلیسی */
     const langData = {
       fa: {
         nav: {
           resume: "رزومه",
-          capabilities: "ابزارها",
+          tools: "ابزارها",
           contact: "تماس"
         },
         resumeOverlay: {
@@ -269,7 +261,7 @@
         },
         capabilitiesOverlay: {
           title: "ابزارهای من",
-          content: `<p>در اینجا ابزارهایی برای راحتی شما قرار گرفته است:</p>
+          content: `<p>اینجا ابزارهایی برای راحتی شما ارائه شده است:</p>
                     <ul>
                       <li><button onclick='alert("ترجمه گر فعال است!")'>ترجمه گر</button></li>
                       <li><button onclick='alert("ماشین حساب فعال است!")'>ماشین حساب</button></li>
@@ -290,7 +282,7 @@
       en: {
         nav: {
           resume: "Resume",
-          capabilities: "Tools",
+          tools: "Tools",
           contact: "Contact"
         },
         resumeOverlay: {
@@ -300,9 +292,9 @@
                     <p>A professional developer specialized in Python, HTML, CSS, Java, and C.</p>
                     <h3>Work Experience</h3>
                     <ul>
-                      <li>Designing and developing modern and advanced websites</li>
+                      <li>Design and development of modern, advanced websites</li>
                       <li>Creating intelligent bots to improve system efficiency</li>
-                      <li>Collaborating in open-source projects and development teams</li>
+                      <li>Collaboration in open-source projects and development teams</li>
                     </ul>
                     <h3>Skills</h3>
                     <ul>
@@ -335,24 +327,20 @@
       }
     };
     
-    // تابع بروزرسانی متن‌ها بر اساس زبان انتخابی
+    // تابع بروزرسانی زبان در DOM
     function updateLanguage(newLang) {
-      // بروزرسانی ناوبری
       document.getElementById("nav-resume").innerText = langData[newLang].nav.resume;
-      document.getElementById("nav-capabilities").innerText = langData[newLang].nav.capabilities;
+      document.getElementById("nav-tools").innerText = langData[newLang].nav.tools;
       document.getElementById("nav-contact").innerText = langData[newLang].nav.contact;
       
-      // بروزرسانی بخش رزومه
       document.getElementById("resumeHeading").innerText = langData[newLang].resumeOverlay.title;
       document.getElementById("tagline").innerHTML = "";
       typeWriter(langData[newLang].resumeOverlay.tagline, "tagline", 0);
       document.getElementById("resumeContent").innerHTML = langData[newLang].resumeOverlay.content;
       
-      // بروزرسانی بخش ابزارها
-      document.getElementById("capabilitiesHeading").innerText = langData[newLang].capabilitiesOverlay.title;
-      document.getElementById("capabilitiesContent").innerHTML = langData[newLang].capabilitiesOverlay.content;
+      document.getElementById("toolsHeading").innerText = langData[newLang].capabilitiesOverlay.title;
+      document.getElementById("toolsContent").innerHTML = langData[newLang].capabilitiesOverlay.content;
       
-      // بروزرسانی بخش تماس
       document.getElementById("contactHeading").innerText = langData[newLang].contactOverlay.title;
       document.getElementById("contactContent").innerHTML = langData[newLang].contactOverlay.content;
     }
@@ -368,19 +356,19 @@
     // افکت تایپ‌رایت برای تگ‌لاین
     function typeWriter(text, elementId, i) {
       const element = document.getElementById(elementId);
-      if (i < text.length) {
+      if(i < text.length) {
         element.innerHTML += text.charAt(i);
         setTimeout(() => typeWriter(text, elementId, i + 1), 100);
       }
     }
     
-    // Back to Top Button
+    // Back to Top
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
     window.addEventListener("scroll", () => {
       const btn = document.getElementById("back-to-top");
-      if (window.scrollY > 300) {
+      if(window.scrollY > 300) {
         btn.style.opacity = "1";
         btn.style.visibility = "visible";
       } else {
@@ -395,9 +383,8 @@
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      // محاسبه دوباره تعداد ستون‌ها
       columns = Math.floor(canvas.width / fontSize);
-      for (let i = 0; i < columns; i++) {
+      for(let i = 0; i < columns; i++){
         drops[i] = 1;
       }
     }
@@ -409,7 +396,7 @@
     const fontSize = 16;
     let columns = Math.floor(canvas.width / fontSize);
     const drops = [];
-    for (let i = 0; i < columns; i++) {
+    for(let i = 0; i < columns; i++){
       drops[i] = 1;
     }
     
@@ -417,27 +404,26 @@
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.font = fontSize + "px monospace";
-      for (let i = 0; i < drops.length; i++) {
+      for(let i = 0; i < drops.length; i++){
         const ch = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
         ctx.fillStyle = Math.random() < 0.2 ? "#F00" : "#0F0";
         ctx.fillText(ch, i * fontSize, drops[i] * fontSize);
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975){
           drops[i] = 0;
         }
         drops[i]++;
       }
     }
     
-    // Lightning effect (به عنوان افکت اضافی برای رعد و برق)
     let lightningTimer = 0;
     function updateLightning() {
-      if (Math.random() < 0.005) {
+      if(Math.random() < 0.005) {
         lightningTimer = 5;
       }
-      if (lightningTimer > 0) lightningTimer--;
+      if(lightningTimer > 0) lightningTimer--;
     }
     function drawLightning() {
-      if (lightningTimer > 0) {
+      if(lightningTimer > 0) {
         ctx.fillStyle = "rgba(255,255,255," + (lightningTimer/5) + ")";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       }
@@ -455,23 +441,23 @@
     }
     animate();
     
-    // GSAP Animations for UI Elements
+    // GSAP Animations for UI
     window.addEventListener("load", () => {
       gsap.from("header.top", { duration: 1, y: -20, opacity: 0, ease: "power3.out" });
       gsap.from("nav.main-nav a", { duration: 1, y: -20, opacity: 0, stagger: 0.2, ease: "power3.out" });
-      // تنظیم زبان پیش‌فرض
+      // تنظیم زبان پیش‌فرض به فارسی
       updateLanguage("fa");
     });
   </script>
   
-  <!-- Back to Top Button Script -->
+  <!-- Back to Top Button Script (تکرار برای اطمینان) -->
   <script>
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
     window.addEventListener("scroll", () => {
       const btn = document.getElementById("back-to-top");
-      if (window.scrollY > 300) {
+      if(window.scrollY > 300) {
         btn.style.opacity = "1";
         btn.style.visibility = "visible";
       } else {
