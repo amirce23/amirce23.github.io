@@ -1,438 +1,126 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="توسعه‌دهنده حرفه‌ای متخصص در Python, HTML, CSS, Java و C.">
-  <meta name="keywords" content="رزومه, توسعه‌دهنده, Matrix Rain, Resume, Developer">
-  <meta name="author" content="GG MAX">
-  <title>Epic Resume</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  
-  <!-- Preload fonts -->
-  <link rel="preload" href="poppins.ttf" as="font" type="font/ttf" crossorigin>
-
+  <title>Amirhossein Behdaad | Programmer Resume</title>
   <style>
-    /* RESET & BASE */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { width: 100%; height: 100%; overflow: hidden; }
     body {
-      font-family: 'poppins', sans-serif;
-      transition: background 0.5s, color 0.5s;
-      background: linear-gradient(270deg, #708090, #6e7f80, #576b6a);
-      background-size: 600% 600%;
-      animation: gradientBG 20s ease infinite;
-      position: relative;
-      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', Courier, monospace;
+      background: black;
+      color: #00ff00;
       overflow-x: hidden;
+      animation: glow 2s ease-in-out infinite alternate;
     }
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #00ff00; }
+      to { text-shadow: 0 0 20px #00ff00, 0 0 30px #0f0; }
     }
-    
-    /* HEADER */
-    header.top {
+
+    .matrix {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 300;
-      display: flex;
-      justify-content: flex-end;
-      padding: 1rem;
-      background: rgba(0,0,0,0.7);
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      overflow: hidden;
+      z-index: -1;
     }
-    .toggle-btns { display: flex; gap: 1rem; }
-    .toggle-btns button {
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 5px;
-      background: #6200ea;
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .toggle-btns button:hover { background: #3700b3; }
-    
-    /* NAVIGATION */
-    nav.main-nav {
-      position: fixed;
-      top: 70px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 300;
-      display: flex;
-      gap: 1rem;
-    }
-    nav.main-nav a {
-      padding: 0.5rem 1rem;
-      background: rgba(0,0,0,0.65);
-      border-radius: 5px;
-      text-decoration: none;
-      color: #fff;
-      transition: background 0.3s;
-    }
-    nav.main-nav a:hover { background: rgba(255,255,255,0.2); }
-    
-    /* CANVAS for Matrix Rain Background */
-    canvas#cityCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 10;
+
+    canvas {
       display: block;
     }
-    
-    /* OVERLAYS */
-    section.overlay {
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      max-width: 800px;
-      background: rgba(0,0,0,0.7);
-      padding: 2rem;
-      border-radius: 10px;
-      z-index: 350;
-      overflow-y: auto;
-      max-height: 70vh;
+
+    .content {
+      padding: 60px;
     }
-    #resume { top: 140px; }
-    #tools { top: 240px; }
-    #contact { bottom: 40px; top: unset; }
-    section.overlay h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      text-align: center;
-      color: #ffc107;
+
+    h1 {
+      font-size: 2.5em;
+      color: #00ff00;
     }
-    section.overlay .content {
-      font-size: 1.1rem;
-      color: #fff;
-      line-height: 1.8;
+
+    h2 {
+      color: #00ff00;
+      margin-top: 30px;
     }
-    
-    /* Tagline with typewriter effect */
-    #tagline {
-      text-align: center;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: #fff;
-      min-height: 30px;
+
+    ul {
+      list-style-type: none;
+      padding-left: 10px;
     }
-    
-    /* BACK TO TOP */
-    #back-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      padding: 0.5rem;
-      border: none;
-      border-radius: 50%;
-      background: #ffc107;
-      color: #000;
-      cursor: pointer;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s, visibility 0.3s;
-      z-index: 300;
-    }
-    #back-to-top:hover {
-      background: #ffeb3b;
-      transform: scale(1.1);
+
+    li::before {
+      content: "\2726";
+      color: #0f0;
+      padding-right: 10px;
     }
   </style>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
-<body data-theme="day" lang="fa">
-  <!-- Header -->
-  <header class="top">
-    <div class="toggle-btns">
-      <button onclick="toggleLanguage()">تغییر زبان</button>
-    </div>
-  </header>
-  
-  <!-- Navigation -->
-  <nav class="main-nav">
-    <a id="nav-resume" href="#resume">رزومه</a>
-    <a id="nav-tools" href="#tools">ابزارها</a>
-    <a id="nav-contact" href="#contact">تماس</a>
-  </nav>
-  
-  <!-- Canvas Background (Matrix Rain) -->
-  <canvas id="cityCanvas"></canvas>
-  
-  <!-- Resume Overlay -->
-  <section class="overlay" id="resume">
-    <h2 id="resumeHeading">رزومه من</h2>
-    <div id="tagline"></div>
-    <div class="content" id="resumeContent">
-      <p><strong>GG MAX</strong></p>
-      <p>توسعه‌دهنده حرفه‌ای متخصص در Python, HTML, CSS, Java و C.</p>
-      <h3>تجربه کاری</h3>
-      <ul>
-        <li>طراحی و توسعه وب‌سایت‌های مدرن</li>
-        <li>ساخت ربات‌های هوشمند</li>
-        <li>همکاری در پروژه‌های منبع باز</li>
-      </ul>
-      <h3>مهارت‌ها</h3>
-      <ul>
-        <li>Python</li>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>Java</li>
-        <li>C</li>
-      </ul>
-    </div>
-  </section>
-  
-  <!-- Tools Overlay -->
-  <section class="overlay" id="tools">
-    <h2 id="toolsHeading">ابزارهای من</h2>
-    <div class="content" id="toolsContent">
-      <p>ابزارهایی برای آسان‌تر کردن کار شما:</p>
-      <ul>
-        <li><button onclick="alert('ترجمه گر فعال است!')">ترجمه گر</button></li>
-        <li><button onclick="alert('ماشین حساب فعال است!')">ماشین حساب</button></li>
-        <li><button onclick="alert('تقویم فعال است!')">تقویم</button></li>
-      </ul>
-    </div>
-  </section>
-  
-  <!-- Contact Overlay -->
-  <section class="overlay" id="contact">
-    <h2 id="contactHeading">تماس با من</h2>
-    <div class="content" id="contactContent">
-      <p>ایمیل: <a href="mailto:ggmax@example.com" style="color:#ffc107;">ggmax@example.com</a></p>
-      <p>شبکه‌های اجتماعی:</p>
-      <ul>
-        <li>تلگرام: <a href="https://t.me/ggmax" target="_blank" style="color:#ffc107;">t.me/ggmax</a></li>
-        <li>گیت‌هاب: <a href="https://github.com/ggmax" target="_blank" style="color:#ffc107;">github.com/ggmax</a></li>
-        <li>دیسکورد: <a href="https://discord.gg/ggmax" target="_blank" style="color:#ffc107;">discord.gg/ggmax</a></li>
-      </ul>
-    </div>
-  </section>
-  
-  <!-- Back to Top Button -->
-  <button id="back-to-top" onclick="scrollToTop()">↑</button>
-  
-  <script>
-    // Language data dictionary
-    const langData = {
-      fa: {
-        nav: { resume: "رزومه", tools: "ابزارها", contact: "تماس" },
-        resumeOverlay: {
-          title: "رزومه من",
-          tagline: "به رزومه من خوش آمدید",
-          content: `<p><strong>GG MAX</strong></p>
-                    <p>توسعه‌دهنده حرفه‌ای متخصص در Python, HTML, CSS, Java و C.</p>
-                    <h3>تجربه کاری</h3>
-                    <ul>
-                      <li>طراحی وب‌سایت‌های مدرن</li>
-                      <li>ساخت ربات‌های هوشمند</li>
-                      <li>همکاری در پروژه‌های منبع باز</li>
-                    </ul>
-                    <h3>مهارت‌ها</h3>
-                    <ul>
-                      <li>Python</li>
-                      <li>HTML</li>
-                      <li>CSS</li>
-                      <li>Java</li>
-                      <li>C</li>
-                    </ul>`
-        },
-        capabilitiesOverlay: {
-          title: "ابزارهای من",
-          content: `<p>ابزارهایی برای آسان‌تر کردن کار شما:</p>
-                    <ul>
-                      <li><button onclick='alert("ترجمه گر فعال است!")'>ترجمه گر</button></li>
-                      <li><button onclick='alert("ماشین حساب فعال است!")'>ماشین حساب</button></li>
-                      <li><button onclick='alert("تقویم فعال است!")'>تقویم</button></li>
-                    </ul>`
-        },
-        contactOverlay: {
-          title: "تماس با من",
-          content: `<p>ایمیل: <a href="mailto:ggmax@example.com" style="color:#ffc107;">ggmax@example.com</a></p>
-                    <p>شبکه‌های اجتماعی:</p>
-                    <ul>
-                      <li>تلگرام: <a href="https://t.me/ggmax" target="_blank" style="color:#ffc107;">t.me/ggmax</a></li>
-                      <li>گیت‌هاب: <a href="https://github.com/ggmax" target="_blank" style="color:#ffc107;">github.com/ggmax</a></li>
-                      <li>دیسکورد: <a href="https://discord.gg/ggmax" target="_blank" style="color:#ffc107;">discord.gg/ggmax</a></li>
-                    </ul>`
-        }
-      },
-      en: {
-        nav: { resume: "Resume", tools: "Tools", contact: "Contact" },
-        resumeOverlay: {
-          title: "My Resume",
-          tagline: "Welcome to my Resume",
-          content: `<p><strong>GG MAX</strong></p>
-                    <p>A professional developer specialized in Python, HTML, CSS, Java, and C.</p>
-                    <h3>Work Experience</h3>
-                    <ul>
-                      <li>Designing modern websites</li>
-                      <li>Creating intelligent bots</li>
-                      <li>Collaborating in open-source projects</li>
-                    </ul>
-                    <h3>Skills</h3>
-                    <ul>
-                      <li>Python</li>
-                      <li>HTML</li>
-                      <li>CSS</li>
-                      <li>Java</li>
-                      <li>C</li>
-                    </ul>`
-        },
-        capabilitiesOverlay: {
-          title: "My Tools",
-          content: `<p>Here are some useful tools for you:</p>
-                    <ul>
-                      <li><button onclick='alert("Translator is active!")'>Translator</button></li>
-                      <li><button onclick='alert("Calculator is active!")'>Calculator</button></li>
-                      <li><button onclick='alert("Calendar is active!")'>Calendar</button></li>
-                    </ul>`
-        },
-        contactOverlay: {
-          title: "Contact Me",
-          content: `<p>Email: <a href="mailto:ggmax@example.com" style="color:#ffc107;">ggmax@example.com</a></p>
-                    <p>Social Networks:</p>
-                    <ul>
-                      <li>Telegram: <a href="https://t.me/ggmax" target="_blank" style="color:#ffc107;">t.me/ggmax</a></li>
-                      <li>GitHub: <a href="https://github.com/ggmax" target="_blank" style="color:#ffc107;">github.com/ggmax</a></li>
-                      <li>Discord: <a href="https://discord.gg/ggmax" target="_blank" style="color:#ffc107;">discord.gg/ggmax</a></li>
-                    </ul>`
-        }
-      }
-    };
+<body>
+  <div class="matrix">
+    <canvas id="matrixCanvas"></canvas>
+  </div>
 
-    function updateLanguage(newLang) {
-      document.getElementById("nav-resume").innerText = langData[newLang].nav.resume;
-      document.getElementById("nav-tools").innerText = langData[newLang].nav.tools;
-      document.getElementById("nav-contact").innerText = langData[newLang].nav.contact;
-      document.getElementById("resumeHeading").innerText = langData[newLang].resumeOverlay.title;
-      document.getElementById("tagline").innerHTML = "";
-      typeWriter(langData[newLang].resumeOverlay.tagline, "tagline", 0);
-      document.getElementById("resumeContent").innerHTML = langData[newLang].resumeOverlay.content;
-      document.getElementById("toolsHeading").innerText = langData[newLang].capabilitiesOverlay.title;
-      document.getElementById("toolsContent").innerHTML = langData[newLang].capabilitiesOverlay.content;
-      document.getElementById("contactHeading").innerText = langData[newLang].contactOverlay.title;
-      document.getElementById("contactContent").innerHTML = langData[newLang].contactOverlay.content;
-    }
-    
-    function toggleLanguage() {
-      const html = document.documentElement;
-      const current = html.getAttribute("lang") || "fa";
-      const newLang = current === "fa" ? "en" : "fa";
-      html.setAttribute("lang", newLang);
-      updateLanguage(newLang);
-    }
-    
-    function typeWriter(text, elementId, i) {
-      const el = document.getElementById(elementId);
-      if(i < text.length) {
-        el.innerHTML += text.charAt(i);
-        setTimeout(() => typeWriter(text, elementId, i + 1), 100);
-      }
-    }
-    
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-    window.addEventListener("scroll", () => {
-      const btn = document.getElementById("back-to-top");
-      if(window.scrollY > 300){
-        btn.style.opacity = "1";
-        btn.style.visibility = "visible";
-      } else {
-        btn.style.opacity = "0";
-        btn.style.visibility = "hidden";
-      }
-    });
-    
-    const canvas = document.getElementById("cityCanvas");
+  <div class="content">
+    <h1>Amirhossein Behdad</h1>
+    <h2>👨‍💻 Full-Stack Developer | Pythonista | Code Magician</h2>
+
+    <h2>💻 Languages & Technologies</h2>
+    <ul>
+      <li>HTML, CSS, JavaScript</li>
+      <li>Python (Flask, Django)</li>
+      <li>C / C++</li>
+      <li>JavaScript (React, Node.js)</li>
+      <li>Git & GitHub</li>
+    </ul>
+
+    <h2>🎯 Projects</h2>
+    <ul>
+      <li>Custom Blog with Flask and SQLite</li>
+      <li>Matrix-Themed Portfolio Website</li>
+      <li>Command-line Password Manager in Python</li>
+    </ul>
+
+    <h2>🌐 Contact</h2>
+    <ul>
+      <li>Email: amirhossein@example.com</li>
+      <li>GitHub: github.com/amirhosseinbehdad</li>
+      <li>Instagram / Aparat: @amirhossein.codes</li>
+    </ul>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("matrixCanvas");
     const ctx = canvas.getContext("2d");
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      columns = Math.floor(canvas.width / fontSize);
-      for(let i = 0; i < columns; i++){
-        drops[i] = 1;
-      }
-    }
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
-    
-    const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()";
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const matrixChars = "アミルホセイン0123456789Behdad".split("");
     const fontSize = 16;
-    let columns = Math.floor(canvas.width / fontSize);
-    const drops = [];
-    for(let i = 0; i < columns; i++){
-      drops[i] = 1;
-    }
-    
+    const columns = canvas.width / fontSize;
+    const drops = new Array(Math.floor(columns)).fill(1);
+
     function drawMatrix() {
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#0f0";
       ctx.font = fontSize + "px monospace";
-      for(let i = 0; i < drops.length; i++){
-        const ch = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
-        ctx.fillStyle = Math.random() < 0.2 ? "#F00" : "#0F0";
-        ctx.fillText(ch, i * fontSize, drops[i] * fontSize);
-        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975){
+      for (let i = 0; i < drops.length; i++) {
+        const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height || Math.random() > 0.975) {
           drops[i] = 0;
         }
         drops[i]++;
       }
     }
-    
-    let lightningTimer = 0;
-    function updateLightning() {
-      if(Math.random() < 0.005) { lightningTimer = 5; }
-      if(lightningTimer > 0) lightningTimer--;
-    }
-    function drawLightning() {
-      if(lightningTimer > 0) {
-        ctx.fillStyle = "rgba(255,255,255," + (lightningTimer/5) + ")";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      }
-    }
-    
-    function drawScene() {
-      drawMatrix();
-      updateLightning();
-      drawLightning();
-    }
-    
-    function animate() {
-      drawScene();
-      requestAnimationFrame(animate);
-    }
-    animate();
-    
-    window.addEventListener("load", () => {
-      gsap.from("header.top", { duration: 1, y: -20, opacity: 0, ease: "power3.out" });
-      gsap.from("nav.main-nav a", { duration: 1, y: -20, opacity: 0, stagger: 0.2, ease: "power3.out" });
-      updateLanguage("fa");
-    });
-  </script>
-  
-  <script>
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-    window.addEventListener("scroll", () => {
-      const btn = document.getElementById("back-to-top");
-      if(window.scrollY > 300) {
-        btn.style.opacity = "1";
-        btn.style.visibility = "visible";
-      } else {
-        btn.style.opacity = "0";
-        btn.style.visibility = "hidden";
-      }
-    });
+
+    setInterval(drawMatrix, 33);
   </script>
 </body>
 </html>
