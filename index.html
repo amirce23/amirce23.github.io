@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ggmax11 - Cyber Coder Resume</title>
+  <title>GGMAX11 - Cyber Coder Resume</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
     * {
@@ -79,6 +79,19 @@
       height: 100%;
       background: linear-gradient(to right, #00fff7, #0084ff);
     }
+    .lang-switch {
+      text-align: right;
+      margin-bottom: 1rem;
+    }
+    .lang-switch button {
+      background: #00fff7;
+      border: none;
+      padding: 0.5rem 1rem;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
@@ -86,12 +99,22 @@
     <canvas id="matrix"></canvas>
   </div>
   <div class="container">
-    <div class="title">ggmax11</div>
-    <div class="section">
+    <div class="lang-switch">
+      <button onclick="toggleLanguage()">تغییر زبان / Switch Language</button>
+    </div>
+    <div class="title">GGMAX11</div>
+    <div class="section" data-en>
       <h2>👨‍💻 About Me</h2>
       <p>
-        I'm ggmax11, a code lover who dives deep into the matrix. Skilled in Python, HTML, C, JavaScript, and more.
-        I mix logic with design to craft immersive digital stuff. Always leveling up.
+        I'm GGMAX11, a code lover who dives deep into the matrix. Skilled in Python, HTML, C, JavaScript, and more.
+        I mix logic with design to craft immersive digital experiences. Always leveling up.
+      </p>
+    </div>
+    <div class="section" data-fa style="display:none">
+      <h2>👨‍💻 درباره من</h2>
+      <p>
+        من GGMAX11 هستم، عاشق کدنویسی که در دنیای ماتریکس غرق شده‌ام. مسلط به Python، HTML، C، JavaScript و بیشتر.
+        ترکیبی از منطق و طراحی برای ساخت تجربه‌های دیجیتال. همیشه در حال پیشرفت.
       </p>
     </div>
 
@@ -132,7 +155,10 @@ greet();</code></pre>
 
     <div class="section">
       <h2>📞 Contact</h2>
-      <p>Email: amyrbhdad23@gmail.com<br>GitHub: <a href="https://github.com/amirce23" target="_blank">amirce23</a></p>
+      <p>Email: amyrbhdad23@gmail.com<br>
+      GitHub: <a href="https://github.com/amirce23" target="_blank">amirce23</a><br>
+      Aparat: <a href="https://bmbgk.ir/?q=https://www.aparat.com/GGmax" target="_blank">کانال گیم GGmax</a>
+      </p>
     </div>
   </div>
 
@@ -169,6 +195,13 @@ greet();</code></pre>
       const snippet = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
       randomCodeEl.textContent = snippet;
     }, 5000);
+
+    function toggleLanguage() {
+      const enSections = document.querySelectorAll('[data-en]');
+      const faSections = document.querySelectorAll('[data-fa]');
+      enSections.forEach(el => el.style.display = el.style.display === 'none' ? 'block' : 'none');
+      faSections.forEach(el => el.style.display = el.style.display === 'none' ? 'block' : 'none');
+    }
   </script>
 </body>
 </html>
