@@ -103,6 +103,7 @@
       <button onclick="toggleLanguage()">تغییر زبان / Switch Language</button>
     </div>
     <div class="title">GGMAX11</div>
+
     <div class="section" data-en>
       <h2>👨‍💻 About Me</h2>
       <p>
@@ -118,7 +119,7 @@
       </p>
     </div>
 
-    <div class="section">
+    <div class="section" data-en>
       <h2>💡 Skills</h2>
       <div class="skills">
         <div class="skill-box">
@@ -144,8 +145,35 @@
       </div>
     </div>
 
+    <div class="section" data-fa style="display:none">
+      <h2>💡 مهارت‌ها</h2>
+      <div class="skills">
+        <div class="skill-box">
+          <div class="skill-title">HTML</div>
+          <div class="chart-bar"><div class="bar-fill" style="width: 95%"></div></div>
+        </div>
+        <div class="skill-box">
+          <div class="skill-title">CSS</div>
+          <div class="chart-bar"><div class="bar-fill" style="width: 90%"></div></div>
+        </div>
+        <div class="skill-box">
+          <div class="skill-title">JavaScript</div>
+          <div class="chart-bar"><div class="bar-fill" style="width: 85%"></div></div>
+        </div>
+        <div class="skill-box">
+          <div class="skill-title">Python</div>
+          <div class="chart-bar"><div class="bar-fill" style="width: 92%"></div></div>
+        </div>
+        <div class="skill-box">
+          <div class="skill-title">C</div>
+          <div class="chart-bar"><div class="bar-fill" style="width: 80%"></div></div>
+        </div>
+      </div>
+    </div>
+
     <div class="section">
-      <h2>🌐 Random Code Language</h2>
+      <h2 data-en>🌐 Random Code Language</h2>
+      <h2 data-fa style="display:none">🌐 زبان‌ کد تصادفی</h2>
       <pre><code id="random-code">// JavaScript Example:
 function greet() {
   console.log("Hello, world!");
@@ -154,11 +182,15 @@ greet();</code></pre>
     </div>
 
     <div class="section">
-      <h2>📞 Contact</h2>
-      <p>Email: amyrbhdad23@gmail.com<br>
+      <h2 data-en>📞 Contact</h2>
+      <h2 data-fa style="display:none">📞 تماس با من</h2>
+      <p data-en>Email: amyrbhdad23@gmail.com<br>
       GitHub: <a href="https://github.com/amirce23" target="_blank">amirce23</a><br>
-      Aparat: <a href="https://bmbgk.ir/?q=https://www.aparat.com/GGmax" target="_blank">کانال گیم GGmax</a>
-      </p>
+      Aparat: <a href="https://bmbgk.ir/?q=https://www.aparat.com/GGmax" target="_blank">GGmax Game Channel</a></p>
+
+      <p data-fa style="display:none">ایمیل: amyrbhdad23@gmail.com<br>
+      گیت‌هاب: <a href="https://github.com/amirce23" target="_blank">amirce23</a><br>
+      آپارات: <a href="https://bmbgk.ir/?q=https://www.aparat.com/GGmax" target="_blank">کانال گیم GGmax</a></p>
     </div>
   </div>
 
@@ -197,10 +229,10 @@ greet();</code></pre>
     }, 5000);
 
     function toggleLanguage() {
-      const enSections = document.querySelectorAll('[data-en]');
-      const faSections = document.querySelectorAll('[data-fa]');
-      enSections.forEach(el => el.style.display = el.style.display === 'none' ? 'block' : 'none');
-      faSections.forEach(el => el.style.display = el.style.display === 'none' ? 'block' : 'none');
+      const toggleables = document.querySelectorAll('[data-en], [data-fa]');
+      toggleables.forEach(el => {
+        el.style.display = el.style.display === 'none' ? 'block' : 'none';
+      });
     }
   </script>
 </body>
