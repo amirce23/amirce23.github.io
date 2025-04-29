@@ -1,239 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GGMAX11 - Cyber Coder Resume</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Share Tech Mono', monospace;
-    }
-    body {
-      background: #0d0d0d;
-      color: #d9d9d9;
-      overflow-x: hidden;
-    }
-    .matrix-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: black;
-      z-index: -1;
-    }
-    canvas {
-      display: block;
-    }
-    .container {
-      padding: 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .title {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      text-align: center;
-      color: #00fff7;
-    }
-    .section {
-      margin: 2rem 0;
-      background: #1a1a1a;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-    }
-    .section h2 {
-      color: #00fff7;
-      margin-bottom: 1rem;
-    }
-    .section p, .section ul {
-      line-height: 1.6;
-    }
-    .skills {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-    .skill-box {
-      background: #262626;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0, 255, 255, 0.1);
-    }
-    .skill-title {
-      margin-bottom: 0.5rem;
-      color: #00fff7;
-    }
-    .chart-bar {
-      height: 10px;
-      background: #444;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-    .bar-fill {
-      height: 100%;
-      background: linear-gradient(to right, #00fff7, #0084ff);
-    }
-    .lang-switch {
-      text-align: right;
-      margin-bottom: 1rem;
-    }
-    .lang-switch button {
-      background: #00fff7;
-      border: none;
-      padding: 0.5rem 1rem;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>جی جی مکس ۱۱ - برترین برنامه‌نویس آینده!</title>
+  <!-- فونت گوگل -->
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
+  <!-- CSS کتابخانه AOS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <!-- استایل اصلی سایت -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="matrix-bg">
-    <canvas id="matrix"></canvas>
-  </div>
-  <div class="container">
-    <div class="lang-switch">
-      <button onclick="toggleLanguage()">تغییر زبان / Switch Language</button>
+  <!-- منوی ناوبری -->
+  <nav>
+    <ul>
+      <li><a href="#home">خانه</a></li>
+      <li><a href="#about">درباره من</a></li>
+      <li><a href="#skills">مهارت‌ها</a></li>
+      <li><a href="#portfolio">نمونه‌کارها</a></li>
+      <li><a href="#contact">تماس</a></li>
+    </ul>
+  </nav>
+
+  <!-- هدر -->
+  <header id="home" data-aos="zoom-in">
+    <h1>جی جی مکس ۱۱</h1>
+    <p class="tagline">برترین برنامه‌نویس آینده!</p>
+  </header>
+
+  <!-- درباره من -->
+  <section id="about" data-aos="fade-up">
+    <h2>درباره من</h2>
+    <p>توضیح کوتاه درباره‌ی خود ...</p>
+  </section>
+
+  <!-- مهارت‌ها -->
+  <section id="skills" data-aos="fade-up">
+    <h2>مهارت‌ها</h2>
+    <ul>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+      <!-- ... مهارت‌های دیگر -->
+    </ul>
+  </section>
+
+  <!-- نمونه‌کارها -->
+  <section id="portfolio" data-aos="fade-up">
+    <h2>نمونه‌کارها</h2>
+    <div class="project">
+      <h3>پروژه ۱</h3>
+      <p>توضیح کوتاه درباره پروژه اول.</p>
     </div>
-    <div class="title">GGMAX11</div>
-
-    <div class="section" data-en>
-      <h2>👨‍💻 About Me</h2>
-      <p>
-        I'm GGMAX11, a code lover who dives deep into the matrix. Skilled in Python, HTML, C, JavaScript, and more.
-        I mix logic with design to craft immersive digital experiences. Always leveling up.
-      </p>
+    <div class="project">
+      <h3>پروژه ۲</h3>
+      <p>توضیح کوتاه درباره پروژه دوم.</p>
     </div>
-    <div class="section" data-fa style="display:none">
-      <h2>👨‍💻 درباره من</h2>
-      <p>
-        من GGMAX11 هستم، عاشق کدنویسی که در دنیای ماتریکس غرق شده‌ام. مسلط به Python، HTML، C، JavaScript و بیشتر.
-        ترکیبی از منطق و طراحی برای ساخت تجربه‌های دیجیتال. همیشه در حال پیشرفت.
-      </p>
-    </div>
+    <!-- ... پروژه‌های بیشتر -->
+  </section>
 
-    <div class="section" data-en>
-      <h2>💡 Skills</h2>
-      <div class="skills">
-        <div class="skill-box">
-          <div class="skill-title">HTML</div>
-          <div class="chart-bar"><div class="bar-fill" style="width: 95%"></div></div>
-        </div>
-        <div class="skill-box">
-          <div class="skill-title">CSS</div>
-          <div class="chart-bar"><div class="bar-fill" style="width: 90%"></div></div>
-        </div>
-        <div class="skill-box">
-          <div class="skill-title">JavaScript</div>
-          <div class="chart-bar"><div class="bar-fill" style="width: 85%"></div></div>
-        </div>
-        <div class="skill-box">
-          <div class="skill-title">Python</div>
-          <div class="chart-bar"><div class="bar-fill" style="width: 92%"></div></div>
-        </div>
-        <div class="skill-box">
-          <div class="skill-title">C</div>
-          <div class="chart-bar"><div class="bar-fill" style="width: 80%"></div></div>
-        </div>
-      </div>
-    </div>
+  <!-- تماس -->
+  <section id="contact" data-aos="fade-up">
+    <h2>تماس با من</h2>
+    <p>می‌توانید از طریق ایمیل example@example.com با من در ارتباط باشید.</p>
+    <!-- یا فرم تماس -->
+  </section>
 
-    <div class="section" data-fa style="display:none">
-      <h2>💡 مهارت‌ها</h2>
-      <div class="skills">
-        <div class="skill-box">
-          <div class="skill-title">HTML</div>
-          <div class="chart-bar"><div class="bar-fill" style="width: 95%"></div></div>
-        </div>
-        <div class="skill-box">
-          <div class="skill-title">CSS</div>
-          <div class="chart-bar"><div class="bar-fill" style="width: 90%"></div></div>
-        </div>
-        <div class="skill-box">
-          <div class="skill-title">JavaScript</div>
-          <div class="chart-bar"><div class="bar-fill" style="width: 85%"></div></div>
-        </div>
-        <div class="skill-box">
-          <div class="skill-title">Python</div>
-          <div class="chart-bar"><div class="bar-fill" style="width: 92%"></div></div>
-        </div>
-        <div class="skill-box">
-          <div class="skill-title">C</div>
-          <div class="chart-bar"><div class="bar-fill" style="width: 80%"></div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2 data-en>🌐 Random Code Language</h2>
-      <h2 data-fa style="display:none">🌐 زبان‌ کد تصادفی</h2>
-      <pre><code id="random-code">// JavaScript Example:
-function greet() {
-  console.log("Hello, world!");
-}
-greet();</code></pre>
-    </div>
-
-    <div class="section">
-      <h2 data-en>📞 Contact</h2>
-      <h2 data-fa style="display:none">📞 تماس با من</h2>
-      <p data-en>Email: amyrbhdad23@gmail.com<br>
-      GitHub: <a href="https://github.com/amirce23" target="_blank">amirce23</a><br>
-      Aparat: <a href="https://bmbgk.ir/?q=https://www.aparat.com/GGmax" target="_blank">GGmax Game Channel</a></p>
-
-      <p data-fa style="display:none">ایمیل: amyrbhdad23@gmail.com<br>
-      گیت‌هاب: <a href="https://github.com/amirce23" target="_blank">amirce23</a><br>
-      آپارات: <a href="https://bmbgk.ir/?q=https://www.aparat.com/GGmax" target="_blank">کانال گیم GGmax</a></p>
-    </div>
-  </div>
-
-  <script>
-    const canvas = document.getElementById('matrix');
-    const ctx = canvas.getContext('2d');
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-
-    const letters = Array(256).join("1").split("");
-    const fontSize = 14;
-
-    const draw = () => {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#00fff7";
-      letters.forEach((y_pos, index) => {
-        const text = String.fromCharCode(3e4 + Math.random() * 33);
-        const x = index * fontSize;
-        ctx.fillText(text, x, y_pos);
-        letters[index] = y_pos > canvas.height + Math.random() * 1e4 ? 0 : y_pos + fontSize;
-      });
-    };
-    setInterval(draw, 60);
-
-    const codeSnippets = [
-      `# Python\nprint("Hello, Matrix")`,
-      `// JavaScript\nconsole.log("Matrix Active")`,
-      `// C\n#include <stdio.h>\nint main() {\n  printf("Hello, Matrix");\n  return 0;\n}`,
-      `<!-- HTML -->\n<h1>Matrix Mode</h1>`
-    ];
-    const randomCodeEl = document.getElementById("random-code");
-    setInterval(() => {
-      const snippet = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
-      randomCodeEl.textContent = snippet;
-    }, 5000);
-
-    function toggleLanguage() {
-      const toggleables = document.querySelectorAll('[data-en], [data-fa]');
-      toggleables.forEach(el => {
-        el.style.display = el.style.display === 'none' ? 'block' : 'none';
-      });
-    }
-  </script>
+  <!-- اسکریپت‌ها -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
