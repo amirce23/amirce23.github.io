@@ -1,7 +1,9 @@
-// script.js
-document.addEventListener('DOMContentLoaded', function() {
-  AOS.init({
-    duration: 1000, // مدت زمان انیمیشن بر حسب میلی‌ثانیه
-    once: true      // انیمیشن فقط یک بار نمایش داده شود
-  });
+// assets/js/script.js
+document.addEventListener('DOMContentLoaded', () => {
+  // فعال‌سازی AOS
+  AOS.init({ duration:1000, once:true });
+
+  // منوی موبایل (در صورت نیاز)
+  const logo = document.querySelector('.logo');
+  // می‌توانید اینجا کد منوی همبرگری اضافه کنید
 });
