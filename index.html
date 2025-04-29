@@ -2,73 +2,43 @@
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>جی جی مکس ۱۱ - برترین برنامه‌نویس آینده!</title>
-  <!-- فونت گوگل -->
-  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
-  <!-- CSS کتابخانه AOS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-  <!-- استایل اصلی سایت -->
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>جی جی مکس ۱۱ – برترین برنامه‌نویس آینده!</title>
+  <!-- فونت مدرن -->
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet"/>
+  <!-- AOS -->
+  <link rel="stylesheet" href="assets/vendor/aos/aos.css"/>
+  <!-- استایل اصلی -->
+  <link rel="stylesheet" href="assets/css/style.css"/>
 </head>
 <body>
   <!-- منوی ناوبری -->
-  <nav>
-    <ul>
-      <li><a href="#home">خانه</a></li>
-      <li><a href="#about">درباره من</a></li>
-      <li><a href="#skills">مهارت‌ها</a></li>
-      <li><a href="#portfolio">نمونه‌کارها</a></li>
-      <li><a href="#contact">تماس</a></li>
-    </ul>
+  <nav class="navbar" data-aos="fade-down">
+    <div class="container">
+      <a href="index.html" class="logo">GGMAX11</a>
+      <ul class="nav-links">
+        <li><a href="about.html">درباره من</a></li>
+        <li><a href="skills.html">مهارت‌ها</a></li>
+        <li><a href="portfolio.html">نمونه‌کارها</a></li>
+        <li><a href="contact.html">تماس با من</a></li>
+      </ul>
+    </div>
   </nav>
 
-  <!-- هدر -->
-  <header id="home" data-aos="zoom-in">
+  <!-- هدر معرفی -->
+  <header id="home" class="hero" data-aos="zoom-in">
     <h1>جی جی مکس ۱۱</h1>
-    <p class="tagline">برترین برنامه‌نویس آینده!</p>
+    <p>برترین برنامه‌نویس آینده!</p>
+    <a href="about.html" class="btn">بیشتر درباره من</a>
   </header>
 
-  <!-- درباره من -->
-  <section id="about" data-aos="fade-up">
-    <h2>درباره من</h2>
-    <p>توضیح کوتاه درباره‌ی خود ...</p>
-  </section>
-
-  <!-- مهارت‌ها -->
-  <section id="skills" data-aos="fade-up">
-    <h2>مهارت‌ها</h2>
-    <ul>
-      <li>HTML</li>
-      <li>CSS</li>
-      <li>JavaScript</li>
-      <!-- ... مهارت‌های دیگر -->
-    </ul>
-  </section>
-
-  <!-- نمونه‌کارها -->
-  <section id="portfolio" data-aos="fade-up">
-    <h2>نمونه‌کارها</h2>
-    <div class="project">
-      <h3>پروژه ۱</h3>
-      <p>توضیح کوتاه درباره پروژه اول.</p>
-    </div>
-    <div class="project">
-      <h3>پروژه ۲</h3>
-      <p>توضیح کوتاه درباره پروژه دوم.</p>
-    </div>
-    <!-- ... پروژه‌های بیشتر -->
-  </section>
-
-  <!-- تماس -->
-  <section id="contact" data-aos="fade-up">
-    <h2>تماس با من</h2>
-    <p>می‌توانید از طریق ایمیل example@example.com با من در ارتباط باشید.</p>
-    <!-- یا فرم تماس -->
-  </section>
+  <!-- فوتر -->
+  <footer data-aos="fade-up">
+    <p>© 2025 GGMAX11. تمامی حقوق محفوظ است.</p>
+  </footer>
 
   <!-- اسکریپت‌ها -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script src="script.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/js/script.js"></script>
 </body>
 </html>
