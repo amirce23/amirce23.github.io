@@ -1,176 +1,116 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>رزومه معماری - امیر</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Tahoma', sans-serif;
-      background-color: #000;
-      color: white;
-      overflow-x: hidden;
-    }
-
-    /* بکگراند متحرک */
-    .bg {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-      overflow: hidden;
-    }
-    .bg-layer {
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
-      animation: rotate 30s linear infinite;
-    }
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    section {
-      padding: 5rem 2rem;
-      text-align: center;
-    }
-
-    /* GlareHover */
-    .glare-hover {
-      width: 250px;
-      height: 150px;
-      background: #111;
-      border-radius: 10px;
-      border: 1px solid #333;
-      overflow: hidden;
-      position: relative;
-      display: grid;
-      place-items: center;
-      margin: auto;
-    }
-    .glare-hover::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(-30deg, transparent 60%, rgba(255,255,255,0.3) 70%, transparent);
-      transition: 800ms ease;
-      background-size: 300% 300%;
-      background-position: -100% -100%;
-    }
-    .glare-hover:hover::before {
-      background-position: 100% 100%;
-    }
-
-    /* CountUp style */
-    .count {
-      font-size: 2rem;
-      font-weight: bold;
-      color: gold;
-    }
-
-    /* پروژه‌ها */
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-    }
-    .projects img {
-      width: 100%;
-      border-radius: 10px;
-      transition: transform 0.5s ease;
-    }
-    .projects img:hover {
-      transform: scale(1.05);
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>رزومه معماری - امیر</title>
+<style>
+  body {
+    margin: 0;
+    font-family: sans-serif;
+    background: #0a0a0a;
+    color: #fff;
+  }
+  header {
+    text-align: center;
+    padding: 2rem;
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 2rem;
+  }
+  .tilt-card {
+    perspective: 800px;
+  }
+  .tilt-inner {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,.35);
+  }
+  .tilt-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .caption {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.6);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+</style>
 </head>
 <body>
 
-  <!-- بکگراند -->
-  <div class="bg">
-    <div class="bg-layer"></div>
-  </div>
+<header>
+  <h1>Amir — Architect</h1>
+  <p>طراحی فضاهایی که الهام‌بخش زندگی‌اند</p>
+</header>
 
-  <!-- معرفی -->
-  <section>
-    <h1>Amir — Architect</h1>
-    <p>طراحی فضاهایی که الهام‌بخش زندگی‌اند</p>
-  </section>
+<section class="projects-grid" id="projects"></section>
 
-  <!-- آمار -->
-  <section>
-    <h2>دستاوردها</h2>
-    <div style="display:flex; gap:2rem; justify-content:center; flex-wrap:wrap;">
-      <div class="glare-hover">
-        <div>
-          <h3>پروژه‌ها</h3>
-          <span class="count" data-target="120">0</span>
-        </div>
-      </div>
-      <div class="glare-hover">
-        <div>
-          <h3>سال تجربه</h3>
-          <span class="count" data-target="10">0</span>
-        </div>
-      </div>
-      <div class="glare-hover">
-        <div>
-          <h3>مشتریان</h3>
-          <span class="count" data-target="85">0</span>
-        </div>
-      </div>
+<script>
+const projects = [
+  { src: 'https://images.unsplash.com/photo-1505842465776-3acb86ea0f61?w=800', cap: 'Residential Courtyard' },
+  { src: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800', cap: 'Minimal Concrete House' },
+  { src: 'https://images.unsplash.com/photo-1494526585095-c41746248156?w=800', cap: 'Timber Facade' },
+  { src: 'https://images.unsplash.com/photo-1487956382158-bb926046304a?w=800', cap: 'Atrium Lightwell' },
+  { src: 'https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?w=800', cap: 'Parametric Roof' },
+  { src: 'https://images.unsplash.com/photo-1494526585095-c41746248156?w=800', cap: 'Modern Interior' },
+  { src: 'https://images.unsplash.com/photo-1505691691458-3b7e2ed2ed4a?w=800', cap: 'Office Lobby' },
+  { src: 'https://images.unsplash.com/photo-1448630360428-65456885c650?w=800', cap: 'Skybridge' },
+  { src: 'https://images.unsplash.com/photo-1529429612778-cdfb5b1da3b0?w=800', cap: 'Sculptural Stair' },
+  { src: 'https://images.unsplash.com/photo-1465311440653-ba9b1d9b0f18?w=800', cap: 'Glass Pavilion' },
+  { src: 'https://images.unsplash.com/photo-1460574283810-2aab119d8511?w=800', cap: 'Sunlit Corridor' },
+  { src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800', cap: 'Urban Housing' },
+  { src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800', cap: 'Courtyard Night' },
+  { src: 'https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=800', cap: 'Interior Minimal' },
+  { src: 'https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?w=800', cap: 'Roof Geometry' },
+  { src: 'https://images.unsplash.com/photo-1437419764061-2473afe69fc2?w=800', cap: 'Cultural Center' },
+  { src: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?w=800', cap: 'Residential Hall' },
+  { src: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800', cap: 'Facade Rhythm' },
+  { src: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800', cap: 'Concrete Volumes' },
+  { src: 'https://images.unsplash.com/photo-1487956382158-bb926046304a?w=800', cap: 'Lobby Atrium' }
+];
+
+const container = document.getElementById('projects');
+
+projects.forEach(p => {
+  const card = document.createElement('div');
+  card.className = 'tilt-card';
+  card.innerHTML = `
+    <div class="tilt-inner">
+      <img src="${p.src}" alt="${p.cap}">
+      <div class="caption">${p.cap}</div>
     </div>
-  </section>
+  `;
+  container.appendChild(card);
 
-  <!-- پروژه‌ها -->
-  <section>
-    <h2>پروژه‌ها</h2>
-    <div class="projects">
-      <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800" alt="">
-      <img src="https://images.unsplash.com/photo-1505691723518-36a5ac3be353?w=800" alt="">
-      <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800" alt="">
-    </div>
-  </section>
+  const inner = card.querySelector('.tilt-inner');
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const rotateX = ((y / rect.height) - 0.5) * -20;
+    const rotateY = ((x / rect.width) - 0.5) * 20;
+    inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    inner.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+  });
+});
+</script>
 
-  <!-- تماس -->
-  <section>
-    <h2>تماس</h2>
-    <form>
-      <input type="text" placeholder="نام" style="padding:10px; width:200px"><br><br>
-      <input type="email" placeholder="ایمیل" style="padding:10px; width:200px"><br><br>
-      <textarea placeholder="پیام" style="padding:10px; width:200px; height:100px"></textarea><br><br>
-      <button type="submit" style="padding:10px 20px">ارسال</button>
-    </form>
-  </section>
-
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script>
-    // CountUp ساده
-    function animateCount(el) {
-      const target = +el.getAttribute('data-target');
-      const duration = 2000;
-      const start = 0;
-      const startTime = performance.now();
-      function update(now) {
-        const progress = Math.min((now - startTime) / duration, 1);
-        el.textContent = Math.floor(progress * (target - start) + start);
-        if (progress < 1) requestAnimationFrame(update);
-      }
-      requestAnimationFrame(update);
-    }
-    document.querySelectorAll('.count').forEach(el => animateCount(el));
-
-    // افکت پارالاکس بکگراند
-    document.addEventListener('mousemove', e => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 50;
-      const y = (e.clientY / window.innerHeight - 0.5) * 50;
-      gsap.to('.bg-layer', { x, y, duration: 1, ease: 'power2.out' });
-    });
-  </script>
 </body>
 </html>
