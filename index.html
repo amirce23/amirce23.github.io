@@ -1,43 +1,176 @@
-<section class="content">
-  <h2>دستاوردها</h2>
-  <div style="display:flex; gap:2rem; justify-content:center;">
-    <div class="glare-hover">
-      <div>
-        <h3>پروژه‌ها</h3>
-        <span class="count" data-target="120">0</span>
-      </div>
-    </div>
-    <div class="glare-hover">
-      <div>
-        <h3>سال تجربه</h3>
-        <span class="count" data-target="10">0</span>
-      </div>
-    </div>
-    <div class="glare-hover">
-      <div>
-        <h3>مشتریان</h3>
-        <span class="count" data-target="85">0</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<script>
-  function animateCount(el) {
-    const target = +el.getAttribute('data-target');
-    const duration = 2000; // ms
-    const start = 0;
-    const startTime = performance.now();
-
-    function update(now) {
-      const progress = Math.min((now - startTime) / duration, 1);
-      el.textContent = Math.floor(progress * (target - start) + start);
-      if (progress < 1) requestAnimationFrame(update);
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>رزومه معماری - امیر</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Tahoma', sans-serif;
+      background-color: #000;
+      color: white;
+      overflow-x: hidden;
     }
-    requestAnimationFrame(update);
-  }
 
-  document.querySelectorAll('.count').forEach(el => {
-    animateCount(el);
-  });
-</script>
+    /* بکگراند متحرک */
+    .bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .bg-layer {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+      animation: rotate 30s linear infinite;
+    }
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    section {
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    /* GlareHover */
+    .glare-hover {
+      width: 250px;
+      height: 150px;
+      background: #111;
+      border-radius: 10px;
+      border: 1px solid #333;
+      overflow: hidden;
+      position: relative;
+      display: grid;
+      place-items: center;
+      margin: auto;
+    }
+    .glare-hover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(-30deg, transparent 60%, rgba(255,255,255,0.3) 70%, transparent);
+      transition: 800ms ease;
+      background-size: 300% 300%;
+      background-position: -100% -100%;
+    }
+    .glare-hover:hover::before {
+      background-position: 100% 100%;
+    }
+
+    /* CountUp style */
+    .count {
+      font-size: 2rem;
+      font-weight: bold;
+      color: gold;
+    }
+
+    /* پروژه‌ها */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+    .projects img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.5s ease;
+    }
+    .projects img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- بکگراند -->
+  <div class="bg">
+    <div class="bg-layer"></div>
+  </div>
+
+  <!-- معرفی -->
+  <section>
+    <h1>Amir — Architect</h1>
+    <p>طراحی فضاهایی که الهام‌بخش زندگی‌اند</p>
+  </section>
+
+  <!-- آمار -->
+  <section>
+    <h2>دستاوردها</h2>
+    <div style="display:flex; gap:2rem; justify-content:center; flex-wrap:wrap;">
+      <div class="glare-hover">
+        <div>
+          <h3>پروژه‌ها</h3>
+          <span class="count" data-target="120">0</span>
+        </div>
+      </div>
+      <div class="glare-hover">
+        <div>
+          <h3>سال تجربه</h3>
+          <span class="count" data-target="10">0</span>
+        </div>
+      </div>
+      <div class="glare-hover">
+        <div>
+          <h3>مشتریان</h3>
+          <span class="count" data-target="85">0</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- پروژه‌ها -->
+  <section>
+    <h2>پروژه‌ها</h2>
+    <div class="projects">
+      <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800" alt="">
+      <img src="https://images.unsplash.com/photo-1505691723518-36a5ac3be353?w=800" alt="">
+      <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800" alt="">
+    </div>
+  </section>
+
+  <!-- تماس -->
+  <section>
+    <h2>تماس</h2>
+    <form>
+      <input type="text" placeholder="نام" style="padding:10px; width:200px"><br><br>
+      <input type="email" placeholder="ایمیل" style="padding:10px; width:200px"><br><br>
+      <textarea placeholder="پیام" style="padding:10px; width:200px; height:100px"></textarea><br><br>
+      <button type="submit" style="padding:10px 20px">ارسال</button>
+    </form>
+  </section>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script>
+    // CountUp ساده
+    function animateCount(el) {
+      const target = +el.getAttribute('data-target');
+      const duration = 2000;
+      const start = 0;
+      const startTime = performance.now();
+      function update(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        el.textContent = Math.floor(progress * (target - start) + start);
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+    document.querySelectorAll('.count').forEach(el => animateCount(el));
+
+    // افکت پارالاکس بکگراند
+    document.addEventListener('mousemove', e => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 50;
+      const y = (e.clientY / window.innerHeight - 0.5) * 50;
+      gsap.to('.bg-layer', { x, y, duration: 1, ease: 'power2.out' });
+    });
+  </script>
+</body>
+</html>
