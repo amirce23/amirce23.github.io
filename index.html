@@ -8,59 +8,128 @@
   body {
     margin: 0;
     font-family: sans-serif;
-    background: #0a0a0a;
+    background: #000;
     color: #fff;
+    overflow-x: hidden;
   }
-  header {
-    text-align: center;
-    padding: 2rem;
-  }
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-    padding: 2rem;
-  }
-  .tilt-card {
-    perspective: 800px;
-  }
-  .tilt-inner {
-    position: relative;
-    width: 100%;
-    height: 320px;
-    transform-style: preserve-3d;
-    transition: transform 0.2s ease;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,.35);
-  }
-  .tilt-inner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .caption {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    background: rgba(0,0,0,0.6);
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 0.9rem;
-  }
+  /* GridMotion Styles */
+  .noscroll { height: 100%; width: 100%; overflow: hidden; position: fixed; top:0; left:0; z-index: -1; }
+  .intro { width: 100%; height: 100vh; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; }
+  .gridMotion-container { gap: 1rem; flex: none; position: relative; width: 150vw; height: 150vh; display: grid; grid-template-rows: repeat(4, 1fr); grid-template-columns: 100%; transform: rotate(-15deg); transform-origin: center center; z-index: 2; }
+  .row { display: grid; gap: 1rem; grid-template-columns: repeat(7, 1fr); will-change: transform; }
+  .row__item-inner { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 10px; background-color: #111; display: flex; align-items: center; justify-content: center; }
+  .row__item-img { width: 100%; height: 100%; background-size: cover; background-position: 50% 50%; position: absolute; top: 0; left: 0; }
+
+  /* Sections */
+  section { padding: 4rem 2rem; position: relative; z-index: 1; text-align: center; background: rgba(0,0,0,0.5); margin-bottom: 2rem; }
+  h1,h2 { margin-bottom: 1rem; }
+  .stats { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+  .stat { font-size: 2rem; color: gold; }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+  .tilt-card { perspective: 800px; }
+  .tilt-inner { position: relative; width: 100%; height: 300px; transform-style: preserve-3d; transition: transform 0.2s ease; border-radius: 15px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,.35); }
+  .tilt-inner img { width: 100%; height: 100%; object-fit: cover; }
+  .caption { position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.6); padding: 5px 10px; border-radius: 5px; font-size: 0.9rem; }
 </style>
 </head>
 <body>
 
-<header>
+<!-- GridMotion Background -->
+<div class="noscroll">
+  <section class="intro">
+    <div class="gridMotion-container" id="grid"></div>
+  </section>
+</div>
+
+<!-- Hero -->
+<section>
   <h1>Amir — Architect</h1>
   <p>طراحی فضاهایی که الهام‌بخش زندگی‌اند</p>
-</header>
+</section>
 
-<section class="projects-grid" id="projects"></section>
+<!-- Stats -->
+<section>
+  <h2>دستاوردها</h2>
+  <div class="stats">
+    <div><div class="stat" data-target="120">0</div><p>پروژه</p></div>
+    <div><div class="stat" data-target="10">0</div><p>سال تجربه</p></div>
+    <div><div class="stat" data-target="85">0</div><p>مشتری</p></div>
+  </div>
+</section>
 
+<!-- Projects -->
+<section>
+  <h2>پروژه‌ها</h2>
+  <div class="projects-grid" id="projects"></div>
+</section>
+
+<!-- About -->
+<section>
+  <h2>درباره من</h2>
+  <p>اینجا متن کوتاهی درباره تخصص و تجربه‌ات میاد...</p>
+</section>
+
+<!-- Contact -->
+<section>
+  <h2>تماس</h2>
+  <form>
+    <input type="text" placeholder="نام" style="padding:10px; width:200px"><br><br>
+    <input type="email" placeholder="ایمیل" style="padding:10px; width:200px"><br><br>
+    <textarea placeholder="پیام" style="padding:10px; width:200px; height:100px"></textarea><br><br>
+    <button type="submit" style="padding:10px 20px">ارسال</button>
+  </form>
+</section>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script>
+/* GridMotion Background */
+const items = Array(28).fill('https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=800&auto=format&fit=crop');
+const grid = document.getElementById('grid');
+const rowRefs = [];
+for (let r = 0; r < 4; r++) {
+  const row = document.createElement('div');
+  row.className = 'row';
+  for (let c = 0; c < 7; c++) {
+    const idx = r * 7 + c;
+    const cell = document.createElement('div');
+    cell.className = 'row__item-inner';
+    const imgDiv = document.createElement('div');
+    imgDiv.className = 'row__item-img';
+    imgDiv.style.backgroundImage = `url(${items[idx]})`;
+    cell.appendChild(imgDiv);
+    row.appendChild(cell);
+  }
+  grid.appendChild(row);
+  rowRefs.push(row);
+}
+let mouseX = window.innerWidth / 2;
+window.addEventListener('mousemove', e => mouseX = e.clientX);
+gsap.ticker.lagSmoothing(0);
+gsap.ticker.add(() => {
+  const maxMove = 300;
+  const baseDuration = 0.8;
+  const inertia = [0.6, 0.4, 0.3, 0.2];
+  rowRefs.forEach((row, i) => {
+    const dir = i % 2 === 0 ? 1 : -1;
+    const move = ((mouseX / window.innerWidth) * maxMove - maxMove / 2) * dir;
+    gsap.to(row, { x: move, duration: baseDuration + inertia[i % inertia.length], ease: 'power3.out', overwrite: 'auto' });
+  });
+});
+
+/* Stats CountUp */
+document.querySelectorAll('.stat').forEach(el => {
+  const target = +el.getAttribute('data-target');
+  let count = 0;
+  const step = target / 100;
+  const interval = setInterval(() => {
+    count += step;
+    if (count >= target) { count = target; clearInterval(interval); }
+    el.textContent = Math.floor(count);
+  }, 20);
+});
+
+/* Projects Tilt Cards */
 const projects = [
   { src: 'https://images.unsplash.com/photo-1505842465776-3acb86ea0f61?w=800', cap: 'Residential Courtyard' },
   { src: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800', cap: 'Minimal Concrete House' },
@@ -76,15 +145,14 @@ const projects = [
   { src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800', cap: 'Urban Housing' },
   { src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800', cap: 'Courtyard Night' },
   { src: 'https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=800', cap: 'Interior Minimal' },
-  { src: 'https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?w=800', cap: 'Roof Geometry' },
   { src: 'https://images.unsplash.com/photo-1437419764061-2473afe69fc2?w=800', cap: 'Cultural Center' },
   { src: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?w=800', cap: 'Residential Hall' },
   { src: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800', cap: 'Facade Rhythm' },
-  { src: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800', cap: 'Concrete Volumes' },
   { src: 'https://images.unsplash.com/photo-1487956382158-bb926046304a?w=800', cap: 'Lobby Atrium' }
 ];
 
-const container = document.getElementById('projects');
+/* ساخت کارت‌ها و افکت Tilt */
+const projectsContainer = document.getElementById('projects');
 
 projects.forEach(p => {
   const card = document.createElement('div');
@@ -95,7 +163,7 @@ projects.forEach(p => {
       <div class="caption">${p.cap}</div>
     </div>
   `;
-  container.appendChild(card);
+  projectsContainer.appendChild(card);
 
   const inner = card.querySelector('.tilt-inner');
   card.addEventListener('mousemove', e => {
@@ -114,3 +182,4 @@ projects.forEach(p => {
 
 </body>
 </html>
+
