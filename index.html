@@ -1,44 +1,43 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>جی جی مکس ۱۱ – برترین برنامه‌نویس آینده!</title>
-  <!-- فونت مدرن -->
-  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet"/>
-  <!-- AOS -->
-  <link rel="stylesheet" href="assets/vendor/aos/aos.css"/>
-  <!-- استایل اصلی -->
-  <link rel="stylesheet" href="assets/css/style.css"/>
-</head>
-<body>
-  <!-- منوی ناوبری -->
-  <nav class="navbar" data-aos="fade-down">
-    <div class="container">
-      <a href="index.html" class="logo">GGMAX11</a>
-      <ul class="nav-links">
-        <li><a href="about.html">درباره من</a></li>
-        <li><a href="skills.html">مهارت‌ها</a></li>
-        <li><a href="portfolio.html">نمونه‌کارها</a></li>
-        <li><a href="contact.html">تماس با من</a></li>
-      </ul>
+<section class="content">
+  <h2>دستاوردها</h2>
+  <div style="display:flex; gap:2rem; justify-content:center;">
+    <div class="glare-hover">
+      <div>
+        <h3>پروژه‌ها</h3>
+        <span class="count" data-target="120">0</span>
+      </div>
     </div>
-  </nav>
+    <div class="glare-hover">
+      <div>
+        <h3>سال تجربه</h3>
+        <span class="count" data-target="10">0</span>
+      </div>
+    </div>
+    <div class="glare-hover">
+      <div>
+        <h3>مشتریان</h3>
+        <span class="count" data-target="85">0</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- هدر معرفی -->
-  <header id="home" class="hero" data-aos="zoom-in">
-    <h1>جی جی مکس ۱۱</h1>
-    <p>برترین برنامه‌نویس آینده!</p>
-    <a href="about.html" class="btn">بیشتر درباره من</a>
-  </header>
+<script>
+  function animateCount(el) {
+    const target = +el.getAttribute('data-target');
+    const duration = 2000; // ms
+    const start = 0;
+    const startTime = performance.now();
 
-  <!-- فوتر -->
-  <footer data-aos="fade-up">
-    <p>© 2025 GGMAX11. تمامی حقوق محفوظ است.</p>
-  </footer>
+    function update(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      el.textContent = Math.floor(progress * (target - start) + start);
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
 
-  <!-- اسکریپت‌ها -->
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/js/script.js"></script>
-</body>
-</html>
+  document.querySelectorAll('.count').forEach(el => {
+    animateCount(el);
+  });
+</script>
