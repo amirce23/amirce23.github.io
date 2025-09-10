@@ -1,187 +1,425 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>lorem ipsum</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Amir — Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700&display=swap" rel="stylesheet" />
 <style>
-  body {
-    margin: 0;
-    font-family: sans-serif;
-    background: #000;
-    color: #fff;
-    overflow-x: hidden;
+  :root{
+    --glass-bg: rgba(255,255,255,0.06);
+    --glass-border: rgba(255,255,255,0.12);
+    --gold: #d4af37;
+    --fg: #f1f1f1;
+    --muted: #bdbdbd;
+    --bg: #000;
   }
-  /* GridMotion Styles */
-  .noscroll { height: 100%; width: 100%; overflow: hidden; position: fixed; top:0; left:0; z-index: -1; }
-  .intro { width: 100%; height: 100vh; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; }
-  .gridMotion-container { gap: 1rem; flex: none; position: relative; width: 150vw; height: 150vh; display: grid; grid-template-rows: repeat(4, 1fr); grid-template-columns: 100%; transform: rotate(-15deg); transform-origin: center center; z-index: 2; }
-  .row { display: grid; gap: 1rem; grid-template-columns: repeat(7, 1fr); will-change: transform; }
-  .row__item-inner { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 10px; background-color: #111; display: flex; align-items: center; justify-content: center; }
-  .row__item-img { width: 100%; height: 100%; background-size: cover; background-position: 50% 50%; position: absolute; top: 0; left: 0; }
-
-  /* Sections */
-  section { padding: 4rem 2rem; position: relative; z-index: 1; text-align: center; background: rgba(0,0,0,0.5); margin-bottom: 2rem; }
-  h1,h2 { margin-bottom: 1rem; }
-  .stats { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
-  .stat { font-size: 2rem; color: gold; }
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
-  .tilt-card { perspective: 800px; }
-  .tilt-inner { position: relative; width: 100%; height: 300px; transform-style: preserve-3d; transition: transform 0.2s ease; border-radius: 15px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,.35); }
-  .tilt-inner img { width: 100%; height: 100%; object-fit: cover; }
-  .caption { position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.6); padding: 5px 10px; border-radius: 5px; font-size: 0.9rem; }
+  /* Base */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: "Vazirmatn", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  /* Header */
+  header{
+    position:fixed; inset:0 0 auto 0; height:64px; padding:0 18px;
+    display:flex; align-items:center; justify-content:space-between;
+    backdrop-filter: blur(10px);
+    background: linear-gradient(180deg, rgba(0,0,0,.65), rgba(0,0,0,.3));
+    border-bottom:1px solid var(--glass-border);
+    z-index:20;
+    transition: background .25s ease, border-color .25s ease;
+  }
+  header.scrolled{
+    background: rgba(0,0,0,.8);
+    border-color: rgba(255,255,255,.18);
+  }
+  .brand{font-weight:700; letter-spacing:.5px}
+  nav{display:flex; gap:14px; align-items:center}
+  nav a{opacity:.9; padding:8px 10px; border-radius:8px; transition:opacity .2s}
+  nav a:hover{opacity:1}
+  /* Background GridMotion container (fixed) */
+  .noscroll{
+    position:fixed; inset:0; z-index:-1; overflow:hidden; width:100%; height:100%;
+  }
+  .intro{position:absolute; inset:0; display:flex; align-items:center; justify-content:center}
+  .gridMotion-container{
+    gap:1rem; position:relative; width:150vw; height:150vh; display:grid;
+    grid-template-rows:repeat(4,1fr); grid-template-columns:100%;
+    transform: rotate(-15deg); transform-origin:center center; z-index:1;
+    filter: saturate(1.05) contrast(1.05) brightness(.9);
+  }
+  .row{display:grid; gap:1rem; grid-template-columns:repeat(7, 1fr); will-change: transform}
+  .row__item-inner{
+    position:relative; overflow:hidden; border-radius:14px; background:#111; height:100%;
+  }
+  .row__item-img{
+    position:absolute; inset:0; background-size:cover; background-position:50% 50%;
+    filter: grayscale(.2);
+    transform: scale(1.02);
+  }
+  /* Section layout */
+  main{padding-top:64px}
+  section{
+    position:relative; padding:64px 20px; margin:0 auto; max-width:1200px;
+  }
+  .glass{
+    background: var(--glass-bg);
+    border:1px solid var(--glass-border);
+    border-radius:16px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 40px rgba(0,0,0,.35);
+  }
+  .center{text-align:center}
+  h1,h2{margin:0 0 12px}
+  .lead{margin:0 auto; max-width:720px; color:var(--muted)}
+  .cta{display:inline-flex; gap:10px; align-items:center; margin-top:18px}
+  .btn{
+    border:1px solid var(--glass-border);
+    background: rgba(255,255,255,.06);
+    color: var(--fg);
+    padding:10px 16px; border-radius:10px; cursor:pointer;
+    transition: transform .2s ease, background .2s ease;
+  }
+  .btn:hover{transform: translateY(-2px); background: rgba(255,255,255,.1)}
+  .btn--gold{background: linear-gradient(135deg, #9c7d27, var(--gold)); color:#101010; border:none}
+  /* Hero */
+  .hero{display:grid; gap:18px; place-items:center; padding-top:84px; padding-bottom:48px}
+  .hero-title{font-size:42px; line-height:1.15; text-wrap:balance}
+  .hero-kicker{letter-spacing:2px; font-size:12px; color:var(--muted)}
+  /* Stats */
+  .stats{
+    display:grid; grid-template-columns: repeat(3, minmax(0,1fr));
+    gap:16px; margin-top:12px;
+  }
+  @media (max-width:780px){ .stats{grid-template-columns: 1fr 1fr} }
+  @media (max-width:520px){ .stats{grid-template-columns: 1fr} }
+  .stat-card{
+    padding:18px; border-radius:14px; border:1px solid var(--glass-border);
+    background: rgba(255,255,255,.04);
+  }
+  .stat-number{font-size:36px; font-weight:700; color:var(--gold)}
+  .stat-label{margin-top:6px; color:var(--muted)}
+  /* Projects grid with Tilt + Glare */
+  .projects-grid{
+    display:grid; gap:16px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  @media (max-width:1100px){ .projects-grid{grid-template-columns: repeat(3,1fr)} }
+  @media (max-width:820px){ .projects-grid{grid-template-columns: repeat(2,1fr)} }
+  @media (max-width:560px){ .projects-grid{grid-template-columns: 1fr} }
+  .tilt-card{perspective:900px}
+  .tilt-inner{
+    position:relative; height:300px; border-radius:16px; overflow:hidden;
+    transform-style:preserve-3d; transition: transform .2s ease;
+    box-shadow: 0 16px 40px rgba(0,0,0,.45), 0 3px 12px rgba(0,0,0,.35);
+  }
+  .tilt-img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform: translateZ(0)}
+  .tilt-glare{
+    position:absolute; inset:-20% -20%; pointer-events:none;
+    background: radial-gradient(280px 280px at 0% 0%, rgba(255,255,255,.18), rgba(255,255,255,0) 55%);
+    opacity:.0; transition: opacity .25s ease;
+    transform: translateZ(60px);
+    mix-blend-mode: screen;
+  }
+  .tilt-inner:hover .tilt-glare{opacity:.9}
+  .tilt-cap{
+    position:absolute; bottom:12px; left:12px; right:12px;
+    padding:8px 12px; border-radius:10px;
+    background: rgba(0,0,0,.45); border:1px solid rgba(255,255,255,.08);
+    font-size:14px; backdrop-filter: blur(6px);
+    transform: translateZ(30px);
+  }
+  /* Split about */
+  .about{
+    display:grid; grid-template-columns: 1.1fr .9fr; gap:18px; align-items:center;
+  }
+  @media (max-width:900px){ .about{grid-template-columns: 1fr; } }
+  .about .panel{padding:22px}
+  .about-img{
+    height:360px; border-radius:16px; overflow:hidden; position:relative;
+    background: linear-gradient(180deg, rgba(212,175,55,.15), rgba(0,0,0,.2));
+    border:1px solid var(--glass-border);
+  }
+  .about-img::before{
+    content:""; position:absolute; inset:0;
+    background: url('https://images.unsplash.com/photo-1505691723518-36a5ac3be353?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;
+    filter:contrast(1.05) saturate(1.05) brightness(.92);
+  }
+  /* Contact */
+  .contact form{display:grid; gap:12px; max-width:520px; margin:auto}
+  .field{
+    background: rgba(255,255,255,.05); color:var(--fg);
+    border:1px solid var(--glass-border); border-radius:10px;
+    padding:12px 14px; outline:none; width:100%;
+  }
+  .field:focus{border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.08)}
+  footer{padding:28px; text-align:center; color:var(--muted)}
 </style>
 </head>
 <body>
 
-<!-- GridMotion Background -->
+<header>
+  <div class="brand">Amir — Architect</div>
+  <nav>
+    <a href="#hero">خانه</a>
+    <a href="#stats">دستاوردها</a>
+    <a href="#projects">پروژه‌ها</a>
+    <a href="#about">درباره</a>
+    <a href="#contact">تماس</a>
+  </nav>
+</header>
+
+<!-- Fixed cinematic background -->
 <div class="noscroll">
   <section class="intro">
     <div class="gridMotion-container" id="grid"></div>
   </section>
 </div>
 
-<!-- Hero -->
-<section>
-  <h1>lorem ipsum</h1>
-  <p>طراحی فضاهایی که الهام‌بخش زندگی‌اند</p>
-</section>
-
-<!-- Stats -->
-<section>
-  <h2>دستاوردها</h2>
-  <div class="stats">
-    <div><div class="stat" data-target="120">0</div><p>پروژه</p></div>
-    <div><div class="stat" data-target="10">0</div><p>سال تجربه</p></div>
-    <div><div class="stat" data-target="85">0</div><p>مشتری</p></div>
-  </div>
-</section>
-
-<!-- Projects -->
-<section>
-  <h2>پروژه‌ها</h2>
-  <div class="projects-grid" id="projects"></div>
-</section>
-
-<!-- About -->
-<section>
-  <h2>درباره ما</h2>
-  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh</p>
-</section>
-
-<!-- Contact -->
-<section>
-  <h2>تماس</h2>
-  <form>
-    <input type="text" placeholder="نام" style="padding:10px; width:200px"><br><br>
-    <input type="email" placeholder="ایمیل" style="padding:10px; width:200px"><br><br>
-    <textarea placeholder="پیام" style="padding:10px; width:200px; height:100px"></textarea><br><br>
-    <button type="submit" style="padding:10px 20px">ارسال</button>
-  </form>
-</section>
-
-<!-- GSAP -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script>
-/* GridMotion Background */
-const items = Array(28).fill('https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=800&auto=format&fit=crop');
-const grid = document.getElementById('grid');
-const rowRefs = [];
-for (let r = 0; r < 4; r++) {
-  const row = document.createElement('div');
-  row.className = 'row';
-  for (let c = 0; c < 7; c++) {
-    const idx = r * 7 + c;
-    const cell = document.createElement('div');
-    cell.className = 'row__item-inner';
-    const imgDiv = document.createElement('div');
-    imgDiv.className = 'row__item-img';
-    imgDiv.style.backgroundImage = `url(${items[idx]})`;
-    cell.appendChild(imgDiv);
-    row.appendChild(cell);
-  }
-  grid.appendChild(row);
-  rowRefs.push(row);
-}
-let mouseX = window.innerWidth / 2;
-window.addEventListener('mousemove', e => mouseX = e.clientX);
-gsap.ticker.lagSmoothing(0);
-gsap.ticker.add(() => {
-  const maxMove = 300;
-  const baseDuration = 0.8;
-  const inertia = [0.6, 0.4, 0.3, 0.2];
-  rowRefs.forEach((row, i) => {
-    const dir = i % 2 === 0 ? 1 : -1;
-    const move = ((mouseX / window.innerWidth) * maxMove - maxMove / 2) * dir;
-    gsap.to(row, { x: move, duration: baseDuration + inertia[i % inertia.length], ease: 'power3.out', overwrite: 'auto' });
-  });
-});
-
-/* Stats CountUp */
-document.querySelectorAll('.stat').forEach(el => {
-  const target = +el.getAttribute('data-target');
-  let count = 0;
-  const step = target / 100;
-  const interval = setInterval(() => {
-    count += step;
-    if (count >= target) { count = target; clearInterval(interval); }
-    el.textContent = Math.floor(count);
-  }, 20);
-});
-
-/* Projects Tilt Cards */
-const projects = [
-  { src: 'https://images.unsplash.com/photo-1505842465776-3acb86ea0f61?w=800', cap: 'Residential Courtyard' },
-  { src: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800', cap: 'Minimal Concrete House' },
-  { src: 'https://images.unsplash.com/photo-1494526585095-c41746248156?w=800', cap: 'Timber Facade' },
-  { src: 'https://images.unsplash.com/photo-1487956382158-bb926046304a?w=800', cap: 'Atrium Lightwell' },
-  { src: 'https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?w=800', cap: 'Parametric Roof' },
-  { src: 'https://images.unsplash.com/photo-1494526585095-c41746248156?w=800', cap: 'Modern Interior' },
-  { src: 'https://images.unsplash.com/photo-1505691691458-3b7e2ed2ed4a?w=800', cap: 'Office Lobby' },
-  { src: 'https://images.unsplash.com/photo-1448630360428-65456885c650?w=800', cap: 'Skybridge' },
-  { src: 'https://images.unsplash.com/photo-1529429612778-cdfb5b1da3b0?w=800', cap: 'Sculptural Stair' },
-  { src: 'https://images.unsplash.com/photo-1465311440653-ba9b1d9b0f18?w=800', cap: 'Glass Pavilion' },
-  { src: 'https://images.unsplash.com/photo-1460574283810-2aab119d8511?w=800', cap: 'Sunlit Corridor' },
-  { src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800', cap: 'Urban Housing' },
-  { src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800', cap: 'Courtyard Night' },
-  { src: 'https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=800', cap: 'Interior Minimal' },
-  { src: 'https://images.unsplash.com/photo-1437419764061-2473afe69fc2?w=800', cap: 'Cultural Center' },
-  { src: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?w=800', cap: 'Residential Hall' },
-  { src: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800', cap: 'Facade Rhythm' },
-  { src: 'https://images.unsplash.com/photo-1487956382158-bb926046304a?w=800', cap: 'Lobby Atrium' }
-];
-
-/* ساخت کارت‌ها و افکت Tilt */
-const projectsContainer = document.getElementById('projects');
-
-projects.forEach(p => {
-  const card = document.createElement('div');
-  card.className = 'tilt-card';
-  card.innerHTML = `
-    <div class="tilt-inner">
-      <img src="${p.src}" alt="${p.cap}">
-      <div class="caption">${p.cap}</div>
+<main>
+  <!-- Hero -->
+  <section id="hero" class="glass center">
+    <div class="hero-kicker">PORTFOLIO</div>
+    <h1 class="hero-title">طراحی فضاهایی که الهام‌بخش زندگی‌اند</h1>
+    <p class="lead">معماری برای من فقط فرم نیست؛ تجربه‌ی حرکت، نور و جزئیاتی‌ست که تا سال‌ها در ذهن می‌ماند.</p>
+    <div class="cta">
+      <a class="btn btn--gold" href="#projects">مشاهده پروژه‌ها</a>
+      <a class="btn" href="#contact">درخواست همکاری</a>
     </div>
-  `;
-  projectsContainer.appendChild(card);
+  </section>
 
-  const inner = card.querySelector('.tilt-inner');
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const rotateX = ((y / rect.height) - 0.5) * -20;
-    const rotateY = ((x / rect.width) - 0.5) * 20;
-    inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+  <!-- Stats -->
+  <section id="stats" class="glass">
+    <h2 class="center">دستاوردها</h2>
+    <div class="stats">
+      <div class="stat-card center">
+        <div class="stat-number count" data-target="120">0</div>
+        <div class="stat-label">پروژه تکمیل‌شده</div>
+      </div>
+      <div class="stat-card center">
+        <div class="stat-number count" data-target="10">0</div>
+        <div class="stat-label">سال تجربه</div>
+      </div>
+      <div class="stat-card center">
+        <div class="stat-number count" data-target="85">0</div>
+        <div class="stat-label">مشتری راضی</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="glass">
+    <h2 class="center" style="margin-bottom:18px">پروژه‌ها</h2>
+    <div class="projects-grid" id="projectsGrid"></div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="glass">
+    <div class="about">
+      <div class="panel">
+        <h2>درباره من</h2>
+        <p class="lead">
+          از کانسپت تا دیتیل اجرایی؛ رویکرد من ترکیب سادگی، مصالح اصیل و نورپردازی هوشمند است.
+          هر پروژه برای من روایتی‌ست از حرکت، قاب‌بندی دیدها و احترام به بافت.
+        </p>
+        <div class="cta">
+          <a class="btn btn--gold" href="#" download>دانلود رزومه PDF</a>
+          <a class="btn" href="#contact">برقراری ارتباط</a>
+        </div>
+      </div>
+      <div class="about-img" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="glass center">
+    <h2>تماس</h2>
+    <p class="lead">برای همکاری، ارائه پیشنهاد یا رزرو جلسه، پیام بفرست.</p>
+    <form onsubmit="event.preventDefault(); alert('پیام شما ارسال شد.');">
+      <input class="field" type="text" placeholder="نام" required />
+      <input class="field" type="email" placeholder="ایمیل" required />
+      <textarea class="field" placeholder="متن پیام" rows="5" required></textarea>
+      <button class="btn btn--gold" type="submit">ارسال پیام</button>
+    </form>
+  </section>
+</main>
+
+<footer>© <span id="year"></span> Amir — All rights reserved.</footer>
+
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Header scroll state
+  const hdr = document.querySelector('header');
+  const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 24);
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // Smooth anchor scroll
+  document.querySelectorAll('nav a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    });
   });
-  card.addEventListener('mouseleave', () => {
-    inner.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+
+  // Build GridMotion background
+  const items = Array(28).fill('https://images.unsplash.com/photo-1723403804231-f4e9b515fe9d?q=80&w=1200&auto=format&fit=crop');
+  const grid = document.getElementById('grid');
+  const rowRefs = [];
+  for (let r=0;r<4;r++){
+    const row = document.createElement('div');
+    row.className = 'row';
+    for (let c=0;c<7;c++){
+      const idx = r*7+c;
+      const cell = document.createElement('div');
+      cell.className = 'row__item-inner';
+      const img = document.createElement('div');
+      img.className = 'row__item-img';
+      img.style.backgroundImage = `url(${items[idx]})`;
+      cell.appendChild(img);
+      row.appendChild(cell);
+    }
+    grid.appendChild(row);
+    rowRefs.push(row);
+  }
+  let mouseX = window.innerWidth/2;
+  window.addEventListener('mousemove', e => { mouseX = e.clientX; }, {passive:true});
+  // Wait for GSAP
+  const startGSAP = () => {
+    if (!window.gsap) { requestAnimationFrame(startGSAP); return; }
+    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.add(() => {
+      const maxMove = 320;
+      const baseDuration = 0.8;
+      const inertia = [0.6, 0.4, 0.3, 0.2];
+      rowRefs.forEach((row, i) => {
+        const dir = i % 2 === 0 ? 1 : -1;
+        const move = ((mouseX / window.innerWidth) * maxMove - maxMove/2) * dir;
+        gsap.to(row, { x: move, duration: baseDuration + inertia[i % inertia.length], ease:'power3.out', overwrite:'auto' });
+      });
+    });
+
+    // ScrollTrigger reveals
+    if (window.ScrollTrigger){
+      gsap.utils.toArray('section.glass').forEach((sec, idx)=>{
+        gsap.fromTo(sec,
+          {y:40, opacity:0},
+          {y:0, opacity:1, duration:.9, ease:'power2.out', scrollTrigger:{
+            trigger: sec, start: 'top 80%', toggleActions: 'play none none reverse'
+          }}
+        );
+      });
+    }
+  };
+  startGSAP();
+
+  // CountUp when in view
+  const countEls = document.querySelectorAll('.count');
+  const animateCount = (el) => {
+    const target = +el.getAttribute('data-target');
+    const dur = 1600; // ms
+    const start = 0;
+    const t0 = performance.now();
+    function step(t){
+      const p = Math.min((t - t0)/dur, 1);
+      const eased = 1 - Math.pow(1-p, 3);
+      el.textContent = Math.round(start + (target-start)*eased);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if (en.isIntersecting){
+        const el = en.target;
+        if (!el.dataset.done){
+          animateCount(el);
+          el.dataset.done = '1';
+        }
+      }
+    });
+  }, {threshold: .6});
+  countEls.forEach(el=>io.observe(el));
+
+  // Projects (20 cards)
+  const images = [
+    { src: 'https://images.unsplash.com/photo-1505842465776-3acb86ea0f61?w=1200', cap: 'Residential Courtyard' },
+    { src: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=1200', cap: 'Minimal Concrete House' },
+    { src: 'https://images.unsplash.com/photo-1494526585095-c41746248156?w=1200', cap: 'Timber Facade' },
+    { src: 'https://images.unsplash.com/photo-1487956382158-bb926046304a?w=1200', cap: 'Atrium Lightwell' },
+    { src: 'https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?w=1200', cap: 'Parametric Roof' },
+    { src: 'https://images.unsplash.com/photo-1494526585095-c41746248156?w=1200', cap: 'Modern Interior' },
+    { src: 'https://images.unsplash.com/photo-1505691691458-3b7e2ed2ed4a?w=1200', cap: 'Office Lobby' },
+    { src: 'https://images.unsplash.com/photo-1448630360428-65456885c650?w=1200', cap: 'Skybridge' },
+    { src: 'https://images.unsplash.com/photo-1529429612778-cdfb5b1da3b0?w=1200', cap: 'Sculptural Stair' },
+    { src: 'https://images.unsplash.com/photo-1465311440653-ba9b1d9b0f18?w=1200', cap: 'Glass Pavilion' },
+    { src: 'https://images.unsplash.com/photo-1460574283810-2aab119d8511?w=1200', cap: 'Sunlit Corridor' },
+    { src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200', cap: 'Urban Housing' },
+    { src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200', cap: 'Courtyard Night' },
+    { src: 'https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=1200', cap: 'Interior Minimal' },
+    { src: 'https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?w=1200', cap: 'Roof Geometry' },
+    { src: 'https://images.unsplash.com/photo-1437419764061-2473afe69fc2?w=1200', cap: 'Cultural Center' },
+    { src: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1200', cap: 'Residential Hall' },
+    { src: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200', cap: 'Facade Rhythm' },
+    { src: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=1200', cap: 'Concrete Volumes' },
+    { src: 'https://images.unsplash.com/photo-1487956382158-bb926046304a?w=1200', cap: 'Lobby Atrium' }
+  ];
+  const gridEl = document.getElementById('projectsGrid');
+
+  images.forEach(it=>{
+    const card = document.createElement('div');
+    card.className = 'tilt-card';
+    const inner = document.createElement('div');
+    inner.className = 'tilt-inner';
+    const img = document.createElement('img');
+    img.className = 'tilt-img';
+    img.src = it.src; img.alt = it.cap;
+    const glare = document.createElement('div');
+    glare.className = 'tilt-glare';
+    const cap = document.createElement('div');
+    cap.className = 'tilt-cap';
+    cap.textContent = it.cap;
+
+    inner.appendChild(img);
+    inner.appendChild(glare);
+    inner.appendChild(cap);
+    card.appendChild(inner);
+    gridEl.appendChild(card);
+
+    // Tilt + glare
+    const maxRot = 14;
+    card.addEventListener('mousemove', (e)=>{
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width;   // 0..1
+      const py = (e.clientY - r.top) / r.height;   // 0..1
+      const rotX = (py - .5) * -2 * maxRot;
+      const rotY = (px - .5) * 2 * maxRot;
+      inner.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.06)`;
+      // Move glare
+      const gx = px*140; // %
+      const gy = py*140; // %
+      glare.style.background = `radial-gradient(280px 280px at ${gx}% ${gy}%, rgba(255,255,255,.18), rgba(255,255,255,0) 55%)`;
+    });
+    card.addEventListener('mouseleave', ()=>{
+      inner.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+    });
   });
 });
 </script>
-
 </body>
 </html>
-
-
-
